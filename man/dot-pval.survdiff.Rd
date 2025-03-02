@@ -13,7 +13,7 @@
 Get \eqn{p}-values from \link[survival]{survdiff} Object
 }
 \examples{
-survdiff(Surv(futime, fustat) ~ rx,data=ovarian) |>
- .pval.survdiff()
+m = survdiff(Surv(futime, fustat) ~ rx,data=ovarian)
+.pval.survdiff(m)
 
 }

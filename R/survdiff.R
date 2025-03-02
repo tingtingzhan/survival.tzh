@@ -1,4 +1,14 @@
 
+
+#' @title Sample Size of \link[survival]{survdiff} Object
+#' 
+#' @param object \link[survival]{survdiff} object
+#' 
+#' @param ... additional parameters, currently not in use
+#' 
+#' @examples
+#' m = survdiff(Surv(futime, fustat) ~ rx,data=ovarian)
+#' stopifnot(nobs.survdiff(m) == nrow(ovarian))
 #' @importFrom stats nobs
 #' @export nobs.survdiff
 #' @export
@@ -12,8 +22,8 @@ nobs.survdiff <- function(object, ...) sum(object$n)
 #' @param x \link[survival]{survdiff} object
 #' 
 #' @examples
-#' survdiff(Surv(futime, fustat) ~ rx,data=ovarian) |>
-#'  .pval.survdiff()
+#' m = survdiff(Surv(futime, fustat) ~ rx,data=ovarian)
+#' .pval.survdiff(m)
 #' 
 #' @importFrom stats pchisq
 #' @export
