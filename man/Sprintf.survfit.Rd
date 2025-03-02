@@ -4,12 +4,10 @@
 \alias{Sprintf.survfit}
 \title{Sprintf.survfit}
 \usage{
-Sprintf.survfit(model, ...)
+Sprintf.survfit(x)
 }
 \arguments{
-\item{model}{\link[survival]{survfit.object}}
-
-\item{...}{..}
+\item{x}{\link[survival]{survfit.object}}
 }
 \description{
 ..

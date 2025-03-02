@@ -174,19 +174,17 @@ autoplot.survfit <- function(object, ...) {
 #' 
 #' @description ..
 #' 
-#' @param model \link[survival]{survfit.object}
-#' 
-#' @param ... ..
+#' @param x \link[survival]{survfit.object}
 #' 
 #' @examples
 #' Sprintf.survfit(survfit(Surv(time, status) ~ 1, data = aml))
 #' Sprintf.survfit(survfit(Surv(time, status) ~ x, data = aml))
 #' @export Sprintf.survfit
 #' @export
-Sprintf.survfit <- function(model, ...) {
+Sprintf.survfit <- function(x) {
   # read ?survival::survfit.formula carefully
   # how to tell 'single event' or not ?
-  fom <- model$call$formula
+  fom <- x$call$formula
   edp <- deparse1(fom[[2L]])
   fmt <- 'Kaplan-Meier estimates and curves of time-to-event endpoint **`%s`** are obtained using <u>**`R`**</u> package <u>**`survival`**</u>'
   if (identical(fom[[3L]], 1)) {
