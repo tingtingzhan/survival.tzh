@@ -201,39 +201,6 @@ Sprintf.survfit <- function(model, ...) {
 
 
 
-#' @title endpoint.survfit
-#' 
-#' @param x ..
-#' 
-#' @param ... ..
-#' 
-#' @returns ..
-#' 
-#' @export
-endpoint.survfit <- function(x, ...) {
-  if (is.symbol(fom <- x$call$formula)) return(as.character.default(fom))
-  if (!is.call(fom) || (fom[[1L]] != '~')) stop('illegal formula in call of survfit object: ', deparse1(fom))
-  return(deparse1(fom[[2L]]))
-}
-
-#' @title model_desc.survfit
-#' 
-#' @param x ..
-#' 
-#' @param ... ..
-#' 
-#' @returns ..
-#' 
-#' @export
-model_desc.survfit <- function(x, ...) {
-  if (length(x$strata)) {
-    model_desc_survdiff_rho(...)
-  } else 'Kaplan-Meier'
-}
-
-
-
-
 
 
 

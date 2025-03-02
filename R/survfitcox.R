@@ -31,12 +31,3 @@ autoplot.survfitcox <- function(object, ...) {
 
 
 
-# @export
-endpoint.survfitcox <- function(x, ...) {
-  cox <- tryCatch(eval(x$call$formula), error = as.null.default, warning = as.null.default)
-  if (!length(cox) || !inherits(cox, what = 'coxph')) return('')
-  return(deparse1(formula(cox)[[2L]]))
-}
-
-
-
