@@ -52,6 +52,7 @@ nobs.survfit <- function(object, ...) {
 #' @importFrom ggrepel geom_label_repel
 #' @importFrom stats setNames aggregate.data.frame quantile
 #' @importFrom survival survdiff
+#' @export autolayer.survfit
 #' @export
 autolayer.survfit <- function(
     object, 
