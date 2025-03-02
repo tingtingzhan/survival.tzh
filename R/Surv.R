@@ -14,6 +14,7 @@
 #' @seealso 
 #' \link[base]{units}, `Hmisc:::units.Surv`
 #' 
+#' @export units.Surv
 #' @export
 units.Surv <- function(x) {
   at <- attributes(x)
