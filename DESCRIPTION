@@ -15,4 +15,4 @@ Encoding: UTF-8
 License: GPL-2
 Depends: R (>= 4.4), ggplot2, survival
 Imports: ggrepel, gridExtra, scales, rpart.tzh
-Suggests: rpart
+Suggests: rpart, coxme
