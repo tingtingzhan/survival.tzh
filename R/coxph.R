@@ -16,7 +16,6 @@
 #' .pval.coxph(m)
 #' 
 #' @name S3_coxph
-#' @export nobsText.coxph
 #' @export
 nobsText.coxph <- function(x) {
   sprintf(fmt = '%d subj (%d events)', x[['n']], x[['nevent']])
@@ -24,24 +23,20 @@ nobsText.coxph <- function(x) {
 
 
 #' @rdname S3_coxph
-#' @export desc_.coxph
 #' @export
 desc_.coxph <- function(x) 'Cox proportional hazards'
 
 
 #' @rdname S3_coxph
-#' @export expcoef.coxph
 #' @export
 expcoef.coxph <- function(x) TRUE
 
 #' @rdname S3_coxph
-#' @export estName.coxph
 #' @export
 estName.coxph <- function(x) 'Hazards\ Ratio'
 
 
 #' @rdname S3_coxph
-#' @export .pval.coxph
 #' @export
 .pval.coxph <- function(x) {
   x |> 
@@ -51,7 +46,6 @@ estName.coxph <- function(x) 'Hazards\ Ratio'
 
 
 #' @rdname S3_coxph
-#' @export .pval.summary.coxph
 #' @export
 .pval.summary.coxph <- function(x) {
   ret <- x$coefficients[, 'Pr(>|z|)']

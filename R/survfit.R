@@ -1,31 +1,4 @@
 
-#' @title conf_level.survfit
-#' 
-#' @param object ..
-#' 
-#' @returns ..
-#' 
-#' @export
-conf_level.survfit <- function(object) object[['conf.int']]
-
-
-
-
-
-
-
-
-
-#' @importFrom stats nobs
-#' @export
-nobs.survfit <- function(object, ...) {
-  sum(object[['n']])
-}
-# dont understand ?broom:::nobs.survfit (2024-09-26)'
-
-
-
-
 #' @title Layers of Kaplan-Meier Curve of \link[survival]{survfit.object} using \CRANpkg{ggplot2}
 #' 
 #' @description ..
@@ -159,6 +132,29 @@ autoplot.survfit <- function(object, ...) {
   ggplot() + 
     autolayer.survfit(object, ...) + 
     scale_y_continuous(labels = percent)
+}
+
+
+
+
+#' @title S3 Methods for \link[survival]{survfit} Objects
+#' 
+#' @param x \link[survival]{survfit} object
+#' 
+#' @examples
+#' m = survfit(Surv(time, status) ~ x, data = aml)
+#' m |> conf_level.survfit()
+#' m |> nobsText.survfit()
+#' 
+#' @name S3_survfit
+#' @export
+conf_level.survfit <- function(x) x[['conf.int']]
+
+
+#' @rdname S3_survfit
+#' @export
+nobsText.survfit <- function(x) {
+  sprintf(fmt = '%d subj (%d events)', sum(x[['n']]), sum(x[['n.event']]))
 }
 
 
