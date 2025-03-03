@@ -3,15 +3,15 @@
 \name{S3_coxzph}
 \alias{S3_coxzph}
 \alias{.pval.cox.zph}
-\alias{desc_.cox.zph}
 \title{S3 methods of \link[survival]{cox.zph}}
 \usage{
 .pval.cox.zph(x)
-
-desc_.cox.zph(x)
 }
 \arguments{
 \item{x}{a \link[survival]{cox.zph} object}
+}
+\value{
+Function \link{.pval.cox.zph} returns a \link[base]{double} \link[base]{vector}.
 }
 \description{
 S3 methods of \link[survival]{cox.zph}
