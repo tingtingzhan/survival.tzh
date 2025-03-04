@@ -59,7 +59,7 @@ diagnose.survfit <- function(object, type = 'survival', ...) {
     
     x <- as.integer(dat0$n.event)
     n <- as.integer(dat0$n.risk)
-    #ci <- bin_confint_(x = x, n = n, level = .95) # ?ThomasJeffersonUniv::bin_confint_
+    #ci <- exact_confint(x = x, n = n, level = .95) # ?ThomasJeffersonUniv::exact_confint
     #colnames(ci) <- c('lower', 'upper')
     dat2 <- data.frame(values = x/n, time = dat0$time, 
                        #ci, 

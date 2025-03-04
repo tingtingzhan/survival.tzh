@@ -139,17 +139,21 @@ autoplot.survfit <- function(object, ...) {
 
 #' @title S3 Methods for \link[survival]{survfit} Objects
 #' 
-#' @param x \link[survival]{survfit} object
+#' @param x \link[survival]{survfit} or \link[survival]{summary.survfit} object
 #' 
 #' @examples
 #' m = survfit(Surv(time, status) ~ x, data = aml)
 #' m |> conf_level.survfit()
+#' m |> summary() |> conf_level.summary.survfit()
 #' m |> nobsText.survfit()
 #' 
 #' @name S3_survfit
 #' @export
 conf_level.survfit <- function(x) x[['conf.int']]
 
+#' @rdname S3_survfit
+#' @export
+conf_level.summary.survfit <- conf_level.survfit
 
 #' @rdname S3_survfit
 #' @export
