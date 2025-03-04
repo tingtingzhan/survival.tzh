@@ -29,11 +29,7 @@ desc_.coxph <- function(x) 'Cox proportional hazards'
 
 #' @rdname S3_coxph
 #' @export
-expcoef.coxph <- function(x) TRUE
-
-#' @rdname S3_coxph
-#' @export
-estName.coxph <- function(x) 'Hazards\ Ratio'
+estnm.coxph <- function(x) 'Hazards\ Ratio'
 
 
 #' @rdname S3_coxph

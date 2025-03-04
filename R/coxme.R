@@ -45,10 +45,6 @@ nobsText.coxme <- function(x) {
 
 # ?MuMIn:::logLik.coxme vs. ?coxme:::logLik.coxme
 
-#' @rdname S3_coxme
-#' @export
-expcoef.coxme <- function(x) TRUE
-
 
 # @method model.frame coxme
 # @importFrom stats model.frame model.frame.default
@@ -78,7 +74,7 @@ desc_.coxme <- function(x) 'mixed effects Cox' # ?coxme::coxme
 
 #' @rdname S3_coxme
 #' @export
-estName.coxme <- function(x) 'Hazards\ Ratio'
+estnm.coxme <- function(x) 'Hazards\ Ratio'
 
 
 

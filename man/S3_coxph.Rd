@@ -4,8 +4,7 @@
 \alias{S3_coxph}
 \alias{nobsText.coxph}
 \alias{desc_.coxph}
-\alias{expcoef.coxph}
-\alias{estName.coxph}
+\alias{estnm.coxph}
 \alias{.pval.coxph}
 \alias{.pval.summary.coxph}
 \title{S3 methods of \link[survival]{coxph}}
@@ -14,9 +13,7 @@ nobsText.coxph(x)
 
 desc_.coxph(x)
 
-expcoef.coxph(x)
-
-estName.coxph(x)
+estnm.coxph(x)
 
 .pval.coxph(x)
 

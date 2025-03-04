@@ -29,7 +29,7 @@ endpoint.clogit <- function(x) {
 
 #' @rdname clogit_S3
 #' @export
-estName.clogit <- function(x) 'Odds\ Ratio'
+estnm.clogit <- function(x) 'Odds\ Ratio'
 
 
 

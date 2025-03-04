@@ -5,9 +5,8 @@
 \alias{.pval.coxme}
 \alias{.pval.summary.coxme}
 \alias{nobsText.coxme}
-\alias{expcoef.coxme}
 \alias{desc_.coxme}
-\alias{estName.coxme}
+\alias{estnm.coxme}
 \title{S3 methods for \link[coxme]{coxme}}
 \usage{
 .pval.coxme(x)
@@ -16,11 +15,9 @@
 
 nobsText.coxme(x)
 
-expcoef.coxme(x)
-
 desc_.coxme(x)
 
-estName.coxme(x)
+estnm.coxme(x)
 }
 \arguments{
 \item{x}{\link[coxme]{coxme} object}

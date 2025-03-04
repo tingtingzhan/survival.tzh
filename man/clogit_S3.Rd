@@ -3,13 +3,13 @@
 \name{clogit_S3}
 \alias{clogit_S3}
 \alias{endpoint.clogit}
-\alias{estName.clogit}
+\alias{estnm.clogit}
 \alias{desc_.clogit}
 \title{Additional S3 methods for \link[survival]{clogit} Objects}
 \usage{
 endpoint.clogit(x)
 
-estName.clogit(x)
+estnm.clogit(x)
 
 desc_.clogit(x)
 }
