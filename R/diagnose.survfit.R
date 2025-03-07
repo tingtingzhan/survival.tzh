@@ -13,7 +13,7 @@ diagnose.Surv <- function(object, ...) {
 #' 
 #' @param object ..
 #' 
-#' @param type ..
+#' @param type `'survival'` (default) or `'hazard'`
 #' 
 #' @param ... ..
 #' 

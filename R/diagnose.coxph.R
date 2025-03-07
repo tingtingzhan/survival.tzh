@@ -37,7 +37,9 @@ maxEventTime <- function(x, units = units.Surv(x), ...) {
 #' 
 #' @param object ..
 #' 
-#' @param type ..
+#' @param type `'CoxSnell'` (default), 
+#'   `'deviance'`, `'schoenfeld'`, `'dfbetas'`, 
+#'   `'GrambschTherneau'`, `'martingale'`, `'dev_by_x'`
 #' 
 #' @param ... ..
 #' 

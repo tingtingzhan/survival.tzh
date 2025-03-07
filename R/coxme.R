@@ -39,7 +39,18 @@ nobsText.coxme <- function(x) {
 }
 
 
-
+#' @importFrom stats terms model.frame
+#' @export
+terms.coxme <- function(x, ...) {
+  # coxme:::terms does not exists
+  # stats:::terms.default does not return attr(, 'dataClasses')
+  x |>
+    model.frame() |> # activates ?stats::model.frame.default, as of packageDate('coxme') 2024-08-22
+    # e.g.
+    # list(Surv(time, status), ph.ecog, age, 1 | inst)
+    # might not be correct hahaha
+    attr(which = 'terms', exact = TRUE)
+}
 
 # ?MuMIn:::formula.coxme is different from ?coxme:::formula.coxme
 

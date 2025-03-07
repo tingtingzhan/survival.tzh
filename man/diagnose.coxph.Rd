@@ -14,7 +14,9 @@ diagnose.coxph(
 \arguments{
 \item{object}{..}
 
-\item{type}{..}
+\item{type}{\code{'CoxSnell'} (default),
+\code{'deviance'}, \code{'schoenfeld'}, \code{'dfbetas'},
+\code{'GrambschTherneau'}, \code{'martingale'}, \code{'dev_by_x'}}
 
 \item{...}{..}
 }

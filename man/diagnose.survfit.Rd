@@ -9,7 +9,7 @@ diagnose.survfit(object, type = "survival", ...)
 \arguments{
 \item{object}{..}
 
-\item{type}{..}
+\item{type}{\code{'survival'} (default) or \code{'hazard'}}
 
 \item{...}{..}
 }
