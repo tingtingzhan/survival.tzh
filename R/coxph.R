@@ -13,8 +13,6 @@
 #' survival:::nobs.coxph(m) # number of events!!
 #' # MuMIn:::nobs.coxph(m) # also number of events
 #' nobsText.coxph(m)
-#' .pval.coxph(m)
-#' 
 #' @name S3_coxph
 #' @export
 nobsText.coxph <- function(x) {
@@ -30,15 +28,6 @@ desc_.coxph <- function(x) 'Cox proportional hazards'
 #' @rdname S3_coxph
 #' @export
 estnm.coxph <- function(x) 'Hazards\ Ratio'
-
-
-#' @rdname S3_coxph
-#' @export
-.pval.coxph <- function(x) {
-  x |> 
-    summary() |> # ?survival:::summary.coxph
-    .pval.summary.coxph()
-} 
 
 
 #' @rdname S3_coxph

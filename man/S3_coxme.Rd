@@ -2,15 +2,12 @@
 % Please edit documentation in R/coxme.R
 \name{S3_coxme}
 \alias{S3_coxme}
-\alias{.pval.coxme}
 \alias{.pval.summary.coxme}
 \alias{nobsText.coxme}
 \alias{desc_.coxme}
 \alias{estnm.coxme}
 \title{S3 methods for \link[coxme]{coxme}}
 \usage{
-.pval.coxme(x)
-
 .pval.summary.coxme(x)
 
 nobsText.coxme(x)
@@ -28,6 +25,5 @@ S3 methods for \link[coxme]{coxme}
 \examples{
 library(coxme)
 m = coxme(Surv(time, status) ~ ph.ecog + age + (1|inst), data = lung) 
-m |> .pval.coxme()
 m |> nobsText.coxme()
 }

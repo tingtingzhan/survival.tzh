@@ -5,7 +5,6 @@
 \alias{nobsText.coxph}
 \alias{desc_.coxph}
 \alias{estnm.coxph}
-\alias{.pval.coxph}
 \alias{.pval.summary.coxph}
 \title{S3 methods of \link[survival]{coxph}}
 \usage{
@@ -14,8 +13,6 @@ nobsText.coxph(x)
 desc_.coxph(x)
 
 estnm.coxph(x)
-
-.pval.coxph(x)
 
 .pval.summary.coxph(x)
 }
@@ -35,6 +32,4 @@ m = ovarian |>
 survival:::nobs.coxph(m) # number of events!!
 # MuMIn:::nobs.coxph(m) # also number of events
 nobsText.coxph(m)
-.pval.coxph(m)
-
 }

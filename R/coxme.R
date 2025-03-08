@@ -7,17 +7,8 @@
 #' @examples 
 #' library(coxme)
 #' m = coxme(Surv(time, status) ~ ph.ecog + age + (1|inst), data = lung) 
-#' m |> .pval.coxme()
 #' m |> nobsText.coxme()
 #' @name S3_coxme
-#' @export
-.pval.coxme <- function(x) {
-  x |> 
-    summary() |> # ?coxme:::summary.coxme (return is `x`)
-    .pval.summary.coxme()
-}
-
-#' @rdname S3_coxme
 #' @export
 .pval.summary.coxme <- function(x) {
   cf <- x$coefficients

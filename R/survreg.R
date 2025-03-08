@@ -1,15 +1,19 @@
 
-# Returned value of ?survival::survreg
-
+#' @title S3 methods for \link[survival]{survreg}
+#' 
+#' @param x a \link[survival]{survreg} or \link[survival]{summary.survreg}
+#' 
+#' @examples
+#' # ?survival::survreg
+#' m = survreg(Surv(futime, fustat) ~ ecog.ps + rx, data = ovarian, dist = 'weibull', scale = 1) 
+#' 
+#' @name S3_survreg
 #' @export
-.pval.survreg <- function(x) {
-  xsum <- summary(x) # ?survival:::summary.survreg
-  ret <- xsum$table[, 'p']
-  names(ret) <- rownames(xsum$table)
+.pval.summary.survreg <- function(x) {
+  # ?survival:::summary.survreg
+  ret <- x$table[, 'p']
+  names(ret) <- rownames(x$table)
   return(ret)
 }
-
-
-
 
 
