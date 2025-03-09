@@ -58,6 +58,8 @@ subset_ggKM <- function(formula, subset, data, ...) {
       labs(title = tt)
   }, p = p0, tt = tt, SIMPLIFY = FALSE))
   
+  #return(p1)
+  
   return(Reduce(f = `+`, x = p1)) # 'patchwork'
   # tzh do not know how \pkg{patchwork} renews definition of function `+`
   # therefore, tzh simply @import patchwork, for now
