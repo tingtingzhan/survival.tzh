@@ -2,37 +2,23 @@
 % Please edit documentation in R/ggKM_more.R
 \name{m_ggKM}
 \alias{m_ggKM}
-\title{m_ggKM}
+\title{Kaplan Meier Curves of Multiple Endpoints}
 \usage{
-m_ggKM(formula, data, ncol = 2L, ...)
+m_ggKM(formula, ...)
 }
 \arguments{
 \item{formula}{\link[stats]{formula}.
 E.g. \code{cbind(y1, y2) ~ x1 + x2 + x3} for
 an array of Kaplan Meier curves of \code{y1 ~ x1 + x2 + x3} and \code{y2 ~ x1 + x2 + x3}}
 
-\item{data}{\link[base]{data.frame}}
-
-\item{ncol}{\link[base]{integer} scalar, see \link[gridExtra]{arrangeGrob}}
-
-\item{...}{..}
+\item{...}{additional parameters of \code{\link[=ggKM.formula]{ggKM.formula()}}}
 }
 \description{
-Array of Kaplan-Meier curves of multiple endpoints and same predictors
+Array of Kaplan-Meier curves of multiple endpoints and same predictors.
 }
 \examples{
-# ?survival::rotterdam
-rtd = within(rotterdam, expr = {
-  rtime = structure(rtime/365, units = 'years', class = 'difftime')
-  #rtime = structure(rtime/365, class = 'difftime')
-  dtime = structure(dtime/365, units = 'years', class = 'difftime')
-  #dtime = structure(dtime/365, class = 'difftime')
-  rfs = Surv(rtime, event = recur)
-  os = Surv(dtime, event = death)
-})
 # y-axis not the same
-ggKM(rfs ~ chemo, data = rtd)
-ggKM(os ~ chemo, data = rtd)
-library(grid)
-grid.newpage(); grid.draw(m_ggKM(cbind(rfs, os) ~ chemo, data = rtd))
+ggKM(rfs ~ chemo, data = rotterdam2)
+ggKM(os ~ chemo, data = rotterdam2)
+m_ggKM(cbind(rfs, os) ~ chemo, data = rotterdam2)
 }

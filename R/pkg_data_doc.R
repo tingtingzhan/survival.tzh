@@ -1,7 +1,7 @@
 
 
 
-#' @title A Slight Modification of Existing Data in R
+#' @title Slight Modification of Datasets in \CRANpkg{survival} Package
 #' 
 #' @description ..
 #' 
@@ -9,6 +9,8 @@
 #' 
 #' @name slight_mod
 'lung2'
+#' @rdname slight_mod
+'rotterdam2'
 
 
 

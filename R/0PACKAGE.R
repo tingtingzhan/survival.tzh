@@ -4,5 +4,6 @@
 #'
 #' @description ..
 #'
+#' @import patchwork
 '_PACKAGE'
 

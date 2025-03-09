@@ -4,27 +4,31 @@
 \alias{subset_ggKM}
 \title{subset_ggKM}
 \usage{
-subset_ggKM(formula, data, ids, ...)
+subset_ggKM(formula, subset, data, ...)
 }
 \arguments{
 \item{formula}{\link[stats]{formula}}
 
-\item{data}{\link[base]{data.frame}}
+\item{subset}{\link[base]{language} to indicate
+the subset(s) of \code{data}}
 
-\item{ids}{\link[base]{list} of \link[base]{integer} or \link[base]{logical} \link[base]{vector},
-indices for subset of \code{data}}
+\item{data}{\link[base]{data.frame}}
 
 \item{...}{..}
 }
+\value{
+Function \code{\link[=subset_ggKM]{subset_ggKM()}} returns a \link[patchwork]{patchwork}.
+}
 \description{
-Produce a batch of Kaplan-Meier curves for \emph{subset analysis}.
+Produce a \link[patchwork]{patchwork} of Kaplan-Meier curves for \emph{subset analysis}.
 }
 \examples{
-dim(colon1 <- subset(colon, etype == 2)) # death
-colon1a = within(colon1, expr = {
- time = as.difftime(time, units = 'days')
- OS = Surv(time, status)
-})
-ids = with(colon1a, list(All = TRUE, Female = (sex == 0), Male = (sex == 1)))
-subset_ggKM(OS ~ rx, ids = ids, data = colon1a)
+subset_ggKM(os ~ ph.ecog, subset = list(
+  All = TRUE, Female = (sex == 'Female'), Male = (sex == 'Male')
+), data = lung2)
+
+id = quote(list(
+  All = TRUE, Female = (sex == 'Female'), Male = (sex == 'Male')
+))
+subset_ggKM(os ~ ph.ecog, subset = id, data = lung2)
 }

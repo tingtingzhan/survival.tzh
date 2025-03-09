@@ -51,6 +51,7 @@ ggKM <- function(object, data, ...) UseMethod('ggKM')
 #' @rdname ggKM
 #' @importFrom ggplot2 ggplot scale_y_continuous labs
 #' @importFrom survival survfit.formula
+#' @export ggKM.formula
 #' @export
 ggKM.formula <- function(formula, data, ..., envir = parent.frame()) {
   cl0 <- match.call()

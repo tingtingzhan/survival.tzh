@@ -4,12 +4,17 @@
 \name{slight_mod}
 \alias{slight_mod}
 \alias{lung2}
-\title{A Slight Modification of Existing Data in R}
+\alias{rotterdam2}
+\title{Slight Modification of Datasets in \CRANpkg{survival} Package}
 \format{
 ..
+
+An object of class \code{data.frame} with 2982 rows and 17 columns.
 }
 \usage{
 lung2
+
+rotterdam2
 }
 \description{
 ..

@@ -42,7 +42,7 @@ units.Surv <- function(x) {
   at <- attr(y, which = 'inputAttributes', exact = TRUE)
   at$time$units <- value 
   if (length(at$time2$units)) at$time2$units <- value
-  attr(y, 'inputAttributes') <- at
+  attr(y, which = 'inputAttributes') <- at
   return(y)
 }
 
