@@ -37,8 +37,3 @@ ggKM.rpart <- function(object, ...) {
   
 }
 
-
-
-ggKM_rpart <- function() .Defunct('ggKM.rpart')
-
-

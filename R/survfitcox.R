@@ -31,5 +31,19 @@ autoplot.survfitcox <- function(object, ...) {
 
 
 
+#' @title Additional S3 methods for `survfitcox` Objects
+#' 
+#' @param x `survfitcox` object
+#' 
+#' @name S3_survfitcox
+#' @export
+endpoint.survfitcox <- function(x) {
+  cox <- tryCatch(eval(x$call$formula), error = as.null.default, warning = as.null.default)
+  if (!length(cox) || !inherits(cox, what = 'coxph')) return('')
+  #return(endpoint.default(cox))
+  NextMethod(generic = 'endpoint', object = cox) # currently dispatch to tzh::endpoint.default
+}
+
+
 
 
