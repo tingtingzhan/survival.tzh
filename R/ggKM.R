@@ -1,5 +1,5 @@
 
-
+# packageDate('ggfortify') 2024-04-16
 
 #' @title Kaplan Meier Curve via \CRANpkg{ggplot2}
 #' 
@@ -17,16 +17,16 @@
 #' 
 #' @details 
 #' 
-#' Function [ggKM] is more elaborated than [autoplot.survfit].
+#' Function [ggKM()] is more elaborated than [autoplot.survfit].
 #' 
 #' @returns 
 #' 
-#' Function [ggKM] returns a \link[ggplot2]{ggplot} figure.
+#' Function [ggKM()] returns a \link[ggplot2]{ggplot} object.
 #' 
 #' @references 
 #' \url{http://sape.inf.usi.ch/quick-reference/ggplot2/colour}
 #' 
-#' For function [ggKM] \url{http://www.stat.unipg.it/luca/R/CumIncidence.R}
+#' For function [ggKM()] \url{http://www.stat.unipg.it/luca/R/CumIncidence.R}
 #' 
 #' Package \pkg{ggfortify} \url{https://cran.r-project.org/web/packages/ggfortify/}
 #' 

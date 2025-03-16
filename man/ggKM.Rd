@@ -24,13 +24,13 @@ ggKM(object, data, ...)
 \item{envir}{..}
 }
 \value{
-Function \link{ggKM} returns a \link[ggplot2]{ggplot} figure.
+Function \code{\link[=ggKM]{ggKM()}} returns a \link[ggplot2]{ggplot} object.
 }
 \description{
 ..
 }
 \details{
-Function \link{ggKM} is more elaborated than \link{autoplot.survfit}.
+Function \code{\link[=ggKM]{ggKM()}} is more elaborated than \link{autoplot.survfit}.
 }
 \examples{
 # ?veteran
@@ -48,7 +48,7 @@ ggKM(os ~ celltype + I(age > 60), data = veteran)
 \references{
 \url{http://sape.inf.usi.ch/quick-reference/ggplot2/colour}
 
-For function \link{ggKM} \url{http://www.stat.unipg.it/luca/R/CumIncidence.R}
+For function \code{\link[=ggKM]{ggKM()}} \url{http://www.stat.unipg.it/luca/R/CumIncidence.R}
 
 Package \pkg{ggfortify} \url{https://cran.r-project.org/web/packages/ggfortify/}
 }
