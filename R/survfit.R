@@ -143,19 +143,9 @@ autoplot.survfit <- function(object, ...) {
 #' 
 #' @examples
 #' m = survfit(Surv(time, status) ~ x, data = aml)
-#' m |> conf_level.survfit()
-#' m |> summary() |> conf_level.summary.survfit()
 #' m |> nobsText.survfit()
 #' 
 #' @name S3_survfit
-#' @export
-conf_level.survfit <- function(x) x[['conf.int']]
-
-#' @rdname S3_survfit
-#' @export
-conf_level.summary.survfit <- conf_level.survfit
-
-#' @rdname S3_survfit
 #' @export
 nobsText.survfit <- function(x) {
   sprintf(fmt = '%d subj (%d events)', sum(x[['n']]), sum(x[['n.event']]))
@@ -177,8 +167,8 @@ nobsText.survfit <- function(x) {
 #' @param x \link[survival]{survfit.object}
 #' 
 #' @examples
-#' Sprintf.survfit(survfit(Surv(time, status) ~ 1, data = aml))
-#' Sprintf.survfit(survfit(Surv(time, status) ~ x, data = aml))
+#' survfit(Surv(time, status) ~ 1, data = aml) |> Sprintf.survfit()
+#' survfit(Surv(time, status) ~ x, data = aml) |> Sprintf.survfit()
 #' @export Sprintf.survfit
 #' @export
 Sprintf.survfit <- function(x) {

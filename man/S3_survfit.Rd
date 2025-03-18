@@ -2,15 +2,9 @@
 % Please edit documentation in R/survfit.R
 \name{S3_survfit}
 \alias{S3_survfit}
-\alias{conf_level.survfit}
-\alias{conf_level.summary.survfit}
 \alias{nobsText.survfit}
 \title{S3 Methods for \link[survival]{survfit} Objects}
 \usage{
-conf_level.survfit(x)
-
-conf_level.summary.survfit(x)
-
 nobsText.survfit(x)
 }
 \arguments{
@@ -21,8 +15,6 @@ S3 Methods for \link[survival]{survfit} Objects
 }
 \examples{
 m = survfit(Surv(time, status) ~ x, data = aml)
-m |> conf_level.survfit()
-m |> summary() |> conf_level.summary.survfit()
 m |> nobsText.survfit()
 
 }
