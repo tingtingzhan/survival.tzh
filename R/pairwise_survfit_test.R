@@ -46,7 +46,7 @@ pairwise_survfit_test <- function(
   
   ids <- split.default(seq_along(xsum$time), f = as.factor(xsum$time))
   
-  ret <- .mapply(FUN = function(id, time) {
+  ret <- .mapply(FUN = \(id, time) {
     pairwise_survfit_int(surv = xsum$surv[id], std.err = xsum$std.err[id], strata = strata[id], data.name = paste('At time', time, units), ...)
   }, dots = list(id = ids, time = times), MoreArgs = NULL)
   names(ret) <- names(ids)

@@ -27,12 +27,14 @@ m_ggKM <- function(formula, ...) { # ncol = 2L,
   if (formula[[2L]][[1L]] != 'cbind') stop()
   
   p0 <- as.list.default(formula[[2L]][-1L]) |>
-    lapply(FUN = function(edp) eval(call(name = '~', edp, formula[[3L]]))) |>
-    lapply(FUN = function(fom) do.call(what = 'ggKM.formula', args = list(formula = fom, ...)))
+    lapply(FUN = \(edp) eval(call(name = '~', edp, formula[[3L]]))) |>
+    lapply(FUN = \(fom) do.call(what = 'ggKM.formula', args = list(formula = fom, ...)))
   
-  yl <- range.default(lapply(p0, FUN = function(p) layer_scales(p)$y$range$range))
+  yl <- p0 |>
+    lapply(FUN = \(p) layer_scales(p)$y$range$range) |>
+    range.default()
   
-  suppressMessages(p1 <- lapply(p0, FUN = function(p) {
+  suppressMessages(p1 <- lapply(p0, FUN = \(p) {
     p + scale_y_continuous(labels = percent, limits = yl)
   })) 
   

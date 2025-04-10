@@ -38,21 +38,26 @@ subset_ggKM <- function(formula, subset, data, ...) {
   nm <- names(e[-1L])
   if (!length(nm) || anyNA(nm) || !all(nzchar(nm))) stop('`subset` must be fully named')
   
-  d <- lapply(e[-1L], FUN = function(e_) {
-    do.call(what = 'subset.data.frame', args = list(x = data, subset = e_))
-  })
+  d <- e[-1L] |>
+    lapply(FUN = \(e_) {
+      do.call(what = 'subset.data.frame', args = list(x = data, subset = e_))
+    })
   
-  nr <- vapply(d, FUN = .row_names_info, type = 2L, FUN.VALUE = NA_integer_)
+  nr <- d |>
+    vapply(FUN = .row_names_info, type = 2L, FUN.VALUE = NA_integer_)
   
   tt <- sprintf(fmt = '%s, n=%d', nm, nr) # title (with sample size)
 
-  p0 <- lapply(d, FUN = function(d) {
-    do.call(what = 'ggKM.formula', args = list(formula = formula, data = d, ...))
-  })
+  p0 <- d |>
+    lapply(FUN = \(d) {
+      do.call(what = 'ggKM.formula', args = list(formula = formula, data = d, ...))
+    })
   
-  yl <- range.default(lapply(p0, FUN = function(p) layer_scales(p)$y$range$range))
+  yl <- p0 |>
+    lapply(FUN = \(p) layer_scales(p)$y$range$range) |>
+    range.default()
   
-  suppressMessages(p1 <- mapply(FUN = function(p, tt) {
+  suppressMessages(p1 <- mapply(FUN = \(p, tt) {
     p + 
       scale_y_continuous(labels = percent, limits = yl) + 
       labs(title = tt)
