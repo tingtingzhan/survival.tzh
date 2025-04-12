@@ -11,9 +11,10 @@
 #' 
 #' @examples 
 #' m1 = coxph(Surv(time, status) ~ celltype, data = veteran)
-#' autoplot(survfit(m1))
-#' autoplot(survfit(m1, newdata = veteran[1:90, ]))
-#' autoplot(survfit(m1, newdata = veteran[1:90, ]), times = c(250))
+#' m1 |> survfit() |> autoplot()
+#' m1 |> survfit(newdata = veteran[1:90, ]) |> autoplot()
+#' m1 |> survfit(newdata = veteran[1:90, ]) |> autoplot(times = c(250))
+#' @keywords internal
 #' @importFrom stats formula
 #' @importFrom ggplot2 ggplot scale_y_continuous labs
 #' @export autoplot.survfitcox

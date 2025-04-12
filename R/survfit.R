@@ -23,6 +23,7 @@
 #' 
 #' @importFrom ggplot2 autolayer aes geom_ribbon geom_step scale_fill_discrete geom_point scale_colour_discrete
 #' @importFrom ggrepel geom_label_repel
+#' @importFrom rlang .data
 #' @importFrom stats setNames aggregate.data.frame quantile
 #' @importFrom survival survdiff
 #' @export autolayer.survfit
@@ -72,32 +73,30 @@ autolayer.survfit <- function(
   
   strata_nm <- if (is.symbol(fom[[3L]])) deparse1(fom[[3L]]) # else NULL
   
-  mp_step <- call(name = 'aes', x = quote(time), y = quote(surv), group = quote(strata), colour = quote(strata))
+  mp_step <- aes(x = .data$time, y = .data$surv, group = .data$strata, colour = .data$strata)
     
   ret <- list( 
     
-    geom_step(data = d, mapping = eval(mp_step), 
+    geom_step(data = d, mapping = mp_step, 
               alpha = if (!missing(times)) .5 else 1), 
     
-    if (ribbon) geom_ribbon(data = d, mapping = eval(call(
-      name = 'aes', 
-      x = quote(time), 
-      ymax = quote(upper), ymin = quote(lower), 
-      group = quote(strata), fill = quote(strata)
-    )), alpha = .1),
+    if (ribbon) geom_ribbon(data = d, mapping = aes( 
+      x = .data$time, 
+      ymax = .data$upper, ymin = .data$lower, 
+      group = .data$strata, fill = .data$strata
+    ), alpha = .1),
     
-    geom_point(data = d_c, mapping = eval(mp_step), shape = 3L,
+    geom_point(data = d_c, mapping = mp_step, shape = 3L,
                alpha = if (!missing(times)) .5 else 1),
     
     if (!missing(times)) {
       yr <- fortify.survfit(object, times = times, ...)
-      geom_label_repel(data = yr, mapping = eval(call(
-        name = 'aes', 
-        x = quote(time), 
-        y = quote(surv), 
-        colour = quote(strata), #fill = quote(strata), 
-        label = quote(txt)
-      )), fontface = 'bold', fill = 'transparent',
+      geom_label_repel(data = yr, mapping = aes( 
+        x = .data$time, 
+        y = .data$surv, 
+        colour = .data$strata, #fill = .data$strata, 
+        label = .data$txt
+      ), fontface = 'bold', fill = 'transparent',
       size = 3)
     },
     (if (length(labels)) scale_colour_discrete(labels = labels)),
