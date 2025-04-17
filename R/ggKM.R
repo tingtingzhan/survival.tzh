@@ -44,7 +44,7 @@
 #' ggKM(os ~ celltype, data = veteran, labels = letters[1:4])
 #' ggKM(os ~ celltype + I(age > 60), data = veteran)
 #' @name ggKM
-#' @importFrom scales percent
+#' @importFrom scales label_percent
 #' @export
 ggKM <- function(object, data, ...) UseMethod('ggKM')
 
@@ -63,7 +63,7 @@ ggKM.formula <- function(formula, data, ..., envir = parent.frame()) {
   #} # else NULL # needs ?flextable.tzh:::format_pval
   p <- ggplot() + 
     autolayer.survfit(sfit, units = units, ...) + 
-    scale_y_continuous(labels = percent) +
+    scale_y_continuous(labels = label_percent()) +
     #labs(x = units, caption = p_survdiff)
     labs(x = units)
   attr(p, which = 'text') <- Sprintf.survfit(sfit)

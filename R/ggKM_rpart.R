@@ -14,7 +14,7 @@
 #' ggKM(rp)
 #' @importFrom ggplot2 ggplot scale_y_continuous labs
 #' @importFrom rpart.tzh survdiff_rpart survfit.rpart
-#' @importFrom scales percent
+#' @importFrom scales label_percent
 #' @export ggKM.rpart
 #' @export
 ggKM.rpart <- function(object, ...) {
@@ -28,7 +28,7 @@ ggKM.rpart <- function(object, ...) {
   
   ggplot() +
     autolayer.survfit(object = survfit.rpart(object), ...) +
-    scale_y_continuous(labels = percent) +
+    scale_y_continuous(labels = label_percent()) +
     labs(x = units.Surv(y), 
          y = deparse1(object$terms[[2L]]),
          colour = lab_, fill = lab_#,

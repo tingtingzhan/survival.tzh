@@ -125,12 +125,12 @@ autolayer.survfit <- function(
 #' `survival:::plot.survfit` `survival:::quantile.survfit`
 #' 
 #' @importFrom ggplot2 ggplot scale_y_continuous
-#' @importFrom scales percent
+#' @importFrom scales label_percent
 #' @export
 autoplot.survfit <- function(object, ...) {
   ggplot() + 
     autolayer.survfit(object, ...) + 
-    scale_y_continuous(labels = percent)
+    scale_y_continuous(labels = label_percent())
 }
 
 

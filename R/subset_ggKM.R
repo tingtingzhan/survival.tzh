@@ -28,7 +28,7 @@
 #' ))
 #' subset_ggKM(os ~ ph.ecog, subset = id, data = lung2)
 #' @importFrom ggplot2 labs layer_scales
-#' @importFrom scales percent
+#' @importFrom scales label_percent
 #' @export
 subset_ggKM <- function(formula, subset, data, ...) {
   
@@ -59,7 +59,7 @@ subset_ggKM <- function(formula, subset, data, ...) {
   
   suppressMessages(p1 <- mapply(FUN = \(p, tt) {
     p + 
-      scale_y_continuous(labels = percent, limits = yl) + 
+      scale_y_continuous(labels = label_percent(), limits = yl) + 
       labs(title = tt)
   }, p = p0, tt = tt, SIMPLIFY = FALSE))
   

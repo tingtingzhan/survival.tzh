@@ -89,7 +89,7 @@ getTime.Surv <- function(x, type = c('event', 'censor', 'any'), ...) {
 #' @examples 
 #' autoplot(with(veteran, Surv(time, status))) # mask for font
 #' @importFrom ggplot2 autoplot ggplot scale_y_continuous labs
-#' @importFrom scales percent
+#' @importFrom scales label_percent
 #' @importFrom survival survfit.formula
 #' @export
 autoplot.Surv <- function(object, ...) {
@@ -100,7 +100,7 @@ autoplot.Surv <- function(object, ...) {
                       formula = call(name = '~', cl0$object, 1)))
     p <- ggplot() + 
       autolayer.survfit(object = sfit, ...) + 
-      scale_y_continuous(labels = percent) +
+      scale_y_continuous(labels = label_percent()) +
       labs(x = units.Surv(object), y = deparse1(substitute(object)))
     return(p)
   }
