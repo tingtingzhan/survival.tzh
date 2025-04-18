@@ -32,7 +32,7 @@ ggKM.rpart <- function(object, ...) {
     labs(x = units.Surv(y), 
          y = deparse1(object$terms[[2L]]),
          colour = lab_, fill = lab_#,
-         #caption = paste(format_pval(survdiff_rpart(object)$pvalue, add_p = TRUE, add_symbol = FALSE), 'Log-rank (unweighted)') # ?flextable.tzh::format_pval
+         #caption = paste(survdiff_rpart(object)$pvalue |> label_pvalue_sym(add_p = TRUE)(), 'Log-rank (unweighted)') # ?flextable.tzh::label_pvalue_sym
     )
   
 }

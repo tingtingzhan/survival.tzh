@@ -51,6 +51,7 @@ ggKM <- function(object, data, ...) UseMethod('ggKM')
 #' @rdname ggKM
 #' @importFrom ggplot2 ggplot scale_y_continuous labs
 #' @importFrom survival survfit.formula
+# @importFrom scales.tzh label_pvalue_sym
 #' @export ggKM.formula
 #' @export
 ggKM.formula <- function(formula, data, ..., envir = parent.frame()) {
@@ -59,8 +60,8 @@ ggKM.formula <- function(formula, data, ..., envir = parent.frame()) {
   sfit <- eval(call(name = 'survfit.formula', formula = cl0$formula, data = cl0$data), envir = envir)
   #p_survdiff <- if (formula[[3L]] != 1L) {
   #  sdiff <- eval(call(name = 'survdiff', formula = cl0$formula, data = cl0$data), envir = envir)
-  #  paste(format_pval(sdiff$pvalue, add_p = TRUE, add_symbol = FALSE), 'Log-rank (unweighted)')
-  #} # else NULL # needs ?flextable.tzh:::format_pval
+  #  paste(sdiff$pvalue |> label_pvalue_sym(add_p = TRUE)(), 'Log-rank (unweighted)')
+  #} # else NULL
   p <- ggplot() + 
     autolayer.survfit(sfit, units = units, ...) + 
     scale_y_continuous(labels = label_percent()) +
