@@ -18,7 +18,7 @@ Array of Kaplan-Meier curves of multiple endpoints and same predictors.
 }
 \examples{
 # y-axis not the same
-ggKM(rfs ~ chemo, data = rotterdam2)
-ggKM(os ~ chemo, data = rotterdam2)
-m_ggKM(cbind(rfs, os) ~ chemo, data = rotterdam2)
+p = ggKM(rfs ~ chemo, data = rotterdam2)
+p = ggKM(os ~ chemo, data = rotterdam2)
+p = m_ggKM(cbind(rfs, os) ~ chemo, data = rotterdam2)
 }

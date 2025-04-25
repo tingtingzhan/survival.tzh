@@ -14,9 +14,9 @@
 #' 
 #' @examples
 #' # y-axis not the same
-#' ggKM(rfs ~ chemo, data = rotterdam2)
-#' ggKM(os ~ chemo, data = rotterdam2)
-#' m_ggKM(cbind(rfs, os) ~ chemo, data = rotterdam2)
+#' p = ggKM(rfs ~ chemo, data = rotterdam2)
+#' p = ggKM(os ~ chemo, data = rotterdam2)
+#' p = m_ggKM(cbind(rfs, os) ~ chemo, data = rotterdam2)
 #' @importFrom ggplot2 labs layer_scales 
 #' @importFrom scales label_percent
 #' @export
@@ -35,7 +35,8 @@ m_ggKM <- function(formula, ...) { # ncol = 2L,
     range.default()
   
   suppressMessages(p1 <- lapply(p0, FUN = \(p) {
-    p + scale_y_continuous(labels = label_percent(), limits = yl)
+    p + 
+      scale_y_continuous(labels = label_percent(), limits = yl)
   })) 
   
   return(Reduce(f = `+`, x = p1)) # 'patchwork'

@@ -15,7 +15,8 @@
 ..
 }
 \examples{
+options(use_unicode = FALSE) # CRAN requirement
 library(rpart)
 rp = rpart(Surv(time, status) ~ age, data = veteran, maxdepth = 2L, model = TRUE)
-ggKM(rp)
+p = ggKM(rp)
 }

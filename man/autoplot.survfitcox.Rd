@@ -16,8 +16,8 @@
 }
 \examples{
 m1 = coxph(Surv(time, status) ~ celltype, data = veteran)
-m1 |> survfit() |> autoplot()
-m1 |> survfit(newdata = veteran[1:90, ]) |> autoplot()
-m1 |> survfit(newdata = veteran[1:90, ]) |> autoplot(times = c(250))
+p = m1 |> survfit() |> autoplot()
+p = m1 |> survfit(newdata = veteran[1:90, ]) |> autoplot()
+p = m1 |> survfit(newdata = veteran[1:90, ]) |> autoplot(times = c(250))
 }
 \keyword{internal}

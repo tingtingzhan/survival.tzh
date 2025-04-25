@@ -14,7 +14,6 @@ nobsText.survfit(x)
 S3 Methods for \link[survival]{survfit} Objects
 }
 \examples{
-m = survfit(Surv(time, status) ~ x, data = aml)
-m |> nobsText.survfit()
-
+survfit(Surv(time, status) ~ x, data = aml) |> 
+ nobsText.survfit()
 }

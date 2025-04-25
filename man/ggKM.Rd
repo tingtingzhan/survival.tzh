@@ -17,7 +17,7 @@ ggKM(object, data, ...)
 
 \item{data}{\link[base]{data.frame}}
 
-\item{...}{additional parameters of function \link{autolayer.survfit}}
+\item{...}{additional parameters of function \code{\link[=autolayer.survfit]{autolayer.survfit()}}}
 
 \item{formula}{\link[stats]{formula}}
 
@@ -30,7 +30,7 @@ Function \code{\link[=ggKM]{ggKM()}} returns a \link[ggplot2]{ggplot} object.
 ..
 }
 \details{
-Function \code{\link[=ggKM]{ggKM()}} is more elaborated than \link{autoplot.survfit}.
+Function \code{\link[=ggKM]{ggKM()}} is more elaborated than \code{\link[=autoplot.survfit]{autoplot.survfit()}}.
 }
 \examples{
 # ?veteran
@@ -39,11 +39,11 @@ veteran = within(veteran, expr = {
   time = as.difftime(time, units = 'days')
   os = Surv(time = time, event = status)
 })
-ggKM(os ~ 1, data = veteran)
-ggKM(os ~ celltype, data = veteran)
-ggKM(os ~ celltype, data = veteran, times = c(100))
-ggKM(os ~ celltype, data = veteran, labels = letters[1:4])
-ggKM(os ~ celltype + I(age > 60), data = veteran)
+p = ggKM(os ~ 1, data = veteran)
+p = ggKM(os ~ celltype, data = veteran)
+p = ggKM(os ~ celltype, data = veteran, times = c(100))
+p = ggKM(os ~ celltype, data = veteran, labels = letters[1:4])
+p = ggKM(os ~ celltype + I(age > 60), data = veteran)
 }
 \references{
 \url{http://sape.inf.usi.ch/quick-reference/ggplot2/colour}

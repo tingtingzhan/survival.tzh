@@ -9,7 +9,7 @@
 \arguments{
 \item{object}{\link[survival]{survfit.object}}
 
-\item{...}{additional parameters of function \link{autolayer.survfit}}
+\item{...}{additional parameters of function \code{\link[=autolayer.survfit]{autolayer.survfit()}}}
 }
 \description{
 ..

@@ -13,11 +13,11 @@
 #' 
 #' @param envir ..
 #' 
-#' @param ... additional parameters of function [autolayer.survfit]
+#' @param ... additional parameters of function [autolayer.survfit()]
 #' 
 #' @details 
 #' 
-#' Function [ggKM()] is more elaborated than [autoplot.survfit].
+#' Function [ggKM()] is more elaborated than [autoplot.survfit()].
 #' 
 #' @returns 
 #' 
@@ -38,15 +38,15 @@
 #'   time = as.difftime(time, units = 'days')
 #'   os = Surv(time = time, event = status)
 #' })
-#' ggKM(os ~ 1, data = veteran)
-#' ggKM(os ~ celltype, data = veteran)
-#' ggKM(os ~ celltype, data = veteran, times = c(100))
-#' ggKM(os ~ celltype, data = veteran, labels = letters[1:4])
-#' ggKM(os ~ celltype + I(age > 60), data = veteran)
+#' p = ggKM(os ~ 1, data = veteran)
+#' p = ggKM(os ~ celltype, data = veteran)
+#' p = ggKM(os ~ celltype, data = veteran, times = c(100))
+#' p = ggKM(os ~ celltype, data = veteran, labels = letters[1:4])
+#' p = ggKM(os ~ celltype + I(age > 60), data = veteran)
 #' @name ggKM
 #' @importFrom scales label_percent
 #' @export
-ggKM <- function(object, data, ...) UseMethod('ggKM')
+ggKM <- function(object, data, ...) UseMethod(generic = 'ggKM')
 
 #' @rdname ggKM
 #' @importFrom ggplot2 ggplot scale_y_continuous labs

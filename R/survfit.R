@@ -62,7 +62,7 @@ autolayer.survfit <- function(
     if (!length(labels) || anyNA(labels) || !all(nzchar(labels))) stop('illegal labels')
     if (length(labels) != length(names(object$strata))) stop('user specified `labels` not match the strata of `survfit` object')
     if (!is.null(names(labels))) stop('user specified `labels` must be unnamed!  Watch the order of default saput first, then write user-specified labels')
-    message(sprintf(fmt = '%s was %s\n', sQuote(labels), sQuote(old_labs)))
+    sprintf(fmt = '%s was %s\n', sQuote(labels), sQuote(old_labs)) |> message()
     
   } else if (isFALSE(labels) || !length(labels)) {
     labels <- NULL
@@ -99,9 +99,13 @@ autolayer.survfit <- function(
       ), fontface = 'bold', fill = 'transparent',
       size = 3)
     },
+    
     (if (length(labels)) scale_colour_discrete(labels = labels)),
+    
     (if (length(labels)) scale_fill_discrete(labels = labels)),
+    
     labs(y = deparse1(fom[[2L]]), colour = strata_nm, fill = strata_nm)
+    
   )
 
   attr(ret, which = 'data') <- d
@@ -119,7 +123,7 @@ autolayer.survfit <- function(
 #' 
 #' @param object \link[survival]{survfit.object}
 #' 
-#' @param ... additional parameters of function [autolayer.survfit]
+#' @param ... additional parameters of function [autolayer.survfit()]
 #' 
 #' @seealso 
 #' `survival:::plot.survfit` `survival:::quantile.survfit`
@@ -141,9 +145,8 @@ autoplot.survfit <- function(object, ...) {
 #' @param x \link[survival]{survfit} or \link[survival]{summary.survfit} object
 #' 
 #' @examples
-#' m = survfit(Surv(time, status) ~ x, data = aml)
-#' m |> nobsText.survfit()
-#' 
+#' survfit(Surv(time, status) ~ x, data = aml) |> 
+#'  nobsText.survfit()
 #' @name S3_survfit
 #' @export
 nobsText.survfit <- function(x) {
