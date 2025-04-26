@@ -86,9 +86,6 @@ getTime.Surv <- function(x, type = c('event', 'censor', 'any'), ...) {
 #' 
 #' @param ... ..
 #' 
-#' @examples 
-#' options(use_unicode = FALSE) # CRAN requirement
-#' p = autoplot(with(veteran, Surv(time, status))) # mask for font
 #' @importFrom ggplot2 autoplot ggplot scale_y_continuous labs
 #' @importFrom scales label_percent
 #' @importFrom survival survfit.formula

@@ -16,9 +16,3 @@ an array of Kaplan Meier curves of \code{y1 ~ x1 + x2 + x3} and \code{y2 ~ x1 + 
 \description{
 Array of Kaplan-Meier curves of multiple endpoints and same predictors.
 }
-\examples{
-# y-axis not the same
-p = ggKM(rfs ~ chemo, data = rotterdam2)
-p = ggKM(os ~ chemo, data = rotterdam2)
-p = m_ggKM(cbind(rfs, os) ~ chemo, data = rotterdam2)
-}

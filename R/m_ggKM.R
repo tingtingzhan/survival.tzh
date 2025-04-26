@@ -12,11 +12,6 @@
 #' 
 #' @param ... additional parameters of [ggKM.formula()] 
 #' 
-#' @examples
-#' # y-axis not the same
-#' p = ggKM(rfs ~ chemo, data = rotterdam2)
-#' p = ggKM(os ~ chemo, data = rotterdam2)
-#' p = m_ggKM(cbind(rfs, os) ~ chemo, data = rotterdam2)
 #' @importFrom ggplot2 labs layer_scales 
 #' @importFrom scales label_percent
 #' @export

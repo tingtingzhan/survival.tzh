@@ -14,7 +14,3 @@
 \description{
 ..
 }
-\examples{
-options(use_unicode = FALSE) # CRAN requirement
-p = autoplot(with(veteran, Surv(time, status))) # mask for font
-}

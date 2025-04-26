@@ -4,9 +4,9 @@
 \name{survival.tzh-package}
 \alias{survival.tzh}
 \alias{survival.tzh-package}
-\title{flextable.tzh}
+\title{survival.tzh: survival.tzh}
 \description{
-..
+Need to think more..
 }
 \author{
 \strong{Maintainer}: Tingting Zhan \email{tingtingzhan@gmail.com} (\href{https://orcid.org/0000-0001-9971-4844}{ORCID})

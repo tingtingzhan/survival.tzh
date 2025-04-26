@@ -14,7 +14,7 @@ Surv_3Date(start, stop, censor, units = "years", ...)
 \item{...}{potential parameters, currently not in use}
 }
 \value{
-Function \link{Surv_3Date} returns a \link[survival]{Surv} object.
+Function \code{\link[=Surv_3Date]{Surv_3Date()}} returns a \link[survival]{Surv} object.
 }
 \description{
 Create right-censored \link[survival]{Surv} object using start, stop and censoring dates.

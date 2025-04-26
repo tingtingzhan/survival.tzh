@@ -22,13 +22,3 @@ Function \code{\link[=subset_ggKM]{subset_ggKM()}} returns a \link[patchwork]{pa
 \description{
 Produce a \link[patchwork]{patchwork} of Kaplan-Meier curves for \emph{subset analysis}.
 }
-\examples{
-p = subset_ggKM(os ~ ph.ecog, subset = list(
-  All = TRUE, Female = (sex == 'Female'), Male = (sex == 'Male')
-), data = lung2)
-
-id = quote(list(
-  All = TRUE, Female = (sex == 'Female'), Male = (sex == 'Male')
-))
-p = subset_ggKM(os ~ ph.ecog, subset = id, data = lung2)
-}

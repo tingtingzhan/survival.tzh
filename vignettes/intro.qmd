@@ -1,0 +1,151 @@
+---
+title: "ggKM"
+author: Tingting Zhan
+format: 
+  html:
+    page-layout: full
+    html-math-method: katex
+toc: true
+toc-location: left
+toc-depth: 4
+toc-title: ''
+editor: visual
+vignette: >
+  %\VignetteIndexEntry{intro}
+  %\VignetteEngine{quarto::html}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Introduction
+
+This vignette of package **`survival.tzh`** ([Github](https://github.com/tingtingzhan/survival.tzh), [RPubs](https://rpubs.com/tingtingzhan/VisualizeSimon2Stage)) documents `ggKM()`.
+
+## Note to Users
+
+Examples in this vignette require that the `search` path has
+
+```{r}
+#| message: false
+library(survival)
+library(rpart)
+library(patchwork)
+library(survival.tzh)
+```
+
+```{r}
+#| echo: false
+library(knitr) # for tables in this vignette
+#options(mc.cores = 1L) # for CRAN submission
+```
+
+## Terms and Abbreviations
+
+```{r}
+#| echo: false
+#| results: asis
+c(
+  '[|>](https://search.r-project.org/R/refmans/base/html/pipeOp.html)', 'Forward pipe operator introduced in `R` 4.1.0', 
+  '`$`', '[Extract](https://search.r-project.org/R/refmans/base/html/Extract.html) parts of an object',
+  '[`binom`](https://search.r-project.org/R/refmans/stats/html/Binomial.html)', '[Binomial](https://en.wikipedia.org/wiki/Binomial_distribution) density and distribution', 
+  '`CRAN`, `R`', '[The Comprehensive R Archive Network](https://cran.r-project.org)',
+  '[`class`](https://search.r-project.org/R/refmans/base/html/class.html)', 'Object class',
+  '[`flextable`](https://search.r-project.org/CRAN/refmans/flextable/html/flextable.html)', 'Flexible tables',
+  '`PASS`', 'Power Analysis & Sample Size, <https://www.ncss.com/software/pass/>', 
+  '`PET`', 'Probability of early termination',
+  '[`ph2simon`](https://search.r-project.org/CRAN/refmans/clinfun/html/ph2simon.html)', 'Simon\'s 2-stage Phase II design',
+  '`S3`, `generic`, [`methods`](https://search.r-project.org/R/refmans/utils/html/methods.html)', '`S3` object oriented system, [`UseMethod`](https://search.r-project.org/R/refmans/base/html/UseMethod.html); [`getS3method`](https://search.r-project.org/R/refmans/utils/html/getS3method.html); <https://adv-r.hadley.nz/s3.html>',  
+  '`S4`, `generic`, `methods`', '`S4` object oriented system, [`isS4`](https://search.r-project.org/R/refmans/base/html/isS4.html); [`setClass`](https://search.r-project.org/R/refmans/methods/html/setClass.html); [`getMethod`](https://search.r-project.org/R/refmans/methods/html/getMethod.html); <https://adv-r.hadley.nz/s4.html>',
+  '[`search`](https://search.r-project.org/R/refmans/base/html/search.html)', 'Search path',
+  '[`seed`](https://search.r-project.org/R/refmans/base/html/Random.html)', 'Random number generation seed'
+) |>
+  matrix(nrow = 2L, dimnames = list(c('Term / Abbreviation', 'Description'), NULL)) |>
+  t.default() |>
+  as.data.frame.matrix() |> 
+  kable() 
+```
+
+# Data Example
+
+```{r}
+rotterdam2 = survival::rotterdam |> 
+  within.data.frame(expr = {
+    rtime = as.difftime(rtime, units = 'days')
+    dtime = as.difftime(dtime, units = 'days')
+    rfs = Surv(rtime, event = recur)
+    os = Surv(dtime, event = death)
+    units(rfs) = units(os) = 'years'
+  })
+```
+
+
+# Kaplan-Meier Curves
+
+```{r}
+rotterdam2$os |> autoplot()
+```
+
+
+```{r}
+ggKM(os ~ 1, data = rotterdam2)
+```
+
+```{r}
+ggKM(os ~ size, data = rotterdam2)
+```
+
+```{r}
+# fix: error
+# ggKM(os ~ size, data = rotterdam2, times = c(5, 10))
+```
+
+
+```{r}
+ggKM(os ~ size, data = rotterdam2, labels = letters[1:3])
+```
+
+
+```{r}
+ggKM(os ~ size + I(age > 60), data = rotterdam2)
+```
+
+
+
+
+
+```{r}
+rpart(os ~ age, data = rotterdam2, maxdepth = 2L, model = TRUE) |>
+  ggKM()
+```
+
+
+
+## `subset_ggKM()`
+
+```{r}
+#| fig-width: 10
+subset_ggKM(os ~ size, subset = list(
+  All = TRUE, pre = (meno == 0), post = (meno == 1)
+), data = rotterdam2) +
+  plot_layout(ncol = 2L)
+```
+
+```{r}
+#| fig-width: 10
+id = quote(list(
+  All = TRUE, pre = (meno == 0), post = (meno == 1)
+))
+subset_ggKM(os ~ size, subset = id, data = rotterdam2) +
+  plot_layout(ncol = 2L)
+```
+
+
+## `m_ggKM()`
+
+```{r}
+#| fig-width: 10
+m_ggKM(cbind(rfs, os) ~ chemo, data = rotterdam2)
+```
+
+
+
+

@@ -8,11 +8,6 @@
 #' 
 #' @param ... ..
 #' 
-#' @examples
-#' options(use_unicode = FALSE) # CRAN requirement
-#' library(rpart)
-#' rp = rpart(Surv(time, status) ~ age, data = veteran, maxdepth = 2L, model = TRUE)
-#' p = ggKM(rp)
 #' @importFrom ggplot2 ggplot scale_y_continuous labs
 #' @importFrom rpart.tzh survdiff_rpart survfit.rpart
 #' @importFrom scales label_percent

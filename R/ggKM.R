@@ -31,18 +31,6 @@
 #' Package \pkg{ggfortify} \url{https://cran.r-project.org/web/packages/ggfortify/}
 #' 
 #' 
-#' @examples 
-#' # ?veteran
-#' # https://www.medrxiv.org/content/10.1101/2022.05.22.22275430v1
-#' veteran = within(veteran, expr = {
-#'   time = as.difftime(time, units = 'days')
-#'   os = Surv(time = time, event = status)
-#' })
-#' p = ggKM(os ~ 1, data = veteran)
-#' p = ggKM(os ~ celltype, data = veteran)
-#' p = ggKM(os ~ celltype, data = veteran, times = c(100))
-#' p = ggKM(os ~ celltype, data = veteran, labels = letters[1:4])
-#' p = ggKM(os ~ celltype + I(age > 60), data = veteran)
 #' @name ggKM
 #' @importFrom scales label_percent
 #' @export

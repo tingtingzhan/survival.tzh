@@ -1,9 +1,5 @@
 
 
-#' @title flextable.tzh
-#'
-#' @description ..
-#'
 #' @import patchwork
 # @importFrom patchwork ggplot_add.ggplot
 '_PACKAGE'

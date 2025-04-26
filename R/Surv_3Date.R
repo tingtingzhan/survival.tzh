@@ -11,7 +11,7 @@
 #' @param ... potential parameters, currently not in use
 #' 
 #' @returns 
-#' Function [Surv_3Date] returns a \link[survival]{Surv} object.
+#' Function [Surv_3Date()] returns a \link[survival]{Surv} object.
 #' 
 #' @examples 
 #' library(survival)

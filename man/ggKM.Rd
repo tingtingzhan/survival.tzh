@@ -32,19 +32,6 @@ Function \code{\link[=ggKM]{ggKM()}} returns a \link[ggplot2]{ggplot} object.
 \details{
 Function \code{\link[=ggKM]{ggKM()}} is more elaborated than \code{\link[=autoplot.survfit]{autoplot.survfit()}}.
 }
-\examples{
-# ?veteran
-# https://www.medrxiv.org/content/10.1101/2022.05.22.22275430v1
-veteran = within(veteran, expr = {
-  time = as.difftime(time, units = 'days')
-  os = Surv(time = time, event = status)
-})
-p = ggKM(os ~ 1, data = veteran)
-p = ggKM(os ~ celltype, data = veteran)
-p = ggKM(os ~ celltype, data = veteran, times = c(100))
-p = ggKM(os ~ celltype, data = veteran, labels = letters[1:4])
-p = ggKM(os ~ celltype + I(age > 60), data = veteran)
-}
 \references{
 \url{http://sape.inf.usi.ch/quick-reference/ggplot2/colour}
 
