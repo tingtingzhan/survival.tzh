@@ -13,6 +13,7 @@ Sprintf.survfit(x)
 ..
 }
 \examples{
+library(survival)
 survfit(Surv(time, status) ~ 1, data = aml) |> Sprintf.survfit()
 survfit(Surv(time, status) ~ x, data = aml) |> Sprintf.survfit()
 }

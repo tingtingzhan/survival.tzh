@@ -8,6 +8,7 @@
 #' Function `?broom:::nobs.survdiff` (2024-09-26) is **WRONG**.
 #' 
 #' @examples
+#' library(survival)
 #' m = survdiff(Surv(futime, fustat) ~ rx, data = ovarian) 
 #' m |> nobsText.survdiff()
 #' m |> .pval.survdiff()

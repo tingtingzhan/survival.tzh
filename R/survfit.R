@@ -145,6 +145,7 @@ autoplot.survfit <- function(object, ...) {
 #' @param x \link[survival]{survfit} or \link[survival]{summary.survfit} object
 #' 
 #' @examples
+#' library(survival)
 #' survfit(Surv(time, status) ~ x, data = aml) |> 
 #'  nobsText.survfit()
 #' @name S3_survfit
@@ -169,6 +170,7 @@ nobsText.survfit <- function(x) {
 #' @param x \link[survival]{survfit.object}
 #' 
 #' @examples
+#' library(survival)
 #' survfit(Surv(time, status) ~ 1, data = aml) |> Sprintf.survfit()
 #' survfit(Surv(time, status) ~ x, data = aml) |> Sprintf.survfit()
 #' @export Sprintf.survfit

@@ -4,6 +4,7 @@
 #' @param x a \link[survival]{survreg} or \link[survival]{summary.survreg}
 #' 
 #' @examples
+#' library(survival)
 #' # ?survival::survreg
 #' m = survreg(Surv(futime, fustat) ~ ecog.ps + rx, data = ovarian, dist = 'weibull', scale = 1) 
 #' 

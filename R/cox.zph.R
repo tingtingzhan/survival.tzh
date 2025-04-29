@@ -9,6 +9,7 @@
 #' 
 #' @examples
 #' ?survival::cox.zph
+#' library(survival)
 #' m = coxph(Surv(futime, fustat) ~ age + ecog.ps, data = ovarian) |> cox.zph() 
 #' .pval.cox.zph(m)
 #' @name S3_coxzph
@@ -37,6 +38,7 @@
 #' 
 #' @examples 
 #' # ?coxphw::coxphw examples
+#' library(survival)
 #' data(gastric, package = 'coxphw')
 #' coxph(Surv(time, status) ~ radiation, data = gastric) |> cox_zph()
 #' @references

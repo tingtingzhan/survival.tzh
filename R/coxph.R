@@ -5,6 +5,7 @@
 #' 
 #' @examples
 #' ?survival::cox.zph
+#' library(survival)
 #' m = ovarian |>
 #'  within.data.frame(expr = {
 #'   ecog.ps = factor(ecog.ps)

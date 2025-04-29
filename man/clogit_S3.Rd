@@ -21,6 +21,7 @@ Additional S3 methods for \link[survival]{clogit} Objects
 }
 \examples{
 # see ?survival::clogit
+library(survival)
 data(logan, package = 'survival')
 resp = levels(logan$occupation)
 n = nrow(logan)

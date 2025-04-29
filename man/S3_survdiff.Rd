@@ -20,6 +20,7 @@ S3 Methods \link[survival]{survdiff} Object
 Function \code{?broom:::nobs.survdiff} (2024-09-26) is \strong{WRONG}.
 }
 \examples{
+library(survival)
 m = survdiff(Surv(futime, fustat) ~ rx, data = ovarian) 
 m |> nobsText.survdiff()
 m |> .pval.survdiff()

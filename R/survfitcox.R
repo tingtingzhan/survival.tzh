@@ -10,6 +10,8 @@
 #' @param ... ..
 #' 
 #' @examples 
+#' library(survival)
+#' library(ggplot2)
 #' m1 = coxph(Surv(time, status) ~ celltype, data = veteran)
 #' p = m1 |> survfit() |> autoplot()
 #' p = m1 |> survfit(newdata = veteran[1:90, ]) |> autoplot()
