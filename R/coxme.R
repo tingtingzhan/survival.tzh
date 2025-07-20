@@ -76,7 +76,7 @@ terms.coxme <- function(x, ...) {
 #' @importFrom utils bibentry
 #' @export
 desc_.coxme <- function(x) {
-  'mixed effects Cox [@Ripatti04, @Therneau03]' |> # ?coxme::coxme
+  'mixed effects Cox [@Ripatti04; @Therneau03]' |> # ?coxme::coxme
     new(Class = 'md_lines', bibentry = c(
       bibentry(
         bibtype = 'Article', key = 'Ripatti04',
