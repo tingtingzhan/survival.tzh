@@ -30,7 +30,7 @@ desc_.coxph <- function(x) {
   '@Cox72 proportional hazards' |>
     new(Class = 'md_lines', bibentry = bibentry(
       bibtype = 'Article', key = 'Cox72',
-      author = 'Cox, David R.',
+      author = 'David R. Cox',
       title = 'Regression Models and Life-Tables',
       journal = 'Journal of the Royal Statistical Society: Series B (Methodological)',
       volume = '34',
