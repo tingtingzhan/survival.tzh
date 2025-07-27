@@ -27,7 +27,6 @@
 #' Function [survOver] returns a \link[base]{logical} \link[base]{vector}.
 #' 
 #' @examples
-#' library(survival)
 #' (x = Surv(1:4, event = c(0,1,0,1)))
 #' survOver(x, tm = 3)
 #' survOver(x, tm = 3, censor = FALSE)

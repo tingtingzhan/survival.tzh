@@ -14,7 +14,6 @@
 #' Function [Surv_3Date()] returns a \link[survival]{Surv} object.
 #' 
 #' @examples 
-#' library(survival)
 #' d1 = within(survival::udca, expr = {
 #'   edp_yr = Surv_3Date(entry.dt, death.dt, last.dt, units = 'years')
 #'   edp_mon = Surv_3Date(entry.dt, death.dt, last.dt, units = 'months') 

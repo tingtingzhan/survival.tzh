@@ -16,7 +16,6 @@
 #' @details ..
 #' 
 #' @examples 
-#' library(survival)
 #' x = survfit(Surv(stop-start, event = (status!=0)) ~ treatment, 
 #'   data = bladder1)
 #' pairwise_survfit_test(x, times = c(10, 20))

@@ -5,7 +5,6 @@
 #' 
 #' @examples
 #' ?survival::cox.zph
-#' library(survival)
 #' m = ovarian |>
 #'  within.data.frame(expr = {
 #'   ecog.ps = factor(ecog.ps)
@@ -38,7 +37,7 @@ desc_.coxph <- function(x) {
       pages = '187-202',
       doi = '10.1111/j.2517-6161.1972.tb00899.x',
       year = '1972'
-    ))
+    ), package = 'survival')
 }
 
 #' @rdname S3_coxph

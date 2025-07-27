@@ -6,7 +6,6 @@
 #' 
 #' @examples
 #' # see ?survival::clogit
-#' library(survival)
 #' data(logan, package = 'survival')
 #' resp = levels(logan$occupation)
 #' n = nrow(logan)

@@ -101,7 +101,7 @@ desc_.coxme <- function(x) {
         year = '2003',
         doi = '10.1198/1061860031365'
       )
-    ))
+    ), package = 'coxme')
 }
 
 
