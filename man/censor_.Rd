@@ -18,7 +18,6 @@ censor_(x, censor)
 In practice, we sometimes want to ignore events happening after a time point.
 }
 \examples{
-library(survival)
 x = lung |> with(expr = Surv(time = time, event = (status == 2)))
 head(x, n = 10)
 x1 = censor_(x, censor = 400)

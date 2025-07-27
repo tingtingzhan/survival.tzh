@@ -20,7 +20,6 @@ Function \code{\link[=Surv_3Date]{Surv_3Date()}} returns a \link[survival]{Surv}
 Create right-censored \link[survival]{Surv} object using start, stop and censoring dates.
 }
 \examples{
-library(survival)
 d1 = within(survival::udca, expr = {
   edp_yr = Surv_3Date(entry.dt, death.dt, last.dt, units = 'years')
   edp_mon = Surv_3Date(entry.dt, death.dt, last.dt, units = 'months') 

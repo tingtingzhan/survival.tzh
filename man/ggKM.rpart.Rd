@@ -14,3 +14,12 @@
 \description{
 ..
 }
+\examples{
+library(rpart)
+rp = rpart(Surv(time, status) ~ age, data = veteran, maxdepth = 2L, model = TRUE)
+library(rmd.tzh); list(
+  'ggKM.rpart' = ggKM(rp)
+) |> render_(file = 'ggKM.rpart')
+
+}
+\keyword{internal}

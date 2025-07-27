@@ -17,7 +17,6 @@ Function \link{cox_zph} prints ...
 }
 \examples{
 # ?coxphw::coxphw examples
-library(survival)
 data(gastric, package = 'coxphw')
 coxph(Surv(time, status) ~ radiation, data = gastric) |> cox_zph()
 }

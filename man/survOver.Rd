@@ -21,7 +21,6 @@ Function \link{survOver} returns a \link[base]{logical} \link[base]{vector}.
 \link[survival]{Surv}ival Over A Time
 }
 \examples{
-library(survival)
 (x = Surv(1:4, event = c(0,1,0,1)))
 survOver(x, tm = 3)
 survOver(x, tm = 3, censor = FALSE)

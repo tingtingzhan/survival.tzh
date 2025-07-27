@@ -18,7 +18,6 @@ S3 methods of \link[survival]{cox.zph}
 }
 \examples{
 ?survival::cox.zph
-library(survival)
 m = coxph(Surv(futime, fustat) ~ age + ecog.ps, data = ovarian) |> cox.zph() 
 .pval.cox.zph(m)
 }

@@ -14,7 +14,6 @@
 S3 methods for \link[survival]{survreg}
 }
 \examples{
-library(survival)
 # ?survival::survreg
 m = survreg(Surv(futime, fustat) ~ ecog.ps + rx, data = ovarian, dist = 'weibull', scale = 1) 
 
