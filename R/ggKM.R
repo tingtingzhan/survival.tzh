@@ -39,7 +39,7 @@ ggKM <- function(object, data, ...) UseMethod(generic = 'ggKM')
 #' @rdname ggKM
 #' @importFrom ggplot2 ggplot scale_y_continuous labs
 #' @importFrom survival survfit.formula
-# @importFrom scales.tzh label_pvalue_sym
+# @importFrom rmd.tzh label_pvalue_sym
 #' @export ggKM.formula
 #' @export
 ggKM.formula <- function(formula, data, ..., envir = parent.frame()) {

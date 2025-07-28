@@ -18,7 +18,7 @@
 #' @keywords internal
 #' @importFrom ggplot2 ggplot scale_y_continuous labs
 #' @importFrom scales label_percent
-#' @importFrom scales.tzh label_pvalue_sym
+#' @importFrom rmd.tzh label_pvalue_sym
 #' @importClassesFrom rmd.tzh md_lines
 #' @export ggKM.rpart
 #' @export

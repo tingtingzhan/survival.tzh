@@ -16,7 +16,7 @@ Depends: R (>= 4.5), survival (== 3.8.3)
 Imports: methods, ggplot2 (== 3.5.2), ggrepel (== 0.9.6), 
     patchwork (== 1.3.1), rlang, scales (== 1.4.0), 
     survminer (== 0.5.0), 
-    rpart.tzh, scales.tzh, rmd.tzh
+    rpart.tzh, rmd.tzh
 Suggests: 
     rpart (== 4.1.24),
     coxme (== 2.2.22),
