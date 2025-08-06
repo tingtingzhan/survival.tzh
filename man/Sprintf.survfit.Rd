@@ -16,3 +16,4 @@ Sprintf.survfit(x)
 survfit(Surv(time, status) ~ 1, data = aml) |> Sprintf.survfit()
 survfit(Surv(time, status) ~ x, data = aml) |> Sprintf.survfit()
 }
+\keyword{internal}

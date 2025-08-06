@@ -9,8 +9,7 @@
 #' @param ... ..
 #' 
 #' @examples
-#' library(rpart)
-#' rp = rpart(Surv(time, status) ~ age, data = veteran, maxdepth = 2L, model = TRUE)
+#' rp = rpart::rpart(Surv(time, status) ~ age, data = veteran, maxdepth = 2L, model = TRUE)
 #' library(rmd.tzh); list(
 #'   'ggKM.rpart' = ggKM(rp)
 #' ) |> render_(file = 'ggKM.rpart')
@@ -43,8 +42,18 @@ ggKM.rpart <- function(object, ...) {
          caption = survdiff_rpart(object)$pvalue |> label_pvalue_sym(add_p = TRUE)() |> paste('Log-rank (unweighted)') 
     )
   
-  attr(p, which = 'text') <- 'Kaplan-Meier estimates and curves based on the partition branches are created by <u>**`R`**</u> package <u>**`survival`**</u>.' |>
-    new(Class = 'md_lines', package = 'survival')
+  attr(p, which = 'text') <- '@KaplanMeier58 estimates and curves based on the partition branches are created by <u>**`R`**</u> package <u>**`survival`**</u>.' |>
+    new(Class = 'md_lines', package = 'survival', bibentry = bibentry(
+      bibtype = 'article', key = 'KaplanMeier58',
+      author = c('Edward L. Kaplan', 'Paul Meier'),
+      title = 'Nonparametric Estimation from Incomplete Observations',
+      journal = 'Journal of the American Statistical Association',
+      volume = '53',
+      number = '282',
+      pages = '457--481',
+      year = '1958',
+      doi = '10.1080/01621459.1958.10501452'
+    ))
   
   return(p)
   
