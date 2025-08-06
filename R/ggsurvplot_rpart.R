@@ -35,17 +35,7 @@ ggsurvplot_rpart <- function(fit, ...) {
     ...)
   
   attr(p, which = 'text') = '@KaplanMeier58 estimates and curves based on the partition branches are created by <u>**`R`**</u> package <u>**`survminer`**</u>.' |>
-    new(Class = 'md_lines', package = 'survminer', bibentry = bibentry(
-      bibtype = 'article', key = 'KaplanMeier58',
-      author = c('Edward L. Kaplan', 'Paul Meier'),
-      title = 'Nonparametric Estimation from Incomplete Observations',
-      journal = 'Journal of the American Statistical Association',
-      volume = '53',
-      number = '282',
-      pages = '457--481',
-      year = '1958',
-      doi = '10.1080/01621459.1958.10501452'
-    ))
+    new(Class = 'md_lines', package = 'survminer', bibentry = KaplanMeier58())
   
   return(p)
   

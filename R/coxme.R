@@ -73,35 +73,10 @@ terms.coxme <- function(x, ...) {
 #' @rdname S3_coxme
 #' @importClassesFrom rmd.tzh md_lines
 #' @importFrom methods new
-#' @importFrom utils bibentry
 #' @export
 desc_.coxme <- function(x) {
   'mixed effects Cox [@Ripatti04; @Therneau03]' |> # ?coxme::coxme
-    new(Class = 'md_lines', bibentry = c(
-      bibentry(
-        bibtype = 'Article', key = 'Ripatti04',
-        author = 'Ripatti, Samuli and Palmgren, Juni',
-        title = 'Estimation of Multivariate Frailty Models Using Penalized Partial Likelihood',
-        journal = 'Biometrics',
-        volume = '56',
-        number = '4',
-        pages = '1016-1022',
-        year = '2004',
-        month = '05',
-        doi = '10.1111/j.0006-341X.2000.01016.x'
-      ),
-      bibentry(
-        bibtype = 'Article', key = 'Therneau03',
-        author = 'Terry M Therneau and Patricia M Grambsch and V. Shane Pankratz',
-        title = 'Penalized Survival Models and Frailty',
-        journal = 'Journal of Computational and Graphical Statistics',
-        volume = '12',
-        number = '1',
-        pages = '156--175',
-        year = '2003',
-        doi = '10.1198/1061860031365'
-      )
-    ), package = 'coxme')
+    new(Class = 'md_lines', bibentry = c(Ripatti04(), Therneau03()), package = 'coxme')
 }
 
 

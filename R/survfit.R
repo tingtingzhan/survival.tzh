@@ -173,7 +173,6 @@ nobsText.survfit <- function(x) {
 #' survfit(Surv(time, status) ~ x, data = aml) |> Sprintf.survfit()
 #' @keywords internal
 #' @importFrom methods new
-#' @importFrom utils bibentry
 #' @importClassesFrom rmd.tzh md_lines  
 #' @export Sprintf.survfit
 #' @export
@@ -192,22 +191,8 @@ Sprintf.survfit <- function(x) {
             paste0('`', all.vars(fom[[3L]]), '`', collapse = ','))
   }
   
-  new(
-    Class = 'md_lines', 
-    ret, 
-    package = 'survival', 
-    bibentry = bibentry(
-      bibtype = 'article', key = 'KaplanMeier58',
-      author = c('Edward L. Kaplan', 'Paul Meier'),
-      title = 'Nonparametric Estimation from Incomplete Observations',
-      journal = 'Journal of the American Statistical Association',
-      volume = '53',
-      number = '282',
-      pages = '457--481',
-      year = '1958',
-      doi = '10.1080/01621459.1958.10501452'
-    )
-  )
+  ret |>
+    new(Class = 'md_lines', package = 'survival', bibentry = KaplanMeier58())
   
 }
 

@@ -23,21 +23,10 @@ nobsText.coxph <- function(x) {
 #' @rdname S3_coxph
 #' @importClassesFrom rmd.tzh md_lines
 #' @importFrom methods new
-#' @importFrom utils bibentry
 #' @export
 desc_.coxph <- function(x) {
   '@Cox72 proportional hazards' |>
-    new(Class = 'md_lines', bibentry = bibentry(
-      bibtype = 'Article', key = 'Cox72',
-      author = 'David R. Cox',
-      title = 'Regression Models and Life-Tables',
-      journal = 'Journal of the Royal Statistical Society: Series B (Methodological)',
-      volume = '34',
-      number = '2',
-      pages = '187-202',
-      doi = '10.1111/j.2517-6161.1972.tb00899.x',
-      year = '1972'
-    ), package = 'survival')
+    new(Class = 'md_lines', bibentry = Cox72(), package = 'survival')
 }
 
 #' @rdname S3_coxph
