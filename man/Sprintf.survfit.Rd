@@ -4,7 +4,7 @@
 \alias{Sprintf.survfit}
 \title{Sprintf.survfit}
 \usage{
-Sprintf.survfit(x)
+\method{Sprintf}{survfit}(x)
 }
 \arguments{
 \item{x}{\link[survival]{survfit.object}}

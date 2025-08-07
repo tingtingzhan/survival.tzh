@@ -13,6 +13,9 @@
 #' m |> .pval.survdiff()
 #'  
 #' @name S3_survdiff
+#' @keywords internal
+#' @importFrom ecip nobsText
+#' @export nobsText.survdiff
 #' @export
 nobsText.survdiff <- function(x) {
   sprintf(fmt = '%d subj (%d events)', sum(x[['n']]), sum(x[['obs']]))
@@ -20,6 +23,8 @@ nobsText.survdiff <- function(x) {
 
 
 #' @name S3_survdiff
+#' @importFrom ecip .pval
+#' @export .pval.survdiff
 #' @export
 .pval.survdiff <- function(x) x[['pvalue']]
 

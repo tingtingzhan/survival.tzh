@@ -9,6 +9,10 @@
 #' m = coxme(Surv(time, status) ~ ph.ecog + age + (1|inst), data = lung) 
 #' m |> nobsText.coxme()
 #' @name S3_coxme
+#' @keywords internal
+#' @importFrom ecip .pval
+#' @method .pval summary.coxme
+#' @export .pval.summary.coxme
 #' @export
 .pval.summary.coxme <- function(x) {
   cf <- x$coefficients
@@ -20,6 +24,8 @@
 
 
 #' @rdname S3_coxme
+#' @importFrom ecip nobsText
+#' @export nobsText.coxme
 #' @export
 nobsText.coxme <- function(x) {
   ng <- lengths(x$frail, use.names = TRUE)
@@ -72,7 +78,9 @@ terms.coxme <- function(x, ...) {
 
 #' @rdname S3_coxme
 #' @importClassesFrom rmd.tzh md_lines
+#' @importFrom ecip desc_
 #' @importFrom methods new
+#' @export desc_.coxme
 #' @export
 desc_.coxme <- function(x) {
   'mixed effects Cox [@Ripatti04; @Therneau03]' |> # ?coxme::coxme
@@ -82,6 +90,8 @@ desc_.coxme <- function(x) {
 
 
 #' @rdname S3_coxme
+#' @importFrom ecip estnm
+#' @export estnm.coxme
 #' @export
 estnm.coxme <- function(x) 'Hazards\ Ratio'
 

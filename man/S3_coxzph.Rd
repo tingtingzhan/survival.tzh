@@ -5,7 +5,7 @@
 \alias{.pval.cox.zph}
 \title{S3 methods of \link[survival]{cox.zph}}
 \usage{
-.pval.cox.zph(x)
+\method{.pval}{cox.zph}(x)
 }
 \arguments{
 \item{x}{a \link[survival]{cox.zph} object}
@@ -21,3 +21,4 @@ S3 methods of \link[survival]{cox.zph}
 m = coxph(Surv(futime, fustat) ~ age + ecog.ps, data = ovarian) |> cox.zph() 
 .pval.cox.zph(m)
 }
+\keyword{internal}

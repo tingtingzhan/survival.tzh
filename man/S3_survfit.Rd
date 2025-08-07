@@ -5,7 +5,7 @@
 \alias{nobsText.survfit}
 \title{S3 Methods for \link[survival]{survfit} Objects}
 \usage{
-nobsText.survfit(x)
+\method{nobsText}{survfit}(x)
 }
 \arguments{
 \item{x}{\link[survival]{survfit} or \link[survival]{summary.survfit} object}
@@ -17,3 +17,4 @@ S3 Methods for \link[survival]{survfit} Objects
 survfit(Surv(time, status) ~ x, data = aml) |> 
  nobsText.survfit()
 }
+\keyword{internal}

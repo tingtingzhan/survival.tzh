@@ -33,19 +33,26 @@ autoplot.survfitcox <- function(object, ...) {
 
 
 
-# @title Additional S3 methods for `survfitcox` Objects
-# 
-# @param x `survfitcox` object
-# 
-# @name S3_survfitcox
-# @export
-#endpoint.survfitcox <- function(x) {
-#  cox <- tryCatch(eval(x$call$formula), error = as.null.default, warning = as.null.default)
-#  if (!length(cox) || !inherits(cox, what = 'coxph')) return('')
-#  #return(endpoint.default(cox))
-#  NextMethod(generic = 'endpoint', object = cox) # currently dispatch to tzh::endpoint.default
-# hahah, does not work :)
-#}
+#' @title Endpoint of `'survfitcox'` Object
+#' 
+#' @param x an object of class `'survfitcox'`, returned from function `survival:::survfit.coxph()`
+#' 
+#' @examples
+#' library(survival)
+#' coxph(Surv(time, status) ~ celltype, data = veteran) |> 
+#'   survfit() |>
+#'   endpoint.survfitcox()
+#' @keywords internal
+#' @importFrom ecip endpoint endpoint.default
+#' @export endpoint.survfitcox
+#' @export
+endpoint.survfitcox <- function(x) {
+  cox <- tryCatch(eval(x$call$formula), error = as.null.default, warning = as.null.default)
+  if (!length(cox) || !inherits(cox, what = 'coxph')) return('')
+  return(endpoint.default(cox))
+}
+
+
 
 
 

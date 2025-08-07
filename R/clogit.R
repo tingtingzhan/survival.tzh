@@ -16,6 +16,9 @@
 #' endpoint.clogit(m)
 #' 
 #' @name clogit_S3
+#' @keywords internal
+#' @importFrom ecip endpoint endpoint.formula
+#' @export endpoint.clogit  
 #' @export
 endpoint.clogit <- function(x) {
   # do not use ?tzh::endpoint.default
@@ -23,16 +26,21 @@ endpoint.clogit <- function(x) {
   # I do not want to write [formula.clogit], may mess up with \pkg{survival}
   fom <- x$userCall[[2L]]
   if (!is.call(fom) || (fom[[1L]] != '~')) stop('user formula not formula?')
-  return(fom[[2L]]) # tzh::endpoint.formula
+  fom |> 
+    endpoint.formula()
 }
 
 
 #' @rdname clogit_S3
+#' @importFrom ecip estnm
+#' @export estnm.clogit
 #' @export
 estnm.clogit <- function(x) 'Odds\ Ratio'
 
 
 
 #' @rdname clogit_S3
+#' @importFrom ecip desc_
+#' @export desc_.clogit
 #' @export
 desc_.clogit <- function(x) 'conditional logistic regression (via Cox model)'

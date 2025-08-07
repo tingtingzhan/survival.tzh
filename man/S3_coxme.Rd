@@ -8,13 +8,13 @@
 \alias{estnm.coxme}
 \title{S3 methods for \link[coxme]{coxme}}
 \usage{
-.pval.summary.coxme(x)
+\method{.pval}{summary.coxme}(x)
 
-nobsText.coxme(x)
+\method{nobsText}{coxme}(x)
 
-desc_.coxme(x)
+\method{desc_}{coxme}(x)
 
-estnm.coxme(x)
+\method{estnm}{coxme}(x)
 }
 \arguments{
 \item{x}{\link[coxme]{coxme} object}
@@ -27,3 +27,4 @@ library(coxme)
 m = coxme(Surv(time, status) ~ ph.ecog + age + (1|inst), data = lung) 
 m |> nobsText.coxme()
 }
+\keyword{internal}

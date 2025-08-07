@@ -148,6 +148,9 @@ autoplot.survfit <- function(object, ...) {
 #' survfit(Surv(time, status) ~ x, data = aml) |> 
 #'  nobsText.survfit()
 #' @name S3_survfit
+#' @keywords internal
+#' @importFrom ecip nobsText
+#' @export nobsText.survfit
 #' @export
 nobsText.survfit <- function(x) {
   sprintf(fmt = '%d subj (%d events)', sum(x[['n']]), sum(x[['n.event']]))
@@ -174,6 +177,7 @@ nobsText.survfit <- function(x) {
 #' @keywords internal
 #' @importFrom methods new
 #' @importClassesFrom rmd.tzh md_lines  
+#' @importFrom ecip Sprintf
 #' @export Sprintf.survfit
 #' @export
 Sprintf.survfit <- function(x) {

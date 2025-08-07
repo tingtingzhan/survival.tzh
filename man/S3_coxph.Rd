@@ -8,13 +8,13 @@
 \alias{.pval.summary.coxph}
 \title{S3 methods of \link[survival]{coxph}}
 \usage{
-nobsText.coxph(x)
+\method{nobsText}{coxph}(x)
 
-desc_.coxph(x)
+\method{desc_}{coxph}(x)
 
-estnm.coxph(x)
+\method{estnm}{coxph}(x)
 
-.pval.summary.coxph(x)
+\method{.pval}{summary.coxph}(x)
 }
 \arguments{
 \item{x}{an \link[survival]{coxph} object}
@@ -32,4 +32,9 @@ m = ovarian |>
 survival:::nobs.coxph(m) # number of events!!
 # MuMIn:::nobs.coxph(m) # also number of events
 nobsText.coxph(m)
+
+library(rmd.tzh); library(ecip); 
+list('`coxph`' = m) |> render_(file = 'coxph')
+
 }
+\keyword{internal}

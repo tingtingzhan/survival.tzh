@@ -5,7 +5,7 @@
 \alias{.pval.summary.survreg}
 \title{S3 methods for \link[survival]{survreg}}
 \usage{
-.pval.summary.survreg(x)
+\method{.pval}{summary.survreg}(x)
 }
 \arguments{
 \item{x}{a \link[survival]{survreg} or \link[survival]{summary.survreg}}

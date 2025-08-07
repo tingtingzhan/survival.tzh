@@ -12,6 +12,10 @@
 #' m = coxph(Surv(futime, fustat) ~ age + ecog.ps, data = ovarian) |> cox.zph() 
 #' .pval.cox.zph(m)
 #' @name S3_coxzph
+#' @keywords internal
+#' @importFrom ecip .pval
+#' @method .pval cox.zph
+#' @export .pval.cox.zph
 #' @export
 .pval.cox.zph <- function(x) {
   if (!any(x$transform == c('log', 'km'))) stop('cox.zph transform is neither of log/km')

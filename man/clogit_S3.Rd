@@ -7,11 +7,11 @@
 \alias{desc_.clogit}
 \title{Additional S3 methods for \link[survival]{clogit} Objects}
 \usage{
-endpoint.clogit(x)
+\method{endpoint}{clogit}(x)
 
-estnm.clogit(x)
+\method{estnm}{clogit}(x)
 
-desc_.clogit(x)
+\method{desc_}{clogit}(x)
 }
 \arguments{
 \item{x}{\link[survival]{clogit} object}
@@ -31,3 +31,4 @@ logan2$case = (logan2$occupation == logan2$tocc)
 endpoint.clogit(m)
 
 }
+\keyword{internal}

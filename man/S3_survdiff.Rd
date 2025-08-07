@@ -6,9 +6,9 @@
 \alias{.pval.survdiff}
 \title{S3 Methods \link[survival]{survdiff} Object}
 \usage{
-nobsText.survdiff(x)
+\method{nobsText}{survdiff}(x)
 
-.pval.survdiff(x)
+\method{.pval}{survdiff}(x)
 }
 \arguments{
 \item{x}{\link[survival]{survdiff} object}
@@ -25,3 +25,4 @@ m |> nobsText.survdiff()
 m |> .pval.survdiff()
  
 }
+\keyword{internal}
