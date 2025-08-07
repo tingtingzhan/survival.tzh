@@ -9,11 +9,10 @@
 #' @param ... ..
 #' 
 #' @examples 
-#' library(rpart)
-#' rp = rpart(Surv(time, status) ~ age, data = veteran, maxdepth = 2L, model = TRUE)
-#' library(rmd.tzh); list(
+#' rp = rpart::rpart(Surv(time, status) ~ age, data = veteran, maxdepth = 2L, model = TRUE)
+#' list(
 #'   'ggsurvplot_rpart' = rp |> ggsurvplot_rpart(pval.coord = c(750, .95))
-#' ) |> render_(file = 'ggsurvplot_rpart')
+#' ) |> rmd.tzh::render_(file = 'ggsurvplot_rpart')
 #' 
 #' @keywords internal
 #' @importFrom survminer ggsurvplot

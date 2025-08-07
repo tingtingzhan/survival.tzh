@@ -55,8 +55,8 @@ estnm.coxph <- function(x) 'Hazards\ Ratio'
 #'  }) |>
 #'  coxph(formula = Surv(futime, fustat) ~ age + ecog.ps)
 #' 
-#' library(rmd.tzh); library(ecip); 
-#' list('`coxph`' = m) |> render_(file = 'coxph')
+#' library(ecip); 
+#' list('`coxph`' = m) |> rmd.tzh::render_(file = 'coxph')
 #' 
 #' @keywords internal
 #' @importFrom rmd.tzh md_

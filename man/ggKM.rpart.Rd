@@ -16,9 +16,9 @@
 }
 \examples{
 rp = rpart::rpart(Surv(time, status) ~ age, data = veteran, maxdepth = 2L, model = TRUE)
-library(rmd.tzh); list(
+list(
   'ggKM.rpart' = ggKM(rp)
-) |> render_(file = 'ggKM.rpart')
+) |> rmd.tzh::render_(file = 'ggKM.rpart')
 
 }
 \keyword{internal}
