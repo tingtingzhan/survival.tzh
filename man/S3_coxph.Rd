@@ -22,19 +22,4 @@
 \description{
 S3 methods of \link[survival]{coxph}
 }
-\examples{
-?survival::cox.zph
-m = ovarian |>
- within.data.frame(expr = {
-  ecog.ps = factor(ecog.ps)
- }) |>
- coxph(formula = Surv(futime, fustat) ~ age + ecog.ps)
-survival:::nobs.coxph(m) # number of events!!
-# MuMIn:::nobs.coxph(m) # also number of events
-nobsText.coxph(m)
-
-library(rmd.tzh); library(ecip); 
-list('`coxph`' = m) |> render_(file = 'coxph')
-
-}
 \keyword{internal}

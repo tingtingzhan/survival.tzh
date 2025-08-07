@@ -3,20 +3,6 @@
 #' 
 #' @param x an \link[survival]{coxph} object  
 #' 
-#' @examples
-#' ?survival::cox.zph
-#' m = ovarian |>
-#'  within.data.frame(expr = {
-#'   ecog.ps = factor(ecog.ps)
-#'  }) |>
-#'  coxph(formula = Surv(futime, fustat) ~ age + ecog.ps)
-#' survival:::nobs.coxph(m) # number of events!!
-#' # MuMIn:::nobs.coxph(m) # also number of events
-#' nobsText.coxph(m)
-#' 
-#' library(rmd.tzh); library(ecip); 
-#' list('`coxph`' = m) |> render_(file = 'coxph')
-#' 
 #' @name S3_coxph
 #' @keywords internal
 #' @importFrom ecip nobsText
@@ -55,3 +41,27 @@ estnm.coxph <- function(x) 'Hazards\ Ratio'
   names(ret) <- rownames(x$coefficients)
   return(ret)
 } 
+
+
+#' @title R Markdown Lines for \link[survival]{coxph}
+#' 
+#' @param x,xnm,... ..
+#' 
+#' @examples
+#' ?survival::cox.zph
+#' m = ovarian |>
+#'  within.data.frame(expr = {
+#'   ecog.ps = factor(ecog.ps)
+#'  }) |>
+#'  coxph(formula = Surv(futime, fustat) ~ age + ecog.ps)
+#' 
+#' library(rmd.tzh); library(ecip); 
+#' list('`coxph`' = m) |> render_(file = 'coxph')
+#' 
+#' @keywords internal
+#' @importFrom rmd.tzh md_
+#' @importFrom ecip md_ecip
+#' @export md_.coxph
+#' @export
+md_.coxph <- md_ecip
+
