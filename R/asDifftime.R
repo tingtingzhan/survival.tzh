@@ -20,7 +20,7 @@
 #' 
 #' @details 
 #' 
-#' Function [asDifftime] improves function \link[base]{as.difftime} in terms that
+#' Function [asDifftime()] improves function \link[base]{as.difftime} in terms that
 #' \itemize{
 #' \item {If input `tim` is a \link[base]{difftime} object, 
 #' function [units_difftime<-] is called and the unit of `tim` is updated.
@@ -34,11 +34,12 @@
 #' }
 #' 
 #' @returns 
-#' Function [asDifftime] returns a \link[base]{difftime} object.
+#' Function [asDifftime()] returns a \link[base]{difftime} object.
 #' 
 #' @note 
 #' Potential name clash with function \link[units]{as_difftime}
 #' 
+#' @keywords internal
 #' @export
 asDifftime <- function(
     tim, 

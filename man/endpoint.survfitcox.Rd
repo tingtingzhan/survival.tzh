@@ -13,7 +13,6 @@
 Endpoint of \code{'survfitcox'} Object
 }
 \examples{
-library(survival)
 coxph(Surv(time, status) ~ celltype, data = veteran) |> 
   survfit() |>
   endpoint.survfitcox()

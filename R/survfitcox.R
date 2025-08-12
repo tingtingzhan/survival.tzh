@@ -16,8 +16,8 @@
 #' p = m1 |> survfit(newdata = veteran[1:90, ]) |> autoplot()
 #' p = m1 |> survfit(newdata = veteran[1:90, ]) |> autoplot(times = c(250))
 #' @keywords internal
+#' @importFrom ggplot2 autoplot ggplot scale_y_continuous labs
 #' @importFrom stats formula
-#' @importFrom ggplot2 ggplot scale_y_continuous labs
 #' @export autoplot.survfitcox
 #' @export
 autoplot.survfitcox <- function(object, ...) {
@@ -38,7 +38,6 @@ autoplot.survfitcox <- function(object, ...) {
 #' @param x an object of class `'survfitcox'`, returned from function `survival:::survfit.coxph()`
 #' 
 #' @examples
-#' library(survival)
 #' coxph(Surv(time, status) ~ celltype, data = veteran) |> 
 #'   survfit() |>
 #'   endpoint.survfitcox()

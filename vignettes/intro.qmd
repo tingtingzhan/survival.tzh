@@ -27,35 +27,14 @@ Examples in this vignette require that the `search` path has
 ```{r}
 #| message: false
 library(survival.tzh)
-library(ggplot2)
-library(rpart)
-library(patchwork)
+#library(patchwork)
 ```
 
 ```{r}
 #| echo: false
 #options(mc.cores = 1L) # for CRAN submission
-
-theme_set(
-  theme_bw(
-    base_size = 11, 
-    base_line_size = 11/22, 
-    base_rect_size = 11/22
-  ) %+replace% 
-    theme(
-      axis.ticks = element_blank(), 
-      #legend.background = element_blank(), 
-      legend.background = element_rect(color = 'grey95'),
-      #legend.key.spacing.y = unit(.015, units = 'npc'),
-      legend.key.spacing.y = unit(.02, units = 'npc'),
-      legend.key = element_blank(), 
-      panel.background = element_blank(), 
-      panel.border = element_blank(), 
-      strip.background = element_blank(), 
-      plot.background = element_blank(), 
-      complete = TRUE
-    )
-)
+ggplot2::theme_minimal() |> 
+  ggplot2::theme_set()
 ```
 
 # Data Example
@@ -74,20 +53,47 @@ rotterdam2 = survival::rotterdam |>
 # Kaplan-Meier Curves
 
 ```{r}
-rotterdam2$os |> autoplot()
+rotterdam2$os |> ggplot2::autoplot()
 ```
+
+```{r}
+survfit(os ~ 1, data = rotterdam2) |>
+  summary(times = c(0, 5, 10, 15)) |>
+  as_flextable.summary.survfit(which = 'n.risk')
+```
+
+```{r}
+survfit(os ~ 1, data = rotterdam2) |>
+  summary(times = c(0, 5, 10, 15)) |>
+  as_flextable.summary.survfit(which = 'surv')
+```
+
+
 
 ```{r}
 ggKM(os ~ 1, data = rotterdam2)
 ```
 
 ```{r}
+survfit(os ~ size, data = rotterdam2) |>
+  summary(times = c(0, 5, 10, 15)) |>
+  as_flextable.summary.survfit(which = 'n.risk')
+```
+
+```{r}
+survfit(os ~ size, data = rotterdam2) |>
+  summary(times = c(0, 5, 10, 15)) |>
+  as_flextable.summary.survfit(which = 'surv')
+```
+
+
+
+```{r}
 ggKM(os ~ size, data = rotterdam2)
 ```
 
 ```{r}
-# fix: error
-# ggKM(os ~ size, data = rotterdam2, times = c(5, 10))
+ggKM(os ~ size, data = rotterdam2, times = c(5, 10))
 ```
 
 ```{r}
@@ -99,7 +105,7 @@ ggKM(os ~ size + I(age > 60), data = rotterdam2)
 ```
 
 ```{r}
-rpart(os ~ age, data = rotterdam2, maxdepth = 2L, model = TRUE) |>
+rpart::rpart(os ~ age, data = rotterdam2, maxdepth = 2L, model = TRUE) |>
   ggKM()
 ```
 
@@ -110,7 +116,7 @@ rpart(os ~ age, data = rotterdam2, maxdepth = 2L, model = TRUE) |>
 subset_ggKM(os ~ size, subset = list(
   All = TRUE, pre = (meno == 0), post = (meno == 1)
 ), data = rotterdam2) +
-  plot_layout(ncol = 2L)
+  patchwork::plot_layout(ncol = 2L)
 ```
 
 ```{r}
@@ -119,7 +125,7 @@ id = quote(list(
   All = TRUE, pre = (meno == 0), post = (meno == 1)
 ))
 subset_ggKM(os ~ size, subset = id, data = rotterdam2) +
-  plot_layout(ncol = 2L)
+  patchwork::plot_layout(ncol = 2L)
 ```
 
 ## `m_ggKM()`

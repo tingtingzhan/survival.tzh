@@ -13,10 +13,13 @@ RoxygenNote: 7.3.2
 Encoding: UTF-8
 License: GPL-2
 Depends: R (>= 4.5), survival (== 3.8.3)
-Imports: methods, ggplot2 (== 3.5.2), ggrepel (== 0.9.6), 
-    patchwork (== 1.3.1), rlang, scales (== 1.4.0), 
+Imports: methods, flextable (== 0.9.9), 
+    ggplot2 (== 3.5.2), ggrepel (== 0.9.6), 
+    patchwork (== 1.3.1), 
+    reshape2 (== 1.4.4),
+    scales (== 1.4.0), 
     survminer (== 0.5.0), 
-    rpart.tzh, rmd.tzh, ecip
+    flextable.tzh, rpart.tzh, rmd.tzh, ecip
 Suggests: 
     rpart (== 4.1.24),
     coxme (== 2.2.22),

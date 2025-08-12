@@ -9,6 +9,8 @@
 \arguments{
 \item{x}{..}
 
+\item{xnm}{..}
+
 \item{...}{..}
 }
 \description{

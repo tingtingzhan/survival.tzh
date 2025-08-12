@@ -4,7 +4,7 @@
 \alias{fortify.survfit}
 \title{Convert \link[survival]{survfit.object} to \link[base]{data.frame}}
 \usage{
-\method{fortify}{survfit}(model, ..., times, units = "", oneminus = FALSE, rm01 = FALSE)
+\method{fortify}{survfit}(model, ..., times, units = "", oneminus = FALSE)
 }
 \arguments{
 \item{model}{\link[survival]{survfit.object}.
@@ -18,12 +18,9 @@
 \item{units}{\link[base]{character}}
 
 \item{oneminus}{\link[base]{logical} scalar}
-
-\item{rm01}{\link[base]{logical} scalar, whether to remove survival rates (and confidence bands)
-being 0 or 1, as some y-axis transformation may yield \code{NA} or \code{Inf} values.  Default \code{FALSE}.}
 }
 \value{
-Function \link{fortify.survfit} returns a \link[base]{data.frame}
+Function \code{\link[=fortify.survfit]{fortify.survfit()}} returns a \code{survival:::summary.survfit} object.
 }
 \description{
 ..
@@ -33,6 +30,4 @@ A column named \code{'strata'}
 of all-equal values \code{'all_subjects'}
 for \link[survival]{survfit.object} without a strata.
 }
-\seealso{
-\code{survival:::summary.survfit}
-}
+\keyword{internal}

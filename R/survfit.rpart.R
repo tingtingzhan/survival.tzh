@@ -13,6 +13,7 @@
 #' rp = rpart(Surv(time, status) ~ age, data = veteran, maxdepth = 2L, model = TRUE)
 #' rp |> survfit.rpart()
 #' 
+#' @keywords internal
 #' @importFrom survival survfit survfit.formula
 #' @export survfit.rpart
 #' @export

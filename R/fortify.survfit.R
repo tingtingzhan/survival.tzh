@@ -15,20 +15,15 @@
 #' 
 #' @param oneminus \link[base]{logical} scalar
 #' 
-#' @param rm01 \link[base]{logical} scalar, whether to remove survival rates (and confidence bands) 
-#' being 0 or 1, as some y-axis transformation may yield `NA` or `Inf` values.  Default `FALSE`.
-#' 
 #' @details 
 #' A column named `'strata'`
 #' of all-equal values `'all_subjects'` 
 #' for \link[survival]{survfit.object} without a strata.
 #' 
 #' @returns 
-#' Function [fortify.survfit] returns a \link[base]{data.frame}
+#' Function [fortify.survfit()] returns a `survival:::summary.survfit` object.
 #' 
-#' @seealso 
-#' `survival:::summary.survfit`
-#' 
+#' @keywords internal
 #' @importFrom utils glob2rx
 #' @importFrom ggplot2 fortify
 #' @export fortify.survfit
@@ -37,8 +32,7 @@ fortify.survfit <- function(
     model, ..., 
     times,
     units = '',
-    oneminus = FALSE,
-    rm01 = FALSE
+    oneminus = FALSE
 ) {
   
   x <- model; model <- NULL
@@ -57,7 +51,7 @@ fortify.survfit <- function(
   
   if (!missing(times)) {
     
-    ret <- summary(x, times = times, extend = TRUE, data.frame = TRUE)
+    ret <- summary(x, times = times, extend = TRUE)
     if (oneminus) ret <- oneminus.summary.survfit(ret)
     ret$txt <- sprintf(
       #fmt = '%.1f%% (95%% CI %.1f%%~%.1f%%) at t=%.4g %s', 
@@ -71,25 +65,27 @@ fortify.survfit <- function(
     
   } else {
     
-    d1 <- summary(x, times = 0, data.frame = TRUE)
-    d2 <- summary(x, censored = TRUE, data.frame = TRUE)
+    ret <- summary(x, censored = TRUE)
     if (oneminus) {
-      d1 <- oneminus.summary.survfit(d1)
-      d2 <- oneminus.summary.survfit(d2)
+      ret <- oneminus.summary.survfit(ret)
     }
-    ret <- rbind.data.frame(d1, d2)
-    
+
   }
-  
-  if (rm01) {
-    id <- (ret$time > 0) & (ret$surv < 1) & (ret$surv > 0) & (ret$upper < 1) & (ret$upper > 0) & (ret$lower < 1) & (ret$lower > 0)
-    ret <- ret[id, ]
-  } # else do_nothing
   
   return(ret)
 }
 
 
+
+
+
+
+#' @title One-Minus Kaplan-Meier Estimates
+#' 
+#' @param x ..
+#' 
+#' @name oneminus
+#' @export
 oneminus.survfit <- function(x) {
   .Defunct(msg = 'do not use this!  survival:::summary.survfit(oneminus.survfit(.)) is unpredictable')
   x$surv <- 1 - x$surv
@@ -99,12 +95,35 @@ oneminus.survfit <- function(x) {
   return(x)
 }
 
+#' @rdname oneminus
+#' @export
 oneminus.summary.survfit <- function(x) {
-  x$surv <- 1 - x$surv
+  
+  # look carefully at 
+  # survival:::summary.survfit(., data.frame = FALSE)
+  # survival:::summary.survfit(., data.frame = TRUE)
+  # we only care about the shared elements!!
+  
+  # names(x) # as of packageDate('survival') 2024-12-17
+  
+  # x$time: do **not** change
+  # x$n.risk; x$n.event; x$n.censor: do **not** change
+  
+  x$surv <- 1 - x$surv # this is now 'percentage died'
+  
+  # x$std.err: do **not** change
+  
+  # x$cumhaz <- -x$cumhaz # what should tzh do?
+  # plot(x$cumhaz + x$surv) # what does this mean???
+  
+  # x$std.chaz: do **not** change
+  # x$strata: do **not** change
+  
   x$lower <- 1 - x$lower
   x$upper <- 1 - x$upper
-  # x$cumhaz <- -x$cumhaz # ???
+  
   return(x)
+  
 }
 
 

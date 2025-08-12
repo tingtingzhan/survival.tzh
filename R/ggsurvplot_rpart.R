@@ -26,15 +26,19 @@ ggsurvplot_rpart <- function(fit, ...) {
   if (!length(sfit)) return(invisible())
   
   p <- ggsurvplot(
-    fit = sfit, data = sfit[['data']], 
+    fit = sfit, 
+    data = sfit[['data']], 
     conf.int = TRUE,
     pval = TRUE, 
-    legend = 'right', 
+    #legend = 'right',
+    risk.table = TRUE,
     ylab = deparse1(fit$terms[[2L]]), 
     ...)
   
-  attr(p, which = 'text') = '@KaplanMeier58 estimates and curves based on the partition branches are created by <u>**`R`**</u> package <u>**`survminer`**</u>.' |>
-    new(Class = 'md_lines', package = 'survminer', bibentry = KaplanMeier58())
+  attr(p, which = 'text') <- '@KaplanMeier58 estimates and curves based on the recursive partitioning branches are created by <u>**`R`**</u> package <u>**`rpart`**</u> and <u>**`survminer`**</u>.' |>
+    new(Class = 'md_lines', package = c('rpart', 'survminer'), bibentry = KaplanMeier58())
+  
+  attr(p, which = 'fig-height') <- 7
   
   return(p)
   
@@ -43,6 +47,8 @@ ggsurvplot_rpart <- function(fit, ...) {
 #' @title md_.ggsurvplot
 #' 
 #' @param x ..
+#' 
+#' @param xnm ..
 #' 
 #' @param ... ..
 #' 

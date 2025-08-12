@@ -23,9 +23,7 @@
 #' 
 #' @importFrom ggplot2 autolayer aes geom_ribbon geom_step scale_fill_discrete geom_point scale_colour_discrete
 #' @importFrom ggrepel geom_label_repel
-#' @importFrom rlang .data
 #' @importFrom stats setNames aggregate.data.frame quantile
-#' @importFrom survival survdiff
 #' @export autolayer.survfit
 #' @export
 autolayer.survfit <- function(
@@ -42,21 +40,28 @@ autolayer.survfit <- function(
   if (!length(object$strata)) object$strata <- setNames(length(object$time), nm = 'all_subjects')
   
   d <- fortify.survfit(object, ...)
-  old_labs <- attr(d$strata, which = 'levels', exact = TRUE)
+  old_labs <- d$strata |>
+    attr(which = 'levels', exact = TRUE)
   
   if (missing(labels)) {
-    ns <- aggregate.data.frame(d[c('n.event', 'n.censor')], by = d['strata'], FUN = sum)
-    sm <- quantile(object, probs = .5, conf.int = TRUE) # survival:::quantile.survfit
-    #obj_sum <- summary(object)
-    #maxFU <- vapply(split.default(obj_sum$time, f = obj_sum$strata), FUN = max, FUN.VALUE = 0)
-    # I have difficulty getting the censor time from 'survfit' object
-    maxFU <- max(object$time)
-    sm_txt <- ifelse(
-      test = !is.na(c(sm$quantile)), 
-      yes = sprintf(fmt = 't50 = %.1f (%.1f, %.1f)', c(sm$quantile), c(sm$lower), c(sm$upper)),
-      no = sprintf(fmt = 't50 > %.1f', maxFU))
-    labels <- sprintf(fmt = '%s\n%d events; %d censors\n%s', 
-                      old_labs, ns[['n.event']], ns[['n.censor']], sm_txt)
+    
+    if (FALSE) {
+      # requires `d` to be 'data.frame'
+      ns <- aggregate.data.frame(d[c('n.event', 'n.censor')], by = d['strata'], FUN = sum)
+      sm <- quantile(object, probs = .5, conf.int = TRUE) # survival:::quantile.survfit
+      #obj_sum <- summary(object)
+      #maxFU <- vapply(split.default(obj_sum$time, f = obj_sum$strata), FUN = max, FUN.VALUE = 0)
+      # I have difficulty getting the censor time from 'survfit' object
+      maxFU <- max(object$time)
+      sm_txt <- ifelse(
+        test = !is.na(c(sm$quantile)), 
+        yes = sprintf(fmt = 't50 = %.1f (%.1f, %.1f)', c(sm$quantile), c(sm$lower), c(sm$upper)),
+        no = sprintf(fmt = 't50 > %.1f', maxFU))
+      labels <- sprintf(fmt = '%s\n%d events; %d censors\n%s', 
+                        old_labs, ns[['n.event']], ns[['n.censor']], sm_txt)
+    }
+    
+    labels <- old_labs
     
   } else if (is.character(labels)) {
     if (!length(labels) || anyNA(labels) || !all(nzchar(labels))) stop('illegal labels')
@@ -69,35 +74,36 @@ autolayer.survfit <- function(
     
   } else stop('illegal `labels`')
   
-  d_c <- d[d$n.censor > 0L, , drop = FALSE]
+  #d_c <- d[d$n.censor > 0L, , drop = FALSE]
+  id_c <- (d$n.censor > 0L)
   
   strata_nm <- if (is.symbol(fom[[3L]])) deparse1(fom[[3L]]) # else NULL
   
-  mp_step <- aes(x = .data$time, y = .data$surv, group = .data$strata, colour = .data$strata)
-    
   ret <- list( 
     
-    geom_step(data = d, mapping = mp_step, 
-              alpha = if (!missing(times)) .5 else 1), 
+    geom_step(
+      mapping = aes(x = d$time, y = d$surv, group = d$strata, colour = d$strata),
+      alpha = if (!missing(times)) .5 else 1), 
     
-    if (ribbon) geom_ribbon(data = d, mapping = aes( 
-      x = .data$time, 
-      ymax = .data$upper, ymin = .data$lower, 
-      group = .data$strata, fill = .data$strata
-    ), alpha = .1),
+    if (ribbon) geom_ribbon(
+      mapping = aes(x = d$time, ymax = d$upper, ymin = d$lower, group = d$strata, fill = d$strata), 
+      alpha = .1),
     
-    geom_point(data = d_c, mapping = mp_step, shape = 3L,
-               alpha = if (!missing(times)) .5 else 1),
+    geom_point(
+      mapping = aes(x = d$time[id_c], y = d$surv[id_c], group = d$strata[id_c], colour = d$strata[id_c]),
+      shape = 3L,
+      alpha = if (!missing(times)) .5 else 1),
     
     if (!missing(times)) {
-      yr <- fortify.survfit(object, times = times, ...)
-      geom_label_repel(data = yr, mapping = aes( 
-        x = .data$time, 
-        y = .data$surv, 
-        colour = .data$strata, #fill = .data$strata, 
-        label = .data$txt
-      ), fontface = 'bold', fill = 'transparent',
-      size = 3)
+      d0 <- fortify.survfit(object, times = times, ...)
+      geom_label_repel(
+        mapping = aes(
+          x = d0$time, y = d0$surv, 
+          colour = d0$strata, #fill = d0$strata, 
+          label = d0$txt
+        ), 
+        fontface = 'bold', fill = 'transparent', size = 3
+      )
     },
     
     (if (length(labels)) scale_colour_discrete(labels = labels)),
@@ -128,7 +134,7 @@ autolayer.survfit <- function(
 #' @seealso 
 #' `survival:::plot.survfit` `survival:::quantile.survfit`
 #' 
-#' @importFrom ggplot2 ggplot scale_y_continuous
+#' @importFrom ggplot2 autoplot ggplot scale_y_continuous
 #' @importFrom scales label_percent
 #' @export
 autoplot.survfit <- function(object, ...) {

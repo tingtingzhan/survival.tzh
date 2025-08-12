@@ -26,14 +26,14 @@ Default is to \link[base]{stop}}
 \item{...}{additional parameters, currently not in use}
 }
 \value{
-Function \link{asDifftime} returns a \link[base]{difftime} object.
+Function \code{\link[=asDifftime]{asDifftime()}} returns a \link[base]{difftime} object.
 }
 \description{
 To create \link[base]{difftime} object
 with additional time units \code{'months'} and \code{'years'}.
 }
 \details{
-Function \link{asDifftime} improves function \link[base]{as.difftime} in terms that
+Function \code{\link[=asDifftime]{asDifftime()}} improves function \link[base]{as.difftime} in terms that
 \itemize{
 \item {If input \code{tim} is a \link[base]{difftime} object,
 function \link{units_difftime<-} is called and the unit of \code{tim} is updated.
@@ -49,3 +49,4 @@ Function \link[base]{as.difftime} does not check for negative \code{tim}.}
 \note{
 Potential name clash with function \link[units]{as_difftime}
 }
+\keyword{internal}
