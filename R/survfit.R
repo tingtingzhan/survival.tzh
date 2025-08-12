@@ -36,8 +36,6 @@ autolayer.survfit <- function(
   fom <- object$call$formula
   if (fom[[1L]] != '~') stop('must preserve the true `formula`')
   
-  if (!length(object$strata)) object$strata <- setNames(length(object$time), nm = 'all_subjects')
-  
   d <- object |> 
     summary(censored = TRUE) # ?survival:::summary.survfit
   # `censored`, ignored if !missing(times); should the censoring times be included in the output?
@@ -47,22 +45,9 @@ autolayer.survfit <- function(
       oneminus.summary.survfit()
   }
   
-  old_labs <- d$strata |>
+  labels <- d$strata |>
     attr(which = 'levels', exact = TRUE)
-  
-  if (missing(labels)) {
-    labels <- old_labs
-    
-  } else if (is.character(labels)) {
-    if (!length(labels) || anyNA(labels) || !all(nzchar(labels))) stop('illegal labels')
-    if (length(labels) != length(names(object$strata))) stop('user specified `labels` not match the strata of `survfit` object')
-    if (!is.null(names(labels))) stop('user specified `labels` must be unnamed!  Watch the order of default saput first, then write user-specified labels')
-    sprintf(fmt = '%s was %s\n', sQuote(labels), sQuote(old_labs)) |> message()
-    
-  } else if (isFALSE(labels) || !length(labels)) {
-    labels <- NULL
-    
-  } else stop('illegal `labels`')
+  # NULL compatible!
   
   id_c <- (d$n.censor > 0L)
   
@@ -114,6 +99,7 @@ autolayer.survfit <- function(
 #' 
 #' @importFrom ggplot2 autoplot ggplot scale_y_continuous
 #' @importFrom scales label_percent
+#' @export autoplot.survfit
 #' @export
 autoplot.survfit <- function(object, ...) {
   ggplot() + 
@@ -148,38 +134,59 @@ nobsText.survfit <- function(x) {
 
 
 
-#' @title Sprintf.survfit
+#' @title md_.survfit
 #' 
 #' @description ..
 #' 
 #' @param x \link[survival]{survfit.object}
 #' 
+#' @param xnm ..
+#'  
+#' @param ... ..
+#' 
 #' @examples
-#' survfit(Surv(time, status) ~ 1, data = aml) |> Sprintf.survfit()
-#' survfit(Surv(time, status) ~ x, data = aml) |> Sprintf.survfit()
+#' list(
+#'  'no strata' = survfit(Surv(time, status) ~ 1, data = aml),
+#'  'one strata' = survfit(Surv(time, status) ~ x, data = aml)
+#' ) |> rmd.tzh::render_(file = 'survfit')
 #' @keywords internal
 #' @importFrom methods new
 #' @importClassesFrom rmd.tzh md_lines  
-#' @importFrom ecip Sprintf
-#' @export Sprintf.survfit
+#' @importFrom rmd.tzh md_
+#' @export md_.survfit
 #' @export
-Sprintf.survfit <- function(x) {
-  # read ?survival::survfit.formula carefully
-  # how to tell 'single event' or not ?
-  fom <- x$call$formula
-  edp <- deparse1(fom[[2L]])
-  fmt <- '@KaplanMeier58 estimates and curves of time-to-event endpoint **`%s`** are obtained using <u>**`R`**</u> package <u>**`survival`**</u>'
-  ret <- if (identical(fom[[3L]], 1)) {
-    # no predictor
-    sprintf(fmt = paste0(fmt, '.'), edp)
-  } else {
-    sprintf(fmt = paste0(fmt, ', by predictor(s) %s.'),
-            edp,
-            paste0('`', all.vars(fom[[3L]]), '`', collapse = ','))
-  }
+md_.survfit <- function(x, xnm, ...) {
   
-  ret |>
+  z1 <- x$call$formula[[2L]] |> 
+    deparse1() |> 
+    sprintf(fmt = '@KaplanMeier58 estimates and curves of time-to-event endpoint **`%s`** are obtained using <u>**`R`**</u> package <u>**`survival`**</u>.') |>
     new(Class = 'md_lines', package = 'survival', bibentry = KaplanMeier58())
+  
+  z2 <- c(
+    '```{r}',
+    '#| echo: false', 
+    '#| comment: ',
+    xnm,
+    '```'
+  ) |> 
+    new(Class = 'md_lines')
+  
+  z3 <- c(
+    '```{r}',
+    '#| echo: false', 
+    x |>
+      attr(which = 'fig-height', exact = TRUE) |> 
+      sprintf(fmt = '#| fig-height: %.1f'),
+    x |>
+      attr(which = 'fig-width', exact = TRUE) |> 
+      sprintf(fmt = '#| fig-width: %.1f'),
+    
+    xnm |> sprintf(fmt = 'autoplot.survfit(%s)'),
+    '```'
+  ) |> 
+    new(Class = 'md_lines')
+  
+  c(z1, z2, z3) # ?rmd.tzh::c.md_lines
   
 }
 

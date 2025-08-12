@@ -91,6 +91,9 @@ getTime.Surv <- function(x, type = c('event', 'censor', 'any'), ...) {
 #' @importFrom survival survfit.formula
 #' @export
 autoplot.Surv <- function(object, ...) {
+  
+  .Defunct(msg = 'deprecate this usage')
+  
   nc <- dim(object)[2L]
   cl0 <- match.call()
   if (nc == 2L) {
