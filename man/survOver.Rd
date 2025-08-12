@@ -25,3 +25,4 @@ Function \link{survOver} returns a \link[base]{logical} \link[base]{vector}.
 survOver(x, tm = 3)
 survOver(x, tm = 3, censor = FALSE)
 }
+\keyword{internal}

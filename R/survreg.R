@@ -8,6 +8,10 @@
 #' m = survreg(Surv(futime, fustat) ~ ecog.ps + rx, data = ovarian, dist = 'weibull', scale = 1) 
 #' 
 #' @name S3_survreg
+#' @keywords internal
+#' @importFrom ecip .pval
+#' @method .pval summary.survreg
+#' @export .pval.summary.survreg
 #' @export
 .pval.summary.survreg <- function(x) {
   # ?survival:::summary.survreg

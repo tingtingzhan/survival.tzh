@@ -22,7 +22,7 @@
 #' 
 #' @keywords internal
 #' @importFrom ggplot2 autolayer aes geom_ribbon geom_step scale_fill_discrete geom_point scale_colour_discrete
-#' @importFrom stats setNames aggregate.data.frame quantile
+#' @importFrom stats setNames
 #' @export autolayer.survfit
 #' @export
 autolayer.survfit <- function(
@@ -51,23 +51,6 @@ autolayer.survfit <- function(
     attr(which = 'levels', exact = TRUE)
   
   if (missing(labels)) {
-    
-    if (FALSE) {
-      # requires `d` to be 'data.frame'
-      ns <- aggregate.data.frame(d[c('n.event', 'n.censor')], by = d['strata'], FUN = sum)
-      sm <- quantile(object, probs = .5, conf.int = TRUE) # survival:::quantile.survfit
-      #obj_sum <- summary(object)
-      #maxFU <- vapply(split.default(obj_sum$time, f = obj_sum$strata), FUN = max, FUN.VALUE = 0)
-      # I have difficulty getting the censor time from 'survfit' object
-      maxFU <- max(object$time)
-      sm_txt <- ifelse(
-        test = !is.na(c(sm$quantile)), 
-        yes = sprintf(fmt = 't50 = %.1f (%.1f, %.1f)', c(sm$quantile), c(sm$lower), c(sm$upper)),
-        no = sprintf(fmt = 't50 > %.1f', maxFU))
-      labels <- sprintf(fmt = '%s\n%d events; %d censors\n%s', 
-                        old_labs, ns[['n.event']], ns[['n.censor']], sm_txt)
-    }
-    
     labels <- old_labs
     
   } else if (is.character(labels)) {

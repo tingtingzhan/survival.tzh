@@ -30,6 +30,7 @@
 #' (x = Surv(1:4, event = c(0,1,0,1)))
 #' survOver(x, tm = 3)
 #' survOver(x, tm = 3, censor = FALSE)
+#' @keywords internal
 #' @export
 survOver <- function(x, tm, censored = NA) {
   if (!inherits(x, 'Surv') || ncol(x) != 2L) stop('`x` must be right censored')

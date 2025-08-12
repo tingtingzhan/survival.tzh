@@ -18,3 +18,4 @@ S3 methods for \link[survival]{survreg}
 m = survreg(Surv(futime, fustat) ~ ecog.ps + rx, data = ovarian, dist = 'weibull', scale = 1) 
 
 }
+\keyword{internal}
