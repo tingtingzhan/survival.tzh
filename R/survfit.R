@@ -9,6 +9,8 @@
 #' 
 #' @param labels (optional) \link[base]{character} \link[base]{vector}
 #' 
+#' @param oneminus \link[base]{logical} scalar
+#' 
 #' @param ... ..
 #' 
 #' @note
@@ -26,6 +28,7 @@ autolayer.survfit <- function(
     object, 
     ribbon = TRUE,
     labels = NULL,
+    oneminus = FALSE,
     ...
 ) {
   
@@ -34,7 +37,17 @@ autolayer.survfit <- function(
   
   if (!length(object$strata)) object$strata <- setNames(length(object$time), nm = 'all_subjects')
   
-  d <- fortify.survfit(object, ...)
+  #d <- fortify.survfit(object, ...)
+  
+  d <- object |> 
+    summary(censored = TRUE) # ?survival:::summary.survfit
+  # `censored`, ignored if !missing(times); should the censoring times be included in the output?
+  # `extend`, ignored if missing(times); even if there are no subjects left at the end of the specified times
+  if (oneminus) {
+    d <- d |> 
+      oneminus.summary.survfit()
+  }
+  
   old_labs <- d$strata |>
     attr(which = 'levels', exact = TRUE)
   
@@ -135,7 +148,6 @@ autoplot.survfit <- function(object, ...) {
 #' @examples
 #' survfit(Surv(time, status) ~ x, data = aml) |> 
 #'  nobsText.survfit()
-#' @name S3_survfit
 #' @keywords internal
 #' @importFrom ecip nobsText
 #' @export nobsText.survfit

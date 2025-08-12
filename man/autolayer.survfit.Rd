@@ -4,7 +4,7 @@
 \alias{autolayer.survfit}
 \title{Layers of Kaplan-Meier Curve of \link[survival]{survfit.object} using \CRANpkg{ggplot2}}
 \usage{
-\method{autolayer}{survfit}(object, ribbon = TRUE, labels = NULL, ...)
+\method{autolayer}{survfit}(object, ribbon = TRUE, labels = NULL, oneminus = FALSE, ...)
 }
 \arguments{
 \item{object}{\link[survival]{survfit.object}}
@@ -12,6 +12,8 @@
 \item{ribbon}{\link[base]{logical} scalar, default \code{TRUE}}
 
 \item{labels}{(optional) \link[base]{character} \link[base]{vector}}
+
+\item{oneminus}{\link[base]{logical} scalar}
 
 \item{...}{..}
 }
