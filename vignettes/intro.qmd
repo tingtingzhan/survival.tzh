@@ -68,6 +68,11 @@ survfit(os ~ 1, data = rotterdam2) |>
   as_flextable.summary.survfit(which = 'surv')
 ```
 
+```{r}
+survfit(os ~ 1, data = rotterdam2) |>
+  summary(times = c(0, 5, 10, 15)) |>
+  as_flextable.summary.survfit(which = 'surv.confint')
+```
 
 
 ```{r}
@@ -86,6 +91,11 @@ survfit(os ~ size, data = rotterdam2) |>
   as_flextable.summary.survfit(which = 'surv')
 ```
 
+```{r}
+survfit(os ~ size, data = rotterdam2) |>
+  summary(times = c(0, 5, 10, 15)) |>
+  as_flextable.summary.survfit(which = 'surv.confint')
+```
 
 
 ```{r}

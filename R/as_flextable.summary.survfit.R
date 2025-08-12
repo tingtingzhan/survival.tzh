@@ -18,11 +18,15 @@
 #' @export
 as_flextable.summary.survfit <- function(
     x, 
-    which = c('n.risk', 'surv'), 
+    which = c('n.risk', 'surv', 'surv.confint'), 
     ...
 ) {
   
   which <- match.arg(which)
+  
+  if (which == 'surv.confint') {
+    x$surv.confint <- sprintf(fmt = '%.1f%%\n(%.1f%% - %.1f%%)',1e2*x$surv, 1e2*x$lower, 1e2*x$upper)
+  }
   
   z <- if (length(x$strata)) {# with strata
     x[c('strata', which, 'time')] |>
@@ -41,9 +45,17 @@ as_flextable.summary.survfit <- function(
       label_percent(accuracy = .1)()
   }
   
+  table_title <- switch(which, n.risk = {
+    'Number at Risk'
+  }, surv = {
+    'Percentage Survived'
+  }, surv.confint = {
+    sprintf(fmt = 'Percentage Survived (%.0f%% CI)', 1e2*x$conf.int)
+  })
+  
   z |> 
     as_flextable.matrix() |>
-    # set_caption(caption = sprintf(fmt = 'Number at risk; %s', deparse1(x$call))) # does not work in rmarkdown..
-    add_header_lines(values = switch(which, n.risk = 'Number at Risk', surv = 'Percentage Survived'))
+    # set_caption(caption = table_title) # does not work in rmarkdown..
+    add_header_lines(values = table_title)
   
 }
