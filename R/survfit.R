@@ -37,8 +37,6 @@ autolayer.survfit <- function(
   
   if (!length(object$strata)) object$strata <- setNames(length(object$time), nm = 'all_subjects')
   
-  #d <- fortify.survfit(object, ...)
-  
   d <- object |> 
     summary(censored = TRUE) # ?survival:::summary.survfit
   # `censored`, ignored if !missing(times); should the censoring times be included in the output?
