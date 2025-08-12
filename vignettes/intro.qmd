@@ -25,7 +25,6 @@ This vignette of package **`survival.tzh`** ([Github](https://github.com/tingtin
 Examples in this vignette require that the `search` path has
 
 ```{r}
-#| message: false
 library(survival.tzh)
 #library(patchwork)
 ```
@@ -72,17 +71,17 @@ ss0
 
 ```{r}
 ss0 |>
-  as_flextable.summary.survfit(which = 'n.risk')
+  flextable::as_flextable(which = 'n.risk')
 ```
 
 ```{r}
 ss0 |>
-  as_flextable.summary.survfit(which = 'surv')
+  flextable::as_flextable(which = 'surv')
 ```
 
 ```{r}
 ss0 |>
-  as_flextable.summary.survfit(which = 'surv.confint')
+  flextable::as_flextable(which = 'surv.confint')
 ```
 
 ## One Strata
@@ -108,17 +107,17 @@ ss1
 
 ```{r}
 ss1 |>
-  as_flextable.summary.survfit(which = 'n.risk')
+  flextable::as_flextable(which = 'n.risk')
 ```
 
 ```{r}
 ss1 |>
-  as_flextable.summary.survfit(which = 'surv')
+  flextable::as_flextable(which = 'surv')
 ```
 
 ```{r}
 ss1 |>
-  as_flextable.summary.survfit(which = 'surv.confint')
+  flextable::as_flextable(which = 'surv.confint')
 ```
 
 ## Multiple Stratum
@@ -126,7 +125,6 @@ ss1 |>
 ```{r}
 (s2 = survfit(os ~ size + meno, data = rotterdam2))
 ```
-
 
 ```{r}
 s2 |> ggplot2::autoplot()
