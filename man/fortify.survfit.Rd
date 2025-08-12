@@ -4,7 +4,7 @@
 \alias{fortify.survfit}
 \title{Convert \link[survival]{survfit.object} to \link[base]{data.frame}}
 \usage{
-\method{fortify}{survfit}(model, ..., times, units = "", oneminus = FALSE)
+\method{fortify}{survfit}(model, ..., units = "", oneminus = FALSE)
 }
 \arguments{
 \item{model}{\link[survival]{survfit.object}.
@@ -12,8 +12,6 @@
 \code{survival:::survfit.coxph} is also supported, as of 2022-09-19}
 
 \item{...}{additional parameters of \link[base]{as.data.frame.list}}
-
-\item{times}{(optional) \link[base]{numeric} vector}
 
 \item{units}{\link[base]{character}}
 

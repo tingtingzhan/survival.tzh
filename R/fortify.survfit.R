@@ -9,8 +9,6 @@
 #' 
 #' @param ... additional parameters of \link[base]{as.data.frame.list}
 #' 
-#' @param times (optional) \link[base]{numeric} vector
-#' 
 #' @param units \link[base]{character}
 #' 
 #' @param oneminus \link[base]{logical} scalar
@@ -30,7 +28,6 @@
 #' @export
 fortify.survfit <- function(
     model, ..., 
-    times,
     units = '',
     oneminus = FALSE
 ) {
@@ -48,28 +45,10 @@ fortify.survfit <- function(
   # ?survival:::summary.survfit
   # `censored`, ignored if !missing(times); should the censoring times be included in the output?
   # `extend`, ignored if missing(times); even if there are no subjects left at the end of the specified times
-  
-  if (!missing(times)) {
     
-    ret <- summary(x, times = times, extend = TRUE)
-    if (oneminus) ret <- oneminus.summary.survfit(ret)
-    ret$txt <- sprintf(
-      #fmt = '%.1f%% (95%% CI %.1f%%~%.1f%%) at t=%.4g %s', 
-      fmt = '%.1f%% (%.1f%%, %.1f%%) @ t=%.4g', 
-      1e2 * ret$surv, 
-      1e2 * ret$lower, 
-      1e2 * ret$upper, 
-      ret$time#, 
-      #units %||% ''
-    )
-    
-  } else {
-    
-    ret <- summary(x, censored = TRUE)
-    if (oneminus) {
-      ret <- oneminus.summary.survfit(ret)
-    }
-
+  ret <- summary(x, censored = TRUE)
+  if (oneminus) {
+    ret <- oneminus.summary.survfit(ret)
   }
   
   return(ret)

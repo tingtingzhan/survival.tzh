@@ -74,7 +74,6 @@ survfit(os ~ 1, data = rotterdam2) |>
   as_flextable.summary.survfit(which = 'surv.confint')
 ```
 
-
 ```{r}
 ggKM(os ~ 1, data = rotterdam2)
 ```
@@ -97,13 +96,8 @@ survfit(os ~ size, data = rotterdam2) |>
   as_flextable.summary.survfit(which = 'surv.confint')
 ```
 
-
 ```{r}
 ggKM(os ~ size, data = rotterdam2)
-```
-
-```{r}
-ggKM(os ~ size, data = rotterdam2, times = c(5, 10))
 ```
 
 ```{r}

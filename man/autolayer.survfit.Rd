@@ -4,13 +4,10 @@
 \alias{autolayer.survfit}
 \title{Layers of Kaplan-Meier Curve of \link[survival]{survfit.object} using \CRANpkg{ggplot2}}
 \usage{
-\method{autolayer}{survfit}(object, times, ribbon = TRUE, labels = NULL, ...)
+\method{autolayer}{survfit}(object, ribbon = TRUE, labels = NULL, ...)
 }
 \arguments{
 \item{object}{\link[survival]{survfit.object}}
-
-\item{times}{(optional) \link[base]{numeric} scalar or \link[base]{vector},
-time points where survival rates as well as the confidence intervals are plotted}
 
 \item{ribbon}{\link[base]{logical} scalar, default \code{TRUE}}
 

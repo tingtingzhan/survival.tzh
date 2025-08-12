@@ -14,7 +14,6 @@
 #' m1 = coxph(Surv(time, status) ~ celltype, data = veteran)
 #' p = m1 |> survfit() |> autoplot()
 #' p = m1 |> survfit(newdata = veteran[1:90, ]) |> autoplot()
-#' p = m1 |> survfit(newdata = veteran[1:90, ]) |> autoplot(times = c(250))
 #' @keywords internal
 #' @importFrom ggplot2 autoplot ggplot scale_y_continuous labs
 #' @importFrom stats formula

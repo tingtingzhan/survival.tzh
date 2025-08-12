@@ -5,9 +5,6 @@
 #' 
 #' @param object \link[survival]{survfit.object}
 #' 
-#' @param times (optional) \link[base]{numeric} scalar or \link[base]{vector},
-#' time points where survival rates as well as the confidence intervals are plotted
-#' 
 #' @param ribbon \link[base]{logical} scalar, default `TRUE`
 #' 
 #' @param labels (optional) \link[base]{character} \link[base]{vector}
@@ -22,13 +19,11 @@
 #' Therefore we leave the specification of `xlab` (ideally the time unit) to the end user.
 #' 
 #' @importFrom ggplot2 autolayer aes geom_ribbon geom_step scale_fill_discrete geom_point scale_colour_discrete
-#' @importFrom ggrepel geom_label_repel
 #' @importFrom stats setNames aggregate.data.frame quantile
 #' @export autolayer.survfit
 #' @export
 autolayer.survfit <- function(
     object, 
-    times,
     ribbon = TRUE,
     labels = NULL,
     ...
@@ -83,7 +78,7 @@ autolayer.survfit <- function(
     
     geom_step(
       mapping = aes(x = d$time, y = d$surv, group = d$strata, colour = d$strata),
-      alpha = if (!missing(times)) .5 else 1), 
+    ), 
     
     if (ribbon) geom_ribbon(
       mapping = aes(x = d$time, ymax = d$upper, ymin = d$lower, group = d$strata, fill = d$strata), 
@@ -91,20 +86,7 @@ autolayer.survfit <- function(
     
     geom_point(
       mapping = aes(x = d$time[id_c], y = d$surv[id_c], group = d$strata[id_c], colour = d$strata[id_c]),
-      shape = 3L,
-      alpha = if (!missing(times)) .5 else 1),
-    
-    if (!missing(times)) {
-      d0 <- fortify.survfit(object, times = times, ...)
-      geom_label_repel(
-        mapping = aes(
-          x = d0$time, y = d0$surv, 
-          colour = d0$strata, #fill = d0$strata, 
-          label = d0$txt
-        ), 
-        fontface = 'bold', fill = 'transparent', size = 3
-      )
-    },
+      shape = 3L),
     
     (if (length(labels)) scale_colour_discrete(labels = labels)),
     
