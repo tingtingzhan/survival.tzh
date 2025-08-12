@@ -1,5 +1,5 @@
 ---
-title: "ggKM"
+title: "Package `survival.tzh`"
 author: Tingting Zhan
 format: 
   html:
@@ -18,7 +18,7 @@ vignette: >
 
 # Introduction
 
-This vignette of package **`survival.tzh`** ([Github](https://github.com/tingtingzhan/survival.tzh), [RPubs](https://rpubs.com/tingtingzhan/VisualizeSimon2Stage)) documents `ggKM()`.
+This vignette of package **`survival.tzh`** ([Github](https://github.com/tingtingzhan/survival.tzh), [RPubs](https://rpubs.com/tingtingzhan/VisualizeSimon2Stage)) documents ...
 
 ## Note to Users
 
@@ -70,7 +70,6 @@ ss0 = s0 |>
 ss0
 ```
 
-
 ```{r}
 ss0 |>
   as_flextable.summary.survfit(which = 'n.risk')
@@ -98,6 +97,10 @@ s1 |> ggplot2::autoplot()
 ```
 
 ```{r}
+s1 |> ggplot2::autoplot(labels = letters[1:3])
+```
+
+```{r}
 ss1 = survfit(os ~ size, data = rotterdam2) |>
   summary(times = c(0, 5, 10, 15))
 ss1
@@ -118,13 +121,15 @@ ss1 |>
   as_flextable.summary.survfit(which = 'surv.confint')
 ```
 
+## Multiple Stratum
 
 ```{r}
-ggKM(os ~ size, data = rotterdam2, labels = letters[1:3])
+(s2 = survfit(os ~ size + meno, data = rotterdam2))
 ```
 
+
 ```{r}
-ggKM(os ~ size + meno, data = rotterdam2)
+s2 |> ggplot2::autoplot()
 ```
 
 ```{r}
@@ -161,7 +166,6 @@ m_ggKM(cbind(rfs, os) ~ meno, data = rotterdam2)
 ```{r}
 rotterdam2$os |> ggplot2::autoplot()
 ```
-
 
 # Appendix
 

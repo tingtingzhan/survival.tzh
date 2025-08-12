@@ -27,3 +27,4 @@ The only way is \code{eval(object$call$formula[[2L]], envir = eval(object$call$d
 which is very vulnerable as \code{object$call$data} might be defined in some other internal functions.
 Therefore we leave the specification of \code{xlab} (ideally the time unit) to the end user.
 }
+\keyword{internal}

@@ -20,6 +20,7 @@
 #' which is very vulnerable as `object$call$data` might be defined in some other internal functions.
 #' Therefore we leave the specification of `xlab` (ideally the time unit) to the end user.
 #' 
+#' @keywords internal
 #' @importFrom ggplot2 autolayer aes geom_ribbon geom_step scale_fill_discrete geom_point scale_colour_discrete
 #' @importFrom stats setNames aggregate.data.frame quantile
 #' @export autolayer.survfit
@@ -80,12 +81,11 @@ autolayer.survfit <- function(
     
   } else stop('illegal `labels`')
   
-  #d_c <- d[d$n.censor > 0L, , drop = FALSE]
   id_c <- (d$n.censor > 0L)
   
   strata_nm <- if (is.symbol(fom[[3L]])) deparse1(fom[[3L]]) # else NULL
   
-  ret <- list( 
+  return(list( 
     
     geom_step(
       mapping = aes(x = d$time, y = d$surv, group = d$strata, colour = d$strata),
@@ -103,13 +103,15 @@ autolayer.survfit <- function(
     
     (if (length(labels)) scale_fill_discrete(labels = labels)),
     
-    labs(y = deparse1(fom[[2L]]), colour = strata_nm, fill = strata_nm)
+    labs(
+      x = tryCatch(units.Surv(eval(object$call$data)[[fom[[2L]]]]), error = \(e) 'Time'),
+      y = deparse1(fom[[2L]]), 
+      colour = strata_nm, 
+      fill = strata_nm
+    )
     
-  )
+  ))
 
-  attr(ret, which = 'data') <- d
-  return(ret)
-  
 }
 
 
