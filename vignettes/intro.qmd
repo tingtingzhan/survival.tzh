@@ -38,9 +38,8 @@ library(flextable)
 ```{r}
 #| echo: false
 #options(mc.cores = 1L) # for CRAN submission
-theme_minimal(base_family = 'Arial Unicode MS') |> 
+theme_minimal() |> 
   theme_set()
-knitr::opts_chunk$set(dev = "ragg_png")
 ```
 
 # Data Example
@@ -159,7 +158,12 @@ s2 |>
 
 # For Multiple `survfit` Objects
 
-## `subset_survfit()`
+Functions `subset_survfit()` and `msurvfit()` return an object of `S3` class `'survfitlist'`, i.e., a `listof` `survfit.object`s.
+
+
+## Multiple Subsets
+
+Function `subset_survfit()` applies function `survival::survfit()` to multiple subset of the input `data`.
 
 ```{r}
 s = subset_survfit(os ~ size, subset = list(
@@ -186,11 +190,9 @@ autoplot(s) +
 
 
 
-## `msurvfit()`
+## Multiple Endpoints
 
 Function `msurvfit()` applies function `survival::survfit()` to multiple endpoints.
-
-Function `msurvfit()` returns an object of `S3` class `'survfitlist'`, i.e., a `listof` `survfit.object`s.
 
 ```{r}
 m = msurvfit(c(rfs, os) ~ meno, data = rotterdam2)
