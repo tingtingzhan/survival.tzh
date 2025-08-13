@@ -1,7 +1,9 @@
 
-
+#' @title \link[utils]{bibentry} for Survival Analysis
+#' 
+#' @name survival_bibentry
 #' @importFrom utils bibentry
-
+#' @export
 KaplanMeier58 <- function() {
   bibentry(
     bibtype = 'article', key = 'KaplanMeier58',
@@ -16,6 +18,9 @@ KaplanMeier58 <- function() {
   )
 }
 
+
+#' @rdname survival_bibentry
+#' @export
 Cox72 <- function() {
   bibentry(
     bibtype = 'Article', key = 'Cox72',
@@ -30,7 +35,8 @@ Cox72 <- function() {
   )
 }
 
-
+#' @rdname survival_bibentry
+#' @export
 Ripatti04 <- function() {
   bibentry(
     bibtype = 'Article', key = 'Ripatti04',
@@ -49,6 +55,8 @@ Ripatti04 <- function() {
 
 
 
+#' @rdname survival_bibentry
+#' @export
 Therneau03 <- function() {
   bibentry(
     bibtype = 'Article', key = 'Therneau03',
