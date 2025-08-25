@@ -166,7 +166,10 @@ md_.survfit <- function(x, xnm, ...) {
     '```{r}',
     '#| echo: false', 
     '#| comment: ',
-    xnm,
+    # xnm,
+    xnm |> sprintf(fmt = 'tmp <- %s'), 
+    'tmp$call <- NULL', # see ?survival:::print.survfit
+    'tmp',
     '```'
   ) |> 
     new(Class = 'md_lines')
