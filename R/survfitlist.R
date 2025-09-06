@@ -138,6 +138,64 @@ autoplot.survfitlist <- function(object, ...) {
 
 
 
+#' @title [md_.survfitlist()]
+#' 
+#' @description ..
+#' 
+#' @param x a `'survfitlist'` object
+#' 
+#' @param xnm ..
+#'  
+#' @param ... ..
+#' 
+#' @keywords internal
+#' @importFrom methods new
+#' @importClassesFrom rmd.tzh md_lines  
+#' @importFrom rmd.tzh md_
+#' @export md_.survfitlist
+#' @export
+md_.survfitlist <- function(x, xnm, ...) {
+  
+  z1 <- x[[1L]]$call$formula[[2L]] |> 
+    deparse1() |> 
+    sprintf(fmt = '@KaplanMeier58 estimates and curves of time-to-event endpoint **`%s`** are obtained using <u>**`R`**</u> package <u>**`survival`**</u>.') |>
+    new(Class = 'md_lines', package = 'survival', bibentry = KaplanMeier58())
+  
+  z2 <- c(
+    '<details><summary>Survival Stats</summary>',
+    '```{r}',
+    '#| echo: false', 
+    '#| comment: ',
+    xnm |> 
+      sprintf(fmt = 'tmp <- lapply(%s, FUN = \\(i) { i$call <- NULL; return(i) })'), # see ?survival:::print.survfit
+    'tmp',
+    '```',
+    '</details>'
+  ) |> 
+    new(Class = 'md_lines')
+  
+  fig.height <- attr(x, which = 'fig-height', exact = TRUE) %||% (ceiling(length(x)/2) * 3.5)
+  fig.width <- attr(x, which = 'fig-width', exact = TRUE) %||% 10
+    
+  z3 <- c(
+    '```{r}',
+    '#| echo: false', 
+    fig.height |> 
+      sprintf(fmt = '#| fig-height: %.1f'),
+    fig.width |> 
+      sprintf(fmt = '#| fig-width: %.1f'),
+    
+    xnm |> sprintf(fmt = 'autoplot.survfitlist(%s) + patchwork::plot_layout(ncol = 2L)'),
+    '```'
+  ) |> 
+    new(Class = 'md_lines')
+  
+  c(z1, z2, z3) # ?rmd.tzh::c.md_lines
+  
+}
+
+
+
 
 
 

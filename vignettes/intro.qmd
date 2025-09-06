@@ -163,7 +163,7 @@ Functions `subset_survfit()` and `msurvfit()` return an object of `S3` class `'s
 
 ## Multiple Subsets
 
-Function `subset_survfit()` applies function `survival::survfit()` to multiple subset of the input `data`.
+Function `subset_survfit()` applies function `survival::survfit()` to multiple subsets of the input `data`.
 
 ```{r}
 s = subset_survfit(os ~ size, subset = list(
@@ -187,6 +187,13 @@ autoplot(s) +
   patchwork::plot_layout(ncol = 2L)
 ```
 
+
+```{r}
+#| eval: false
+#| echo: false
+list(survfitlist = s) |>
+  rmd.tzh::render_(file = 'survfitlist')
+```
 
 
 

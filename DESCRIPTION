@@ -9,7 +9,7 @@ Authors@R: c(person(given = 'Tingting', family = 'Zhan',
       '0000-0001-9971-4844')))
 Language: en-US
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Encoding: UTF-8
 License: GPL-2
 Depends: R (>= 4.5), survival (== 3.8.3)
@@ -25,5 +25,3 @@ Suggests:
     coxphw,
     knitr, quarto, rmarkdown
 VignetteBuilder: quarto
-
-

@@ -163,6 +163,7 @@ md_.survfit <- function(x, xnm, ...) {
     new(Class = 'md_lines', package = 'survival', bibentry = KaplanMeier58())
   
   z2 <- c(
+    '<details><summary>Survival Stats</summary>',
     '```{r}',
     '#| echo: false', 
     '#| comment: ',
@@ -170,7 +171,8 @@ md_.survfit <- function(x, xnm, ...) {
     xnm |> sprintf(fmt = 'tmp <- %s'), 
     'tmp$call <- NULL', # see ?survival:::print.survfit
     'tmp',
-    '```'
+    '```',
+    '</details>'
   ) |> 
     new(Class = 'md_lines')
   
