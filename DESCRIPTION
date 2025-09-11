@@ -15,7 +15,7 @@ License: GPL-2
 Depends: R (>= 4.5), survival (== 3.8.3)
 Imports: methods, 
     flextable (== 0.9.10), 
-    ggplot2 (== 3.5.2),
+    ggplot2 (== 4.0.0),
     patchwork (== 1.3.2), 
     reshape2 (== 1.4.4),
     scales (== 1.4.0), 
