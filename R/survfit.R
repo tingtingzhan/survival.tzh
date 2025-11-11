@@ -25,8 +25,10 @@
 #' @export autolayer.survfit
 #' @export
 autolayer.survfit <- function(object, ...) {
+  # see ?survival:::summary.survfit
   object |> 
-    summary(censored = TRUE) |> # ?survival:::summary.survfit
+    # summary(censored = TRUE) |> # 
+    summary(times = c(0, object$time) |> unique.default()) |> # more robust!!
     autolayer.summary.survfit(...)
 }
 
