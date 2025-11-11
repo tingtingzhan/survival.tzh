@@ -4,25 +4,19 @@
 \alias{autolayer.survfit}
 \title{Layers of Kaplan-Meier Curve of \link[survival]{survfit.object} using \CRANpkg{ggplot2}}
 \usage{
-\method{autolayer}{survfit}(object, ribbon = TRUE, labels = NULL, oneminus = FALSE, ...)
+\method{autolayer}{survfit}(object, ...)
 }
 \arguments{
 \item{object}{\link[survival]{survfit.object}}
 
-\item{ribbon}{\link[base]{logical} scalar, default \code{TRUE}}
-
-\item{labels}{(optional) \link[base]{character} \link[base]{vector}}
-
-\item{oneminus}{\link[base]{logical} scalar}
-
-\item{...}{..}
+\item{...}{additional parameters of function \code{\link[=autolayer.summary.survfit]{autolayer.summary.survfit()}}}
 }
 \description{
 ..
 }
 \note{
 It's very difficulty to grab the time \link[base]{units} of the response of a
-\link[survival]{survfit} object.
+\link[survival]{survfit} or \link[survival]{summary.survfit} object.
 The only way is \code{eval(object$call$formula[[2L]], envir = eval(object$call$data))},
 which is very vulnerable as \code{object$call$data} might be defined in some other internal functions.
 Therefore we leave the specification of \code{xlab} (ideally the time unit) to the end user.
