@@ -13,21 +13,21 @@
 #' @importFrom flextable as_flextable add_header_lines set_caption
 #' @importFrom flextable.tzh as_flextable.matrix
 #' @importFrom reshape2 acast dcast
-#' @importFrom scales label_percent
 #' @export as_flextable.summary.survfit
 #' @export
 as_flextable.summary.survfit <- function(
     x, 
-    which = c('n.risk', 'surv', 'surv.confint'), 
+    which = c('n.risk', 'surv'), 
     ...
 ) {
   
   which <- match.arg(which)
   
-  if (which == 'surv.confint') {
-    x$surv.confint <- sprintf(fmt = '%.1f%%\n(%.1f%% - %.1f%%)',1e2*x$surv, 1e2*x$lower, 1e2*x$upper)
-  }
+  x0 <- x # original `x`, just in case
   
+  # add confint to `$surv`
+  x$surv <- sprintf(fmt = '%.1f%%\n(%.1f%% - %.1f%%)', 1e2*x$surv, 1e2*x$lower, 1e2*x$upper)
+
   z <- if (length(x$strata)) {# with strata
     x[c('strata', which, 'time')] |>
       as.data.frame.list() |>
@@ -38,19 +38,14 @@ as_flextable.summary.survfit <- function(
       acast(formula = . ~ time, value.var = which)
   }
   
-  names(dimnames(z)) <- c('Strata', 'Time')
-  
-  if (which == 'surv') {
-    z[] <- z |> 
-      label_percent(accuracy = .1)()
-  }
+  cl <- x$call
+  unt <- tryCatch(units.Surv(eval(cl$data)[[cl$formula[[2L]]]]), error = \(e) 'Time')
+  names(dimnames(z)) <- c('Strata', unt)
   
   table_title <- switch(which, n.risk = {
     'Number at Risk'
   }, surv = {
-    'Percentage Survived'
-  }, surv.confint = {
-    sprintf(fmt = 'Percentage Survived (%.0f%% CI)', 1e2*x$conf.int)
+    sprintf(fmt = 'Percentage Survived (%.0f%% Confidence Interval)', 1e2*x$conf.int)
   })
   
   z |> 

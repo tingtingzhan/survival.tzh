@@ -4,7 +4,7 @@
 \alias{as_flextable.summary.survfit}
 \title{as_flextable.summary.survfit}
 \usage{
-\method{as_flextable}{summary.survfit}(x, which = c("n.risk", "surv", "surv.confint"), ...)
+\method{as_flextable}{summary.survfit}(x, which = c("n.risk", "surv"), ...)
 }
 \arguments{
 \item{x}{returned object from function \code{survival:::summary.survfit}}
