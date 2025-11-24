@@ -25,6 +25,7 @@
 #' })
 #' subset(survival::udca, subset = entry.dt > as.Date('1991-01-01')) # check error as suggested
 #' 
+#' @keywords internal
 #' @importFrom survival Surv
 #' @export
 Surv_3Date <- function(
@@ -33,32 +34,51 @@ Surv_3Date <- function(
     ...
 ) {
   
-  start_nm <- deparse1(substitute(start))
-  stop_nm <- deparse1(substitute(stop))
-  censor_nm <- deparse1(substitute(censor))
+  start_nm <- substitute(start) |>
+    deparse1(backtick = TRUE)
+  stop_nm <- substitute(stop) |>
+    deparse1(backtick = TRUE)
+  censor_nm <- substitute(censor) |>
+    deparse1(backtick = TRUE)
   
   start <- as.Date(start)
   stop <- as.Date(stop)
   censor <- as.Date(censor)
   
   stop2 <- stop - start # recycled; may have NA
-  if (any(unclass(stop2) < 0, na.rm = TRUE)) {
-    message('\U0001f6d1 ERROR! `start` date later than `stop` date\nsee `subset_(, subset = ', start_nm, ' > ', stop_nm, ')`')
+  if (any(unclass(stop2) <= 0, na.rm = TRUE)) {
+    sprintf(
+      fmt = '\U0001f6d1 %s no-earlier than %s! See',
+      'START' |> col_blue() |> style_bold(),
+      'STOP' |> col_red() |> style_bold()
+    ) |>
+      message()
+    sprintf(
+      fmt = 'flextable.tzh::subset_(, subset = %s >= %s)',
+      start_nm, stop_nm
+      ) |>
+      col_magenta() |> style_bold() |>
+      message()
     return(invisible()) # dont stop; inspect multiple definition
-  }
-  if (any(unclass(stop2) == 0, na.rm = TRUE)) {
-    warning('`start` date same as `stop` date\nsee `subset_(, subset = ', start_nm, ' == ', stop_nm, ')`')
   }
   
   censor2 <- censor - start # recycled; may have NA
-  if (any(unclass(censor2) < 0, na.rm = TRUE)) {
-    message('\U0001f6d1 ERROR! `start` date later than `censor` date\nsee `subset_(, subset = ', start_nm, ' > ', censor_nm, ')`')
+  if (any(unclass(censor2) <= 0, na.rm = TRUE)) {
+    sprintf(
+      fmt = '\U0001f6d1 %s no-earlier than %s! See',
+      'START' |> col_blue() |> style_bold(),
+      'CENSOR' |> col_red() |> style_bold()
+    ) |>
+      message()
+    sprintf(
+      fmt = 'flextable.tzh::subset_(, subset = %s >= %s)',
+      start_nm, censor_nm
+    ) |>
+      col_magenta() |> style_bold() |>
+      message()
     return(invisible()) # dont stop; inspect multiple definition
   }
-  if (any(unclass(censor2) == 0, na.rm = TRUE)) {
-    warning('`start` date same as `censor` date\nsee `subset_(, subset = ', start_nm, ' == ', censor_nm, ')`')
-  }
-  
+
   units <- match.arg(units, choices = names(timeUnits()))
   units_difftime(stop2) <- units
   units_difftime(censor2) <- units

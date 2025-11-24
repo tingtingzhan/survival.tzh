@@ -32,3 +32,4 @@ noout = within(survival::udca, expr = {
 subset(survival::udca, subset = entry.dt > as.Date('1991-01-01')) # check error as suggested
 
 }
+\keyword{internal}

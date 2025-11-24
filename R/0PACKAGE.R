@@ -1,5 +1,6 @@
 
 
+#' @import cli
 #' @import patchwork
 # @importFrom patchwork ggplot_add.ggplot
 '_PACKAGE'
