@@ -12,7 +12,7 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Encoding: UTF-8
 License: GPL-2
-Depends: R (>= 4.5), survival (== 3.8.3)
+Depends: R (>= 4.5), survival (== 3.8.6)
 Imports: cli, methods, 
     flextable (== 0.9.10), 
     ggplot2 (== 4.0.1),
@@ -21,7 +21,7 @@ Imports: cli, methods,
     scales (== 1.4.0), 
     flextable.tzh, rmd.tzh, ecip
 Suggests: 
-    coxme,
-    coxphw,
+    coxme (== 2.2.22),
+    coxphw (== 4.0.3),
     knitr, quarto, rmarkdown
 VignetteBuilder: quarto
