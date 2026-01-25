@@ -195,7 +195,7 @@ md_.survfit <- function(x, xnm, ...) {
   
   z1 <- x$call$formula[[2L]] |> 
     deparse1() |> 
-    sprintf(fmt = '@KaplanMeier58 estimates and curves of time-to-event endpoint **`%s`** are obtained using <u>**`R`**</u> package <u>**`survival`**</u>.') |>
+    sprintf(fmt = '@KaplanMeier58 estimates and curves of the time-to-event endpoint **`%s`** are obtained using <u>**`R`**</u> package <u>**`survival`**</u>.') |>
     new(Class = 'md_lines', package = 'survival', bibentry = KaplanMeier58())
   
   z2 <- c(

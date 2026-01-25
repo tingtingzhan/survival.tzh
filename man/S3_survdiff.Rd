@@ -11,7 +11,7 @@
 \method{.pval}{survdiff}(x)
 }
 \arguments{
-\item{x}{\link[survival]{survdiff} object}
+\item{x}{a \link[survival]{survdiff} object}
 }
 \description{
 S3 Methods \link[survival]{survdiff} Object
