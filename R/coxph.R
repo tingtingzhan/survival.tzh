@@ -14,7 +14,7 @@ nobsText.coxph <- function(x) {
 
 
 #' @rdname S3_coxph
-#' @importClassesFrom rmd.tzh md_lines
+#' @importClassesFrom fastmd md_lines
 #' @importFrom ecip desc_
 #' @importFrom methods new
 #' @export desc_.coxph
@@ -56,10 +56,10 @@ estnm.coxph <- function(x) 'Hazards\ Ratio'
 #'  coxph(formula = Surv(futime, fustat) ~ age + ecog.ps)
 #' 
 #' library(ecip); 
-#' list('`coxph`' = m) |> rmd.tzh::render_(file = 'coxph')
+#' list('`coxph`' = m) |> fastmd::render_(file = 'coxph')
 #' 
 #' @keywords internal
-#' @importFrom rmd.tzh md_
+#' @importFrom fastmd md_
 #' @importFrom ecip md_ecip
 #' @export md_.coxph
 #' @export

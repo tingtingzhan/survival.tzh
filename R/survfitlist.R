@@ -150,8 +150,8 @@ autoplot.survfitlist <- function(object, ...) {
 #' 
 #' @keywords internal
 #' @importFrom methods new
-#' @importClassesFrom rmd.tzh md_lines  
-#' @importFrom rmd.tzh md_
+#' @importClassesFrom fastmd md_lines  
+#' @importFrom fastmd md_
 #' @export md_.survfitlist
 #' @export
 md_.survfitlist <- function(x, xnm, ...) {
@@ -190,7 +190,7 @@ md_.survfitlist <- function(x, xnm, ...) {
   ) |> 
     new(Class = 'md_lines')
   
-  c(z1, z2, z3) # ?rmd.tzh::c.md_lines
+  c(z1, z2, z3) # ?fastmd::c.md_lines
   
 }
 

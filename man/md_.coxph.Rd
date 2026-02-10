@@ -21,7 +21,7 @@ m = ovarian |>
  coxph(formula = Surv(futime, fustat) ~ age + ecog.ps)
 
 library(ecip); 
-list('`coxph`' = m) |> rmd.tzh::render_(file = 'coxph')
+list('`coxph`' = m) |> fastmd::render_(file = 'coxph')
 
 }
 \keyword{internal}

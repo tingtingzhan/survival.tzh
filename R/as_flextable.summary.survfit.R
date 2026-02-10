@@ -11,7 +11,7 @@
 #' 
 #' @keywords internal
 #' @importFrom flextable as_flextable add_header_lines set_caption
-#' @importFrom flextable.tzh as_flextable.matrix
+#' @importFrom fastmd as_flextable.matrix
 #' @importFrom reshape2 acast dcast
 #' @export as_flextable.summary.survfit
 #' @export

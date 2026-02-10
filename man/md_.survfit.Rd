@@ -22,6 +22,6 @@ s1 = survfit(Surv(time, status) ~ x, data = aml)
 list(
  'no strata' = list(s0, summary(s0, times = c(10, 25))),
  'one strata' = list(s1, summary(s1, times = c(10, 25)))
-) |> rmd.tzh::render_(file = 'survfit')
+) |> fastmd::render_(file = 'survfit')
 }
 \keyword{internal}

@@ -58,11 +58,11 @@ nobsText.survdiff <- function(x) {
 #' @examples
 #' list(
 #'  logrank = survdiff(Surv(time, status) ~ x, data = aml)
-#' ) |> rmd.tzh::render_(file = 'logrank')
+#' ) |> fastmd::render_(file = 'logrank')
 #' @keywords internal
 #' @importFrom methods new
-#' @importClassesFrom rmd.tzh md_lines
-#' @importFrom rmd.tzh md_ label_pvalue_sym
+#' @importClassesFrom fastmd md_lines
+#' @importFrom fastmd md_ label_pvalue_sym
 #' @export md_.survdiff
 #' @export
 md_.survdiff <- function(x, xnm, ...) {
@@ -86,7 +86,7 @@ md_.survdiff <- function(x, xnm, ...) {
   ) |> 
     new(Class = 'md_lines')
   
-  c(z1, z2) # ?rmd.tzh::c.md_lines
+  c(z1, z2) # ?fastmd::c.md_lines
   
 }
 

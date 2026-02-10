@@ -19,6 +19,6 @@
 \examples{
 list(
  logrank = survdiff(Surv(time, status) ~ x, data = aml)
-) |> rmd.tzh::render_(file = 'logrank')
+) |> fastmd::render_(file = 'logrank')
 }
 \keyword{internal}

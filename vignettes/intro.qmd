@@ -185,7 +185,7 @@ autoplot(s) +
 #| eval: false
 #| echo: false
 list(survfitlist = s) |>
-  rmd.tzh::render_(file = 'survfitlist')
+  fastmd::render_(file = 'survfitlist')
 ```
 
 

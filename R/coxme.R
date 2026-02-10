@@ -77,7 +77,7 @@ terms.coxme <- function(x, ...) {
 
 
 #' @rdname S3_coxme
-#' @importClassesFrom rmd.tzh md_lines
+#' @importClassesFrom fastmd md_lines
 #' @importFrom ecip desc_
 #' @importFrom methods new
 #' @export desc_.coxme

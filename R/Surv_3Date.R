@@ -54,7 +54,7 @@ Surv_3Date <- function(
     ) |>
       message()
     sprintf(
-      fmt = 'flextable.tzh::subset_(, subset = %s >= %s)',
+      fmt = 'fastmd::subset_(, subset = %s >= %s)',
       start_nm, stop_nm
       ) |>
       col_magenta() |> style_bold() |>
@@ -71,7 +71,7 @@ Surv_3Date <- function(
     ) |>
       message()
     sprintf(
-      fmt = 'flextable.tzh::subset_(, subset = %s >= %s)',
+      fmt = 'fastmd::subset_(, subset = %s >= %s)',
       start_nm, censor_nm
     ) |>
       col_magenta() |> style_bold() |>

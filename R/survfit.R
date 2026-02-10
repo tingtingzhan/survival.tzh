@@ -184,11 +184,11 @@ nobsText.survfit <- function(x) {
 #' list(
 #'  'no strata' = list(s0, summary(s0, times = c(10, 25))),
 #'  'one strata' = list(s1, summary(s1, times = c(10, 25)))
-#' ) |> rmd.tzh::render_(file = 'survfit')
+#' ) |> fastmd::render_(file = 'survfit')
 #' @keywords internal
 #' @importFrom methods new
-#' @importClassesFrom rmd.tzh md_lines  
-#' @importFrom rmd.tzh md_
+#' @importClassesFrom fastmd md_lines  
+#' @importFrom fastmd md_
 #' @export md_.survfit
 #' @export
 md_.survfit <- function(x, xnm, ...) {
@@ -228,7 +228,7 @@ md_.survfit <- function(x, xnm, ...) {
   ) |> 
     new(Class = 'md_lines')
   
-  c(z1, z2, z3) # ?rmd.tzh::c.md_lines
+  c(z1, z2, z3) # ?fastmd::c.md_lines
   
 }
 
@@ -247,8 +247,8 @@ md_.survfit <- function(x, xnm, ...) {
 #' 
 #' @keywords internal
 #' @importFrom methods new
-#' @importClassesFrom rmd.tzh md_lines  
-#' @importFrom rmd.tzh md_
+#' @importClassesFrom fastmd md_lines  
+#' @importFrom fastmd md_
 #' @export md_.summary.survfit
 #' @export
 md_.summary.survfit <- function(x, xnm, ...) {
