@@ -16,7 +16,6 @@
 #' Function [msurvfit()] returns a `'survfitlist'`.
 #' 
 #' @keywords internal
-#' @importFrom survival survfit.formula
 #' @export
 msurvfit <- function(formula, ...) {
   
@@ -60,7 +59,6 @@ msurvfit <- function(formula, ...) {
 #' Function [subset_survfit()] returns a `'survfitlist'`.
 #' 
 #' @keywords internal
-#' @importFrom survival survfit.formula
 #' @export
 subset_survfit <- function(formula, subset, data, ...) {
   
@@ -149,7 +147,6 @@ autoplot.survfitlist <- function(object, ...) {
 #' @param ... ..
 #' 
 #' @keywords internal
-#' @importFrom methods new
 #' @importClassesFrom fastmd md_lines  
 #' @importFrom fastmd md_
 #' @export md_.survfitlist

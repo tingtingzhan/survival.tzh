@@ -7,7 +7,7 @@
 \method{autolayer}{survfit}(object, ...)
 }
 \arguments{
-\item{object}{\link[survival]{survfit.object}}
+\item{object}{a \link[survival]{survfit.object}}
 
 \item{...}{additional parameters of function \code{\link[=autolayer.summary.survfit]{autolayer.summary.survfit()}}}
 }

@@ -55,7 +55,6 @@ pairwise_survfit_test <- function(
 
 
 
-#' @importFrom stats p.adjust pchisq qlogis
 pairwise_survfit_int <- function(
   surv,
   std.err,

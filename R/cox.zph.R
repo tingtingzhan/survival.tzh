@@ -46,12 +46,13 @@
 #' @references
 #' \url{http://www.sthda.com/english/wiki/cox-model-assumptions}
 #' 
-#' @importFrom survival cox.zph
 #' @export
 cox_zph <- function(fit, global = TRUE, ...) {
   
-  zph <- fit |> cox.zph(global = global, ...)
-  p <- zph |> .pval.cox.zph()
+  zph <- fit |> 
+    cox.zph(global = global, ...)
+  p <- zph |> 
+    .pval.cox.zph()
   
   if (length(p0 <- p[!is.na(p)]) && any(id <- (p0 <= .05))) {
     message('Proportional hazard assumption violated (Schoenfeld residuals):')

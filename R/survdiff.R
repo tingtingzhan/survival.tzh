@@ -60,7 +60,6 @@ nobsText.survdiff <- function(x) {
 #'  logrank = survdiff(Surv(time, status) ~ x, data = aml)
 #' ) |> fastmd::render_(file = 'logrank')
 #' @keywords internal
-#' @importFrom methods new
 #' @importClassesFrom fastmd md_lines
 #' @importFrom fastmd md_ label_pvalue_sym
 #' @export md_.survdiff

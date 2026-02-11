@@ -88,7 +88,6 @@ getTime.Surv <- function(x, type = c('event', 'censor', 'any'), ...) {
 #' 
 #' @importFrom ggplot2 autoplot ggplot scale_y_continuous labs
 #' @importFrom scales label_percent
-#' @importFrom survival survfit.formula
 #' @export
 autoplot.Surv <- function(object, ...) {
   

@@ -1,15 +1,37 @@
 
+
+#' @title Time Unit of a \link[survival]{survfit.object} or \link[survival]{summary.survfit} Object
+#' 
+#' @description ..
+#' 
+#' @param x a \link[survival]{survfit.object} or \link[survival]{summary.survfit} object
+#' 
+#' @seealso 
+#' \link[base]{units}
+#' 
+#' @keywords internal
+#' @name units_survfit
+#' @export units.survfit
+#' @export
+units.survfit <- function(x) {
+  tryCatch(units.Surv(eval(x$call$data)[[x$call$formula[[2L]]]]), error = \(e) return(invisible()))
+}
+  
+#' @rdname units_survfit
+#' @method units summary.survfit
+#' @export units.summary.survfit
+#' @export
+units.summary.survfit <- units.survfit
+
+  
+  
+  
+  
 #' @title Layers of Kaplan-Meier Curve of \link[survival]{survfit.object} using \CRANpkg{ggplot2}
 #' 
 #' @description ..
 #' 
-#' @param object \link[survival]{survfit.object}
-#' 
-# @param ribbon \link[base]{logical} scalar, default `TRUE`
-#' 
-# @param labels (optional) \link[base]{character} \link[base]{vector}
-#' 
-# @param oneminus \link[base]{logical} scalar
+#' @param object a \link[survival]{survfit.object}
 #' 
 #' @param ... additional parameters of function [autolayer.summary.survfit()]
 #' 
@@ -25,10 +47,12 @@
 #' @export autolayer.survfit
 #' @export
 autolayer.survfit <- function(object, ...) {
-  # see ?survival:::summary.survfit
   object |> 
     # summary(censored = TRUE) |> # 
-    summary(times = c(0, object$time) |> unique.default()) |> # more robust!!
+    summary( # ?survival:::summary.survfit
+      times = c(0, object$time) |> 
+        unique.default() # more robust!!
+    ) |> 
     autolayer.summary.survfit(...)
 }
 
@@ -51,7 +75,6 @@ autolayer.survfit <- function(object, ...) {
 #' 
 #' @keywords internal
 #' @importFrom ggplot2 autolayer aes geom_ribbon geom_step scale_fill_discrete geom_point scale_colour_discrete
-#' @importFrom stats setNames
 #' @export autolayer.summary.survfit
 #' @export
 autolayer.summary.survfit <- function(
@@ -99,7 +122,7 @@ autolayer.summary.survfit <- function(
     (if (length(labels)) scale_fill_discrete(labels = labels)),
     
     labs(
-      x = tryCatch(units.Surv(eval(object$call$data)[[fom[[2L]]]]), error = \(e) 'Time'),
+      x = units.survfit(object) %||% 'Time',
       y = deparse1(fom[[2L]]), 
       colour = strata_nm, 
       fill = strata_nm
@@ -144,21 +167,31 @@ autoplot.survfit <- function(object, ...) {
 
 
 
-#' @title S3 Methods for \link[survival]{survfit} Objects
+#' @title Sample Size of \link[survival]{survfit} Objects
 #' 
-#' @param x \link[survival]{survfit} or \link[survival]{summary.survfit} object
+#' @param x a \link[survival]{survfit} or \link[survival]{summary.survfit} object
 #' 
 #' @examples
+#' library(ecip)
 #' survfit(Surv(time, status) ~ x, data = aml) |> 
-#'  nobsText.survfit()
+#'  nobsText()
+#' survfit(Surv(time, status) ~ x, data = aml) |> 
+#'  summary() |>
+#'  nobsText()
 #' @keywords internal
 #' @importFrom ecip nobsText
+#' @name nobsText_survfit
 #' @export nobsText.survfit
 #' @export
 nobsText.survfit <- function(x) {
   sprintf(fmt = '%d subj (%d events)', sum(x[['n']]), sum(x[['n.event']]))
 }
 
+#' @rdname nobsText_survfit
+#' @method nobsText summary.survfit
+#' @export nobsText.summary.survfit
+#' @export
+nobsText.summary.survfit <- nobsText.survfit
 
 
 
@@ -168,7 +201,9 @@ nobsText.survfit <- function(x) {
 
 
 
-#' @title md_.survfit
+
+
+#' @title Fast Markdown Lines for \link[survival]{survfit.object}
 #' 
 #' @description ..
 #' 
@@ -186,7 +221,6 @@ nobsText.survfit <- function(x) {
 #'  'one strata' = list(s1, summary(s1, times = c(10, 25)))
 #' ) |> fastmd::render_(file = 'survfit')
 #' @keywords internal
-#' @importFrom methods new
 #' @importClassesFrom fastmd md_lines  
 #' @importFrom fastmd md_
 #' @export md_.survfit
@@ -199,16 +233,16 @@ md_.survfit <- function(x, xnm, ...) {
     new(Class = 'md_lines', package = 'survival', bibentry = .kaplan_meier58())
   
   z2 <- c(
-    '<details><summary>Median Survival (& Confidence Interval)</summary>',
+    # '<details><summary>Median Survival (& Confidence Interval)</summary>',
     '```{r}',
     '#| echo: false', 
     '#| comment: ',
-    # xnm,
-    xnm |> sprintf(fmt = 'tmp <- %s'), 
-    'tmp$call <- NULL', # see ?survival:::print.survfit
-    'tmp',
-    '```',
-    '</details>'
+    xnm |> 
+      sprintf(fmt = 'as_flextable_quantile_survfit(%s)'),
+    # xnm |> sprintf(fmt = 'rm_call(%s)'), # ?fastmd::rm_call
+    # ?survival:::print.survfit does not return the console print-out
+    '```'
+    # '</details>'
   ) |> 
     new(Class = 'md_lines')
   
@@ -235,7 +269,7 @@ md_.survfit <- function(x, xnm, ...) {
 
 
 
-#' @title [md_.summary.survfit]
+#' @title Fast Markdown Lines for \link[survival]{summary.survfit} Object
 #' 
 #' @description ..
 #' 
@@ -246,7 +280,6 @@ md_.survfit <- function(x, xnm, ...) {
 #' @param ... ..
 #' 
 #' @keywords internal
-#' @importFrom methods new
 #' @importClassesFrom fastmd md_lines  
 #' @importFrom fastmd md_
 #' @export md_.summary.survfit
@@ -256,10 +289,79 @@ md_.summary.survfit <- function(x, xnm, ...) {
   c(
     '```{r}',
     '#| echo: false', 
-    xnm |> sprintf(fmt = '%s |> as_flextable.summary.survfit(which = \'surv\')'), 
+    xnm |> 
+      sprintf(fmt = '%s |> as_flextable.summary.survfit(which = \'surv\')'), 
     '```'
   ) |> 
     new(Class = 'md_lines')
+  
+}
+
+
+
+
+
+
+
+#' @title Convert \link[survival]{summary.survfit} Object to \link[flextable]{flextable}
+#' 
+#' @param x a \link[survival]{summary.survfit} object
+#' 
+#' @param which ..
+#' 
+#' @param ... ..
+#' 
+#' @keywords internal
+#' @importFrom flextable as_flextable color set_caption
+#' @importFrom fastmd as_flextable.matrix
+#' @importFrom reshape2 acast dcast
+#' @importFrom scales pal_hue
+#' @export as_flextable.summary.survfit
+#' @export
+as_flextable.summary.survfit <- function(
+    x, 
+    which = c('n.risk', 'surv'), 
+    ...
+) {
+  
+  which <- match.arg(which)
+  
+  x0 <- x # original `x`, just in case
+  
+  # add confint to `$surv`
+  x$surv <- sprintf(
+    fmt = '%.1f%%\n(%.1f%%, %.1f%%)', 
+    1e2*x$surv, 1e2*x$lower, 1e2*x$upper
+  )
+  
+  nstrata <- x$strata |> 
+    levels() |> 
+    length()
+  z <- if (nstrata) {# with strata
+    x[c('strata', which, 'time')] |>
+      as.data.frame.list() |>
+      acast(formula = strata ~ time, value.var = which)
+  } else {# without strata
+    x[c(which, 'time')] |>
+      as.data.frame.list() |> 
+      acast(formula = . ~ time, value.var = which)
+  }
+  
+  #cl <- x$call
+  #unt <- tryCatch(units.Surv(eval(cl$data)[[cl$formula[[2L]]]]), error = \(e) 'Time')
+  unt <- units.summary.survfit(x) %||% 'Time'
+  names(dimnames(z)) <- c('Strata', unt)
+  
+  table_title <- switch(which, n.risk = {
+    'Number at Risk'
+  }, surv = {
+    sprintf(fmt = 'Percentage Survived (%.0f%% Confidence Interval)', 1e2*x$conf.int)
+  })
+  
+  z |> 
+    as_flextable.matrix() |>
+    color(i = seq_len(nstrata), color = if (nstrata) pal_hue()(n = nstrata), part = 'body') |>
+    set_caption(caption = table_title)
   
 }
 

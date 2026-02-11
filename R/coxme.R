@@ -36,7 +36,6 @@ nobsText.coxme <- function(x) {
 }
 
 
-#' @importFrom stats terms model.frame
 #' @export
 terms.coxme <- function(x, ...) {
   # coxme:::terms does not exists
@@ -55,7 +54,6 @@ terms.coxme <- function(x, ...) {
 
 
 # @method model.frame coxme
-# @importFrom stats model.frame model.frame.default
 # @export
 #model.frame.coxme <- function(formula, ...) {
 #  if (!is.data.frame(data <- eval(formula$call$data))) stop('`data` must be evaluable')
@@ -79,7 +77,6 @@ terms.coxme <- function(x, ...) {
 #' @rdname S3_coxme
 #' @importClassesFrom fastmd md_lines
 #' @importFrom ecip desc_
-#' @importFrom methods new
 #' @export desc_.coxme
 #' @export
 desc_.coxme <- function(x) {

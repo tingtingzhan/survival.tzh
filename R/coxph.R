@@ -16,7 +16,6 @@ nobsText.coxph <- function(x) {
 #' @rdname S3_coxph
 #' @importClassesFrom fastmd md_lines
 #' @importFrom ecip desc_
-#' @importFrom methods new
 #' @export desc_.coxph
 #' @export
 desc_.coxph <- function(x) {

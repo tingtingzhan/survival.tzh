@@ -2,6 +2,11 @@
 
 #' @import cli
 #' @import patchwork
+#' @import survival
+#' 
+#' @import stats
+#' @import methods
+#' 
 # @importFrom patchwork ggplot_add.ggplot
 '_PACKAGE'
 # ?patchwork:::ggplot_add.ggplot # not exported

@@ -26,7 +26,6 @@
 #' subset(survival::udca, subset = entry.dt > as.Date('1991-01-01')) # check error as suggested
 #' 
 #' @keywords internal
-#' @importFrom survival Surv
 #' @export
 Surv_3Date <- function(
     start, stop, censor, 

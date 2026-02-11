@@ -2,7 +2,7 @@
 % Please edit documentation in R/survfit.R
 \name{md_.summary.survfit}
 \alias{md_.summary.survfit}
-\title{\link{md_.summary.survfit}}
+\title{Fast Markdown Lines for \link[survival]{summary.survfit} Object}
 \usage{
 \method{md_}{summary.survfit}(x, xnm, ...)
 }
