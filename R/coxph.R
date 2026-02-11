@@ -21,7 +21,7 @@ nobsText.coxph <- function(x) {
 #' @export
 desc_.coxph <- function(x) {
   '@Cox72 proportional hazards' |>
-    new(Class = 'md_lines', bibentry = Cox72(), package = 'survival')
+    new(Class = 'md_lines', bibentry = .cox72(), package = 'survival')
 }
 
 #' @rdname S3_coxph

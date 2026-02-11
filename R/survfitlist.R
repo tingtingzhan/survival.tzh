@@ -159,7 +159,7 @@ md_.survfitlist <- function(x, xnm, ...) {
   z1 <- x[[1L]]$call$formula[[2L]] |> 
     deparse1() |> 
     sprintf(fmt = '@KaplanMeier58 estimates and curves of time-to-event endpoint **`%s`** are obtained using <u>**`R`**</u> package <u>**`survival`**</u>.') |>
-    new(Class = 'md_lines', package = 'survival', bibentry = KaplanMeier58())
+    new(Class = 'md_lines', package = 'survival', bibentry = .kaplan_meier58())
   
   z2 <- c(
     '<details><summary>Survival Stats</summary>',

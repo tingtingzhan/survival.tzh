@@ -84,7 +84,7 @@ terms.coxme <- function(x, ...) {
 #' @export
 desc_.coxme <- function(x) {
   'mixed effects Cox [@Ripatti04; @Therneau03]' |> # ?coxme::coxme
-    new(Class = 'md_lines', bibentry = c(Ripatti04(), Therneau03()), package = 'coxme')
+    new(Class = 'md_lines', bibentry = c(.ripatti04(), .therneau03()), package = 'coxme')
 }
 
 

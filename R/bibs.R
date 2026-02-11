@@ -1,10 +1,11 @@
 
 #' @title \link[utils]{bibentry} for Survival Analysis
 #' 
-#' @name survival_bibentry
+#' @keywords internal
+#' @name survival_bib
 #' @importFrom utils bibentry
 #' @export
-KaplanMeier58 <- function() {
+.kaplan_meier58 <- function() {
   bibentry(
     bibtype = 'article', key = 'KaplanMeier58',
     author = c('Edward L. Kaplan', 'Paul Meier'),
@@ -19,9 +20,9 @@ KaplanMeier58 <- function() {
 }
 
 
-#' @rdname survival_bibentry
+#' @rdname survival_bib
 #' @export
-Cox72 <- function() {
+.cox72 <- function() {
   bibentry(
     bibtype = 'Article', key = 'Cox72',
     author = 'David R. Cox',
@@ -35,9 +36,9 @@ Cox72 <- function() {
   )
 }
 
-#' @rdname survival_bibentry
+#' @rdname survival_bib
 #' @export
-Ripatti04 <- function() {
+.ripatti04 <- function() {
   bibentry(
     bibtype = 'Article', key = 'Ripatti04',
     author = 'Ripatti, Samuli and Palmgren, Juni',
@@ -55,9 +56,9 @@ Ripatti04 <- function() {
 
 
 
-#' @rdname survival_bibentry
+#' @rdname survival_bib
 #' @export
-Therneau03 <- function() {
+.therneau03 <- function() {
   bibentry(
     bibtype = 'Article', key = 'Therneau03',
     author = 'Terry M Therneau and Patricia M Grambsch and V. Shane Pankratz',
