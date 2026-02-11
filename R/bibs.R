@@ -1,13 +1,15 @@
 
 #' @title \link[utils]{bibentry} for Survival Analysis
 #' 
+#' @param key,... parameters of function \link[utils]{bibentry}
+#' 
 #' @keywords internal
 #' @name survival_bib
 #' @importFrom utils bibentry
 #' @export
-.kaplan_meier58 <- function() {
+.kaplan_meier58 <- function(key = 'KaplanMeier58', ...) {
   bibentry(
-    bibtype = 'article', key = 'KaplanMeier58',
+    bibtype = 'article', key = key, ...,
     author = c('Edward L. Kaplan', 'Paul Meier'),
     title = 'Nonparametric Estimation from Incomplete Observations',
     journal = 'Journal of the American Statistical Association',
@@ -22,9 +24,9 @@
 
 #' @rdname survival_bib
 #' @export
-.cox72 <- function() {
+.cox72 <- function(key = 'Cox72', ...) {
   bibentry(
-    bibtype = 'Article', key = 'Cox72',
+    bibtype = 'Article', key = key, ...,
     author = 'David R. Cox',
     title = 'Regression Models and Life-Tables',
     journal = 'Journal of the Royal Statistical Society: Series B (Methodological)',
@@ -38,9 +40,9 @@
 
 #' @rdname survival_bib
 #' @export
-.ripatti04 <- function() {
+.ripatti04 <- function(key = 'Ripatti04', ...) {
   bibentry(
-    bibtype = 'Article', key = 'Ripatti04',
+    bibtype = 'Article', key = key, ...,
     author = 'Ripatti, Samuli and Palmgren, Juni',
     title = 'Estimation of Multivariate Frailty Models Using Penalized Partial Likelihood',
     journal = 'Biometrics',
@@ -58,9 +60,9 @@
 
 #' @rdname survival_bib
 #' @export
-.therneau03 <- function() {
+.therneau03 <- function(key = 'Therneau03', ...) {
   bibentry(
-    bibtype = 'Article', key = 'Therneau03',
+    bibtype = 'Article', key = key, ...,
     author = 'Terry M Therneau and Patricia M Grambsch and V. Shane Pankratz',
     title = 'Penalized Survival Models and Frailty',
     journal = 'Journal of Computational and Graphical Statistics',

@@ -8,13 +8,16 @@
 \alias{.therneau03}
 \title{\link[utils]{bibentry} for Survival Analysis}
 \usage{
-.kaplan_meier58()
+.kaplan_meier58(key = "KaplanMeier58", ...)
 
-.cox72()
+.cox72(key = "Cox72", ...)
 
-.ripatti04()
+.ripatti04(key = "Ripatti04", ...)
 
-.therneau03()
+.therneau03(key = "Therneau03", ...)
+}
+\arguments{
+\item{key, ...}{parameters of function \link[utils]{bibentry}}
 }
 \description{
 \link[utils]{bibentry} for Survival Analysis
