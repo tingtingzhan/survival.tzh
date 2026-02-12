@@ -236,16 +236,12 @@ md_.survfit <- function(x, xnm, ...) {
     new(Class = 'md_lines', package = 'survival', bibentry = .kaplan_meier58())
   
   z2 <- c(
-    # '<details><summary>Median Survival (& Confidence Interval)</summary>',
     '```{r}',
     '#| echo: false', 
     '#| comment: ',
     xnm |> 
       sprintf(fmt = 'as_flextable_quantile_survfit(%s)'),
-    # xnm |> sprintf(fmt = 'rm_call(%s)'), # ?fastmd::rm_call
-    # ?survival:::print.survfit does not return the console print-out
     '```'
-    # '</details>'
   ) |> 
     new(Class = 'md_lines')
   
@@ -253,6 +249,7 @@ md_.survfit <- function(x, xnm, ...) {
     '```{r}',
     '#| echo: false', 
     '#| warning: false', 
+    '#| dev: \'ragg_png\'', # unicode support for \pkg{rpart.tzh}
     x |>
       attr(which = 'fig-height', exact = TRUE) |> 
       sprintf(fmt = '#| fig-height: %.1f'),
@@ -260,7 +257,11 @@ md_.survfit <- function(x, xnm, ...) {
       attr(which = 'fig-width', exact = TRUE) |> 
       sprintf(fmt = '#| fig-width: %.1f'),
     
-    xnm |> sprintf(fmt = 'autoplot.survfit(%s)'),
+    #xnm |> sprintf(fmt = 'autoplot.survfit(%s)'),
+    xnm |> sprintf(fmt = 'autoplot(%s)'),
+    # use generic ?ggplot2::autoplot; May dispatch to
+    # ?survival.tzh::autoplot.survfit
+    # ?rpart.tzh::autoplot.rpart
     '```'
   ) |> 
     new(Class = 'md_lines')
