@@ -48,12 +48,14 @@ units.summary.survfit <- units.survfit
 #' @export autolayer.survfit
 #' @export
 autolayer.survfit <- function(object, ...) {
-  object |> 
+  ss <- object |> 
     # summary(censored = TRUE) |> # 
     summary( # ?survival:::summary.survfit
       times = c(0, object$time) |> 
         unique.default() # more robust!!
-    ) |> 
+    ) 
+  attr(ss, which = 'units') <- attr(object, which = 'units', exact = TRUE) # have to go the silly way..
+  ss |> 
     autolayer.summary.survfit(...)
 }
 
@@ -123,7 +125,7 @@ autolayer.summary.survfit <- function(
     (if (length(labels)) scale_fill_discrete(labels = labels)),
     
     labs(
-      x = units.survfit(object) %||% 'Time',
+      x = units.summary.survfit(object) %||% 'Time',
       y = deparse1(fom[[2L]]), 
       colour = strata_nm, 
       fill = strata_nm
@@ -348,8 +350,6 @@ as_flextable.summary.survfit <- function(
       acast(formula = . ~ time, value.var = which)
   }
   
-  #cl <- x$call
-  #unt <- tryCatch(units.Surv(eval(cl$data)[[cl$formula[[2L]]]]), error = \(e) 'Time')
   unt <- units.summary.survfit(x) %||% 'Time'
   names(dimnames(z)) <- c('Strata', unt)
   
