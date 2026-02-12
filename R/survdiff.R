@@ -101,5 +101,6 @@ md_.survdiff <- function(x, xnm, ...) {
 #' 
 #' @param ... additional parameters
 #' 
+#' @keywords internal
 #' @export
 survdiff_ <- function(object, ...) UseMethod(generic = 'survdiff_')

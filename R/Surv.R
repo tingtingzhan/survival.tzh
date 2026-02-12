@@ -1,5 +1,18 @@
 
 
+#' @title `S3` Generic Function [is.Surv.endpoint()]
+#' 
+#' @description
+#' An `S3` generic function for downstream packages,
+#' to determine if an R object is a model with a \link[survival]{Surv} endpoint
+#' 
+#' @param object an R object
+#' 
+#' @keywords internal
+#' @export
+is.Surv.endpoint <- function(object) UseMethod(generic = 'is.Surv.endpoint')
+
+
 # ?survival:::duplicated.Surv is good (using ?survival:::as.matrix.Surv)
 # ?survival:::unique.Surv good
 
@@ -83,38 +96,5 @@ getTime.Surv <- function(x, type = c('event', 'censor', 'any'), ...) {
 
 
 
-
-
-
-
-#' @title Kaplan-Meier Curve of \link[survival]{Surv} Objects using \CRANpkg{ggplot2}
-#' 
-#' @description ..
-#' 
-#' @param object \link[survival]{Surv} object
-#' 
-#' @param ... ..
-#' 
-#' @importFrom ggplot2 autoplot ggplot scale_y_continuous labs
-#' @importFrom scales label_percent
-#' @export
-autoplot.Surv <- function(object, ...) {
-  
-  .Defunct(msg = 'deprecate this usage')
-  
-  nc <- dim(object)[2L]
-  cl0 <- match.call()
-  if (nc == 2L) {
-    sfit <- eval(call(name = 'survfit.formula', 
-                      formula = call(name = '~', cl0$object, 1)))
-    p <- ggplot() + 
-      autolayer.survfit(object = sfit, ...) + 
-      scale_y_continuous(labels = label_percent()) +
-      labs(x = units.Surv(object), y = deparse1(substitute(object)))
-    return(p)
-  }
-  if (nc == 3L) stop('autoplot.Surv not good for col-3 Surv object yet')
-  stop('nc > 3L')
-}
 
 

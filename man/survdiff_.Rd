@@ -14,3 +14,4 @@ survdiff_(object, ...)
 \description{
 An \code{S3} generic function for downstream packages
 }
+\keyword{internal}
