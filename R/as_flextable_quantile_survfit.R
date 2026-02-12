@@ -4,7 +4,7 @@
 #' 
 #' @description ..
 #' 
-#' @param x a \link[survival]{survfit} object
+#' @param x a \link[survival]{survfit.object}
 #' 
 #' @param ... parameters of function \link[survival]{quantile.survfit}
 #' 

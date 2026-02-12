@@ -14,7 +14,8 @@
 #' @export units.survfit
 #' @export
 units.survfit <- function(x) {
-  tryCatch(units.Surv(eval(x$call$data)[[x$call$formula[[2L]]]]), error = \(e) return(invisible()))
+  attr(x, which = 'units', exact = TRUE) %||% # brutal-but-simple for downstream packages!!
+    tryCatch(units.Surv(eval(x$call$data)[[x$call$formula[[2L]]]]), error = \(e) return(invisible()))
 }
   
 #' @rdname units_survfit
@@ -167,9 +168,9 @@ autoplot.survfit <- function(object, ...) {
 
 
 
-#' @title Sample Size of \link[survival]{survfit} Objects
+#' @title Sample Size of \link[survival]{survfit.object}
 #' 
-#' @param x a \link[survival]{survfit} or \link[survival]{summary.survfit} object
+#' @param x a \link[survival]{survfit.object} or \link[survival]{summary.survfit} object
 #' 
 #' @examples
 #' library(ecip)

@@ -7,7 +7,7 @@
 as_flextable_quantile_survfit(x, ..., fmt = "\%.1f", units = units.survfit(x))
 }
 \arguments{
-\item{x}{a \link[survival]{survfit} object}
+\item{x}{a \link[survival]{survfit.object}}
 
 \item{...}{parameters of function \link[survival]{quantile.survfit}}
 

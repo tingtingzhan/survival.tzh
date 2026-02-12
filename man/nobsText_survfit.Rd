@@ -4,17 +4,17 @@
 \alias{nobsText_survfit}
 \alias{nobsText.survfit}
 \alias{nobsText.summary.survfit}
-\title{Sample Size of \link[survival]{survfit} Objects}
+\title{Sample Size of \link[survival]{survfit.object}}
 \usage{
 \method{nobsText}{survfit}(x)
 
 \method{nobsText}{summary.survfit}(x)
 }
 \arguments{
-\item{x}{a \link[survival]{survfit} or \link[survival]{summary.survfit} object}
+\item{x}{a \link[survival]{survfit.object} or \link[survival]{summary.survfit} object}
 }
 \description{
-Sample Size of \link[survival]{survfit} Objects
+Sample Size of \link[survival]{survfit.object}
 }
 \examples{
 library(ecip)
