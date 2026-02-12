@@ -36,7 +36,7 @@ with additional time units \code{'months'} and \code{'years'}.
 Function \code{\link[=asDifftime]{asDifftime()}} improves function \link[base]{as.difftime} in terms that
 \itemize{
 \item {If input \code{tim} is a \link[base]{difftime} object,
-function \link{units_difftime<-} is called and the unit of \code{tim} is updated.
+function \link{more_units<-.difftime} is called and the unit of \code{tim} is updated.
 In function \link[base]{as.difftime}, \code{tim} is returned directly, i.e., parameter \code{units} is ignored}
 \item {Time units \code{'months'} and \code{'years'} are supported,
 in addition to \code{'secs'}, \code{'mins'}, \code{'hours'}, \code{'days'}, \code{'weeks'} supported in function \link[base]{as.difftime}.
@@ -47,6 +47,11 @@ Function \link[base]{as.difftime} does not check for negative \code{tim}.}
 }
 }
 \note{
-Potential name clash with function \link[units]{as_difftime}
+Potential name clash with function \link[units]{as_difftime}.
+}
+\seealso{
+Function \link[lubridate]{time_length},
+or \code{getMethod(f = lubridate::time_length, signature = 'Interval')},
+does not return a \link[base]{difftime} object.
 }
 \keyword{internal}

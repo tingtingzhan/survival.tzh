@@ -53,7 +53,7 @@ rotterdam2 = survival::rotterdam |>
     dtime = as.difftime(dtime, units = 'days')
     rfs = Surv(rtime, event = recur)
     os = Surv(dtime, event = death)
-    units(rfs) = units(os) = 'years'
+    more_units(rfs) = more_units(os) = 'years'
   })
 ```
 

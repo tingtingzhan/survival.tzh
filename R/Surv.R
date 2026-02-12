@@ -31,8 +31,10 @@ units.Surv <- function(x) {
 }
 
 # base::`units<-`
+#' @rdname more_units_set
+#' @export more_units<-.Surv
 #' @export
-`units<-.Surv` <- function(x, value) {
+`more_units<-.Surv` <- function(x, value) {
   y <- x
   if (length(un <- units.Surv(x))) { # nomenclature follows ?Hmisc:::units.Surv
     # only change the 'time'/'start'/'stop' column, not the 'event' column !!
@@ -44,6 +46,13 @@ units.Surv <- function(x) {
   if (length(at$time2$units)) at$time2$units <- value
   attr(y, which = 'inputAttributes') <- at
   return(y)
+}
+
+
+
+#' @export
+`units<-.Surv` <- function(x, value) {
+  .Defunct(new = 'more_units<-.Surv')
 }
 
 

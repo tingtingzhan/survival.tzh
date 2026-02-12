@@ -14,10 +14,11 @@
 #' Function [Surv_3Date()] returns a \link[survival]{Surv} object.
 #' 
 #' @examples 
-#' d1 = within(survival::udca, expr = {
+#' d1 = survival::udca |> 
+#'  within.data.frame(expr = {
 #'   edp_yr = Surv_3Date(entry.dt, death.dt, last.dt, units = 'years')
 #'   edp_mon = Surv_3Date(entry.dt, death.dt, last.dt, units = 'months') 
-#' })
+#'  })
 #' head(d1)
 #' 
 #' noout = within(survival::udca, expr = {
@@ -45,15 +46,17 @@ Surv_3Date <- function(
   censor <- as.Date(censor)
   
   stop2 <- stop - start # recycled; may have NA
-  if (any(unclass(stop2) <= 0, na.rm = TRUE)) {
+  #if (any(unclass(stop2) <= 0, na.rm = TRUE)) {
+  if (any(unclass(stop2) < 0, na.rm = TRUE)) {
     sprintf(
-      fmt = '\U0001f6d1 %s no-earlier than %s! See',
+      #fmt = '\U0001f6d1 %s no-earlier than %s! See',
+      fmt = '\U0001f6d1 %s later than %s! See',
       'START' |> col_blue() |> style_bold(),
       'STOP' |> col_red() |> style_bold()
     ) |>
       message()
     sprintf(
-      fmt = 'fastmd::subset_(, subset = %s >= %s)',
+      fmt = '|> fastmd::subset_(subset = %s >= %s)',
       start_nm, stop_nm
       ) |>
       col_magenta() |> style_bold() |>
@@ -62,15 +65,17 @@ Surv_3Date <- function(
   }
   
   censor2 <- censor - start # recycled; may have NA
-  if (any(unclass(censor2) <= 0, na.rm = TRUE)) {
+  #if (any(unclass(censor2) <= 0, na.rm = TRUE)) {
+  if (any(unclass(censor2) < 0, na.rm = TRUE)) { 
     sprintf(
-      fmt = '\U0001f6d1 %s no-earlier than %s! See',
+      #fmt = '\U0001f6d1 %s no-earlier than %s! See',
+      fmt = '\U0001f6d1 %s later than %s! See',
       'START' |> col_blue() |> style_bold(),
       'CENSOR' |> col_red() |> style_bold()
     ) |>
       message()
     sprintf(
-      fmt = 'fastmd::subset_(, subset = %s >= %s)',
+      fmt = '|> fastmd::subset_(subset = %s >= %s)',
       start_nm, censor_nm
     ) |>
       col_magenta() |> style_bold() |>
@@ -78,9 +83,8 @@ Surv_3Date <- function(
     return(invisible()) # dont stop; inspect multiple definition
   }
 
-  units <- match.arg(units, choices = names(timeUnits()))
-  units_difftime(stop2) <- units
-  units_difftime(censor2) <- units
+  more_units(stop2) <- units
+  more_units(censor2) <- units
   
   censor3 <- pmax(stop2, censor2, na.rm = TRUE) 
   # some clinicians do not know we must have `cencor >= stop`

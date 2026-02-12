@@ -23,5 +23,6 @@ Imports: methods, cli (== 3.6.5),
 Suggests: 
     coxme (== 2.2.22),
     coxphw (== 4.0.3),
+    lubridate (== 1.9.5),
     knitr, quarto, rmarkdown
 VignetteBuilder: quarto
