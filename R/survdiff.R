@@ -90,3 +90,16 @@ md_.survdiff <- function(x, xnm, ...) {
 }
 
 
+
+#' @title S3 Generic Function [survdiff_()]
+#' 
+#' @description
+#' An `S3` generic function for downstream packages
+#' 
+#' 
+#' @param object an R object
+#' 
+#' @param ... additional parameters
+#' 
+#' @export
+survdiff_ <- function(object, ...) UseMethod(generic = 'survdiff_')
