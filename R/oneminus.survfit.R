@@ -7,6 +7,7 @@
 #' 
 #' @param x ..
 #' 
+#' @keywords internal
 #' @name oneminus
 #' @export
 oneminus.survfit <- function(x) {

@@ -15,3 +15,4 @@
 \seealso{
 \link[base]{units}, \code{Hmisc:::units.Surv}
 }
+\keyword{internal}

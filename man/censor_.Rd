@@ -23,3 +23,4 @@ head(x, n = 10)
 x1 = censor_(x, censor = 400)
 head(x1, n = 10)
 }
+\keyword{internal}

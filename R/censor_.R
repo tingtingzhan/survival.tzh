@@ -16,6 +16,7 @@
 #' head(x, n = 10)
 #' x1 = censor_(x, censor = 400)
 #' head(x1, n = 10)
+#' @keywords internal
 #' @export
 censor_ <- function(x, censor) {
   if (!inherits(x, what = 'Surv')) stop('1st argument must be `Surv`')

@@ -36,3 +36,4 @@ pairwise_survfit_test(x, times = c(10, 20))
 \seealso{
 \link[stats]{pairwise.table}
 }
+\keyword{internal}

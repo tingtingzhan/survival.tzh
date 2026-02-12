@@ -67,7 +67,7 @@ nobsText.survdiff <- function(x) {
 md_.survdiff <- function(x, xnm, ...) {
   
   z1 <- sprintf(
-    fmt = '%s on the time-to-event endpoint **`%s`** is performed (%s) using <u>**`R`**</u> package <u>**`survival`**</u>.',
+    fmt = '%s on the time-to-event endpoint **`%s`** (%s) is performed using <u>**`R`**</u> package <u>**`survival`**</u>.',
     desc_survdiff_rho(x$call$rho),
     x$call$formula[[2L]] |> 
       deparse1(),

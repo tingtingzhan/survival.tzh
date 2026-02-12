@@ -14,6 +14,7 @@
 #' @seealso 
 #' \link[base]{units}, `Hmisc:::units.Surv`
 #' 
+#' @keywords internal
 #' @export units.Surv
 #' @export
 units.Surv <- function(x) {
@@ -30,7 +31,6 @@ units.Surv <- function(x) {
   return(invisible())
 }
 
-# base::`units<-`
 #' @rdname more_units_set
 #' @export more_units<-.Surv
 #' @export
@@ -49,7 +49,7 @@ units.Surv <- function(x) {
 }
 
 
-
+# base::`units<-`
 #' @export
 `units<-.Surv` <- function(x, value) {
   .Defunct(new = 'more_units<-.Surv')

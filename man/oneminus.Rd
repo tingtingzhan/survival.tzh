@@ -16,3 +16,4 @@ oneminus.summary.survfit(x)
 \description{
 One-Minus Kaplan-Meier Estimates
 }
+\keyword{internal}

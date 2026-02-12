@@ -23,6 +23,7 @@
 #' @seealso 
 #' \link[stats]{pairwise.table}
 #' 
+#' @keywords internal
 #' @export
 pairwise_survfit_test <- function(
     x, 
