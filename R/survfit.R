@@ -74,7 +74,7 @@ autolayer.survfit <- function(object, ...) {
 #' @param ... ..
 #' 
 #' @keywords internal
-#' @importFrom ggplot2 autolayer aes geom_ribbon geom_step scale_fill_discrete geom_point scale_colour_discrete
+#' @importFrom ggplot2 autolayer aes geom_ribbon geom_step scale_fill_discrete geom_point scale_colour_discrete labs
 #' @export autolayer.summary.survfit
 #' @export
 autolayer.summary.survfit <- function(
