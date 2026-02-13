@@ -28,11 +28,21 @@ units.summary.survfit <- units.survfit
   
 
 #' @rdname more_units_set
+#' @details
+#' The `S3` methods [more_units<-.survfit] and
+#' [more_units<-.summary.survfit]
+#' convert the element
+#' `$time` of the input \link[surivival]{survfit.object} or 
+#' \link[survival]{summary.survfit} object
+#' from a \link[base]{double} \link[base]{vector} into a \link[base]{difftime} object!
+#' This is extremely aggressive and can be affected by future updates of package \CRANpkg{survival}.
+#' 
 #' @returns 
 #' The `S3` method [more_units<-.survfit] returns a \link[survival]{survfit.object}.
 #' @export more_units<-.survfit
 #' @export
 `more_units<-.survfit` <- function(x, value) {
+  if (!length(value)) return(x) # exception handling
   x[['time']] <- x[['time']] |> # |> is.vector(mode = 'double')
     .difftime(units = value)
   return(x)

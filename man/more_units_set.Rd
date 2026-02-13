@@ -43,6 +43,15 @@ The \code{S3} method \link{more_units<-.summary.survfit} returns a \link[surviva
 Set \link[base]{units} of R objects,
 with additional support of \code{'months'} and \code{'years'}.
 }
+\details{
+The \code{S3} methods \link{more_units<-.survfit} and
+\link{more_units<-.summary.survfit}
+convert the element
+\verb{$time} of the input \link[surivival]{survfit.object} or
+\link[survival]{summary.survfit} object
+from a \link[base]{double} \link[base]{vector} into a \link[base]{difftime} object!
+This is extremely aggressive and can be affected by future updates of package \CRANpkg{survival}.
+}
 \examples{
 (x = Sys.Date() - as.Date('2021-01-01'))
 tryCatch(units(x) <- 'months', error = identity)
