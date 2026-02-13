@@ -14,7 +14,8 @@
 #' @export units.survfit
 #' @export
 units.survfit <- function(x) {
-  attr(x, which = 'units', exact = TRUE) %||% # brutal-but-simple for downstream packages!!
+  #attr(x, which = 'units', exact = TRUE) %||% # brutal-but-simple for downstream packages!!
+  attr(x[['time']], which = 'units', exact = TRUE) %||%
     tryCatch(units.Surv(eval(x$call$data)[[x$call$formula[[2L]]]]), error = \(e) return(invisible()))
 }
   
@@ -25,7 +26,28 @@ units.survfit <- function(x) {
 units.summary.survfit <- units.survfit
 
   
-  
+
+#' @rdname more_units_set
+#' @returns 
+#' The `S3` method [more_units<-.survfit] returns a \link[survival]{survfit.object}.
+#' @export more_units<-.survfit
+#' @export
+`more_units<-.survfit` <- function(x, value) {
+  x[['time']] <- x[['time']] |> # |> is.vector(mode = 'double')
+    .difftime(units = value)
+  return(x)
+}
+
+
+#' @rdname more_units_set
+#' @returns 
+#' The `S3` method [more_units<-.summary.survfit] returns a \link[survival]{summary.survfit} object.
+#' @method more_units<- summary.survfit
+#' @export more_units<-.summary.survfit
+#' @export
+`more_units<-.summary.survfit` <- `more_units<-.survfit`
+
+
   
   
 #' @title Layers of Kaplan-Meier Curve of \link[survival]{survfit.object} using \CRANpkg{ggplot2}
@@ -54,7 +76,8 @@ autolayer.survfit <- function(object, ...) {
       times = c(0, object$time) |> 
         unique.default() # more robust!!
     ) 
-  attr(ss, which = 'units') <- attr(object, which = 'units', exact = TRUE) # have to go the silly way..
+  #attr(ss, which = 'units') <- attr(object, which = 'units', exact = TRUE) # have to go the silly way..
+  more_units(ss) <- units.survfit(object) # `more_units<-.summary.survfit`
   ss |> 
     autolayer.summary.survfit(...)
 }

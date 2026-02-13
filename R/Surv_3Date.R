@@ -16,8 +16,8 @@
 #' @examples 
 #' d1 = survival::udca |> 
 #'  within.data.frame(expr = {
-#'   edp_yr = Surv_3Date(entry.dt, death.dt, last.dt, units = 'years')
-#'   edp_mon = Surv_3Date(entry.dt, death.dt, last.dt, units = 'months') 
+#'   os_yr = Surv_3Date(entry.dt, death.dt, last.dt, units = 'years')
+#'   os_mon = Surv_3Date(entry.dt, death.dt, last.dt, units = 'months') 
 #'  })
 #' head(d1)
 #' 

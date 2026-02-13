@@ -45,6 +45,8 @@ units.Surv <- function(x) {
 }
 
 #' @rdname more_units_set
+#' @returns 
+#' The `S3` method [more_units<-.Surv] returns a \link[survival]{Surv} object.
 #' @export more_units<-.Surv
 #' @export
 `more_units<-.Surv` <- function(x, value) {
