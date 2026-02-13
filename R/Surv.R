@@ -53,8 +53,13 @@ units.Surv <- function(x) {
   y <- x
   if (length(un <- units.Surv(x))) { # nomenclature follows ?Hmisc:::units.Surv
     # only change the 'time'/'start'/'stop' column, not the 'event' column !!
-    nc <- dim(unclass(x))[2L]
-    y[,-nc] <- as.double(asDifftime(asDifftime(x[,-nc], units = un), units = value))
+    nc <- x |>
+      unclass() |>
+      ncol()
+    y[,-nc] <- x[,-nc] |>
+      asDifftime(units = un) |>
+      asDifftime(units = value) |>
+      as.double()
   }
   at <- attr(y, which = 'inputAttributes', exact = TRUE)
   at$time$units <- value 

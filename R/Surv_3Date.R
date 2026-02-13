@@ -17,14 +17,13 @@
 #' d1 = survival::udca |> 
 #'  within.data.frame(expr = {
 #'   os_yr = Surv_3Date(entry.dt, death.dt, last.dt, units = 'years')
-#'   os_mon = Surv_3Date(entry.dt, death.dt, last.dt, units = 'months') 
+#'   os_mon = os_yr; more_units(os_mon) = 'months'
 #'  })
 #' head(d1)
 #' 
 #' noout = within(survival::udca, expr = {
 #'   edp_bug = Surv_3Date(entry.dt, death.dt, as.Date('1991-01-01'), units = 'months') 
 #' })
-#' subset(survival::udca, subset = entry.dt > as.Date('1991-01-01')) # check error as suggested
 #' 
 #' @keywords internal
 #' @export
