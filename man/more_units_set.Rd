@@ -47,7 +47,7 @@ with additional support of \code{'months'} and \code{'years'}.
 The \code{S3} methods \link{more_units<-.survfit} and
 \link{more_units<-.summary.survfit}
 convert the element
-\verb{$time} of the input \link[surivival]{survfit.object} or
+\verb{$time} of the input \link[survival]{survfit.object} or
 \link[survival]{summary.survfit} object
 from a \link[base]{double} \link[base]{vector} into a \link[base]{difftime} object!
 This is extremely aggressive and can be affected by future updates of package \CRANpkg{survival}.
