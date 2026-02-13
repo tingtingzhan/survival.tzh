@@ -4,11 +4,11 @@ desc_survdiff_rho <- function(rho, ...) {
   if (missing(rho) || is.null(rho) || (rho == 0)) {
     # see ?survival::survdiff and ?coin::logrank_test
     # 'Log-rank [unweighted]' # 'Logrank [Mantel-Cox]' # 'hypergeometric variance'
-    'Log-rank test'
+    '[Log-rank test](https://en.wikipedia.org/wiki/Logrank_test)'
   } else if (rho == 1) {
-    'Peto-Gehan-Wilcoxon test'
+    '@Petos72\'s modification of @Gehan65 test'
   } else {
-    'G-rho family of tests'
+    '@HarringtonFleming82 $G^{\\rho,\\gamma}$ family of tests'
   }
 }
 
@@ -19,7 +19,7 @@ desc_survdiff_rho <- function(rho, ...) {
 #' @param x a \link[survival]{survdiff} object
 #' 
 #' @note
-#' Function `?broom:::nobs.survdiff` (2024-09-26) is **WRONG**.
+#' The `S3` method `broom:::nobs.survdiff()` (2026-01-26) is **WRONG**.
 #' 
 #' @examples
 #' m = survdiff(Surv(futime, fustat) ~ rx, data = ovarian) 
@@ -36,7 +36,7 @@ nobsText.survdiff <- function(x) {
 }
 
 
-#' @name S3_survdiff
+#' @rdname S3_survdiff
 #' @importFrom ecip .pval
 #' @export .pval.survdiff
 #' @export
@@ -45,7 +45,7 @@ nobsText.survdiff <- function(x) {
 
 
 
-#' @title [md_.survdiff]
+#' @title Fast Markdown Lines for \link[survival]{survdiff} Object
 #' 
 #' @description ..
 #' 
@@ -67,14 +67,23 @@ nobsText.survdiff <- function(x) {
 md_.survdiff <- function(x, xnm, ...) {
   
   z1 <- sprintf(
-    fmt = '%s on the time-to-event endpoint **`%s`** (%s) is performed using <u>**`R`**</u> package <u>**`survival`**</u>.',
+    fmt = '%s on the time-to-event endpoint **`%s`** by %s (%s) is performed using <u>**`R`**</u> package <u>**`survival`**</u>.',
     desc_survdiff_rho(x$call$rho),
     x$call$formula[[2L]] |> 
       deparse1(),
-    x$pvalue |>
+    x$call$formula[[3L]] |>
+      all.vars() |>
+      sprintf(fmt = '`%s`') |>
+      paste(collapse = ', '),
+    x |>
+      .pval.survdiff() |>
       label_pvalue_sym(add_p = TRUE)()
   ) |>
-    new(Class = 'md_lines', package = 'survival')
+    new(Class = 'md_lines', package = 'survival', bibentry = c(
+      .harrington_fleming82(),
+      .petos72(),
+      .gehan65()
+    ))
   
   z2 <- c(
     '```{r}',
@@ -99,7 +108,12 @@ md_.survdiff <- function(x, xnm, ...) {
 #' 
 #' @param object an R object
 #' 
-#' @param ... additional parameters
+#' @param ... additional parameters of the workhorse function \link[survival]{survdiff}
+#' 
+#' @details
+#' The `S3` methods of the generic function [survdiff_()]
+#' applies the workhorse function \link[survival]{survdiff} to different R objects
+#' 
 #' 
 #' @keywords internal
 #' @export

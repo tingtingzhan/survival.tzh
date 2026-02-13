@@ -9,9 +9,13 @@ survdiff_(object, ...)
 \arguments{
 \item{object}{an R object}
 
-\item{...}{additional parameters}
+\item{...}{additional parameters of the workhorse function \link[survival]{survdiff}}
 }
 \description{
 An \code{S3} generic function for downstream packages
+}
+\details{
+The \code{S3} methods of the generic function \code{\link[=survdiff_]{survdiff_()}}
+applies the workhorse function \link[survival]{survdiff} to different R objects
 }
 \keyword{internal}

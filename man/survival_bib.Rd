@@ -6,6 +6,9 @@
 \alias{.cox72}
 \alias{.ripatti04}
 \alias{.therneau03}
+\alias{.harrington_fleming82}
+\alias{.petos72}
+\alias{.gehan65}
 \title{\link[utils]{bibentry} for Survival Analysis}
 \usage{
 .kaplan_meier58(key = "KaplanMeier58", ...)
@@ -15,6 +18,12 @@
 .ripatti04(key = "Ripatti04", ...)
 
 .therneau03(key = "Therneau03", ...)
+
+.harrington_fleming82(key = "HarringtonFleming82", ...)
+
+.petos72(key = "Petos72", ...)
+
+.gehan65(key = "Gehan65", ...)
 }
 \arguments{
 \item{key, ...}{parameters of function \link[utils]{bibentry}}

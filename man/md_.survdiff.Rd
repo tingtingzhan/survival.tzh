@@ -2,7 +2,7 @@
 % Please edit documentation in R/survdiff.R
 \name{md_.survdiff}
 \alias{md_.survdiff}
-\title{\link{md_.survdiff}}
+\title{Fast Markdown Lines for \link[survival]{survdiff} Object}
 \usage{
 \method{md_}{survdiff}(x, xnm, ...)
 }

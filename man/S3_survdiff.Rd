@@ -17,7 +17,7 @@
 S3 Methods \link[survival]{survdiff} Object
 }
 \note{
-Function \code{?broom:::nobs.survdiff} (2024-09-26) is \strong{WRONG}.
+The \code{S3} method \code{broom:::nobs.survdiff()} (2026-01-26) is \strong{WRONG}.
 }
 \examples{
 m = survdiff(Surv(futime, fustat) ~ rx, data = ovarian) 
