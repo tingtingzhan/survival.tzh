@@ -282,6 +282,7 @@ md_.survfit <- function(x, xnm, ...) {
     '```{r}',
     '#| echo: false', 
     '#| warning: false', 
+    '#| message: false', 
     '#| dev: \'ragg_png\'', # unicode support for \pkg{rpart.tzh}
     x |>
       attr(which = 'fig-height', exact = TRUE) |> 
