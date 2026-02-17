@@ -182,7 +182,7 @@ autoplot(s) +
 #| eval: false
 #| echo: false
 list(survfitlist = s) |>
-  fastmd::render_(file = 'survfitlist')
+  fastmd::render2html(file = 'survfitlist')
 ```
 
 

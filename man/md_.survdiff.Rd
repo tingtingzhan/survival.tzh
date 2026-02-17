@@ -19,6 +19,6 @@
 \examples{
 list(
  logrank = survdiff(Surv(time, status) ~ x, data = aml)
-) |> fastmd::render_(file = 'logrank')
+) |> fastmd::render2html(file = 'logrank')
 }
 \keyword{internal}

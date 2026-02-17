@@ -58,7 +58,7 @@ nobsText.survdiff <- function(x) {
 #' @examples
 #' list(
 #'  logrank = survdiff(Surv(time, status) ~ x, data = aml)
-#' ) |> fastmd::render_(file = 'logrank')
+#' ) |> fastmd::render2html(file = 'logrank')
 #' @keywords internal
 #' @importClassesFrom fastmd md_lines
 #' @importFrom fastmd md_ label_pvalue_sym
