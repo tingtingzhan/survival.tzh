@@ -278,7 +278,6 @@ md_.survfit <- function(x, xnm, ...) {
   
   z3 <- c(
     '```{r}',
-    # '#| dev: \'ragg_png\'', # unicode support for \pkg{rpart.tzh}
     x |>
       attr(which = 'fig-height', exact = TRUE) |> 
       sprintf(fmt = '#| fig-height: %.1f'),
