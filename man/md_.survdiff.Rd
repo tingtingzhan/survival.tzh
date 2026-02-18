@@ -18,7 +18,8 @@
 }
 \examples{
 list(
- logrank = survdiff(Surv(time, status) ~ x, data = aml)
+ logrank = survdiff(Surv(time, status) ~ x, data = aml),
+ 'logrank, $\\\\rho=1$' = survdiff(Surv(time, status) ~ x, data = aml, rho = 1)
 ) |> fastmd::render2html(file = 'logrank')
 }
 \keyword{internal}

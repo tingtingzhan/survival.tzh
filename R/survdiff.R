@@ -57,7 +57,8 @@ nobsText.survdiff <- function(x) {
 #' 
 #' @examples
 #' list(
-#'  logrank = survdiff(Surv(time, status) ~ x, data = aml)
+#'  logrank = survdiff(Surv(time, status) ~ x, data = aml),
+#'  'logrank, $\\rho=1$' = survdiff(Surv(time, status) ~ x, data = aml, rho = 1)
 #' ) |> fastmd::render2html(file = 'logrank')
 #' @keywords internal
 #' @importClassesFrom fastmd md_lines
@@ -65,6 +66,8 @@ nobsText.survdiff <- function(x) {
 #' @export md_.survdiff
 #' @export
 md_.survdiff <- function(x, xnm, ...) {
+  
+  rho <- x$call$rho %||% 0
   
   z1 <- sprintf(
     fmt = '%s on the time-to-event endpoint **`%s`** by %s (%s) is performed using <u>**`R`**</u> package <u>**`survival`**</u>.',
@@ -79,11 +82,11 @@ md_.survdiff <- function(x, xnm, ...) {
       .pval.survdiff() |>
       label_pvalue_sym(add_p = TRUE)()
   ) |>
-    new(Class = 'md_lines', package = 'survival', bibentry = c(
-      .harrington_fleming82(),
-      .petos72(),
-      .gehan65()
-    ))
+    new(Class = 'md_lines', package = 'survival', bibentry = if (rho == 1) {
+      c(.petos72(), .gehan65())
+    } else if ((rho > 0) && (rho < 1)) {
+      .harrington_fleming82()
+    } else bibentry())
   
   z2 <- if (!missing(xnm)) {
     md_.default(x, xnm = xnm, ...)
