@@ -44,49 +44,16 @@ as_flextable_quantile_survfit <- function(
   
   if (!inherits(x, what = 'survfit')) stop('input must be survfit object')
   
-  # max time, when median survival is not available
   nstrata <- length(x$strata)
-  max_tm <- if (nstrata) {
-    xs <- summary(x, censored = TRUE)
-    xs$time |> 
-      split.default(f = xs$strata) |>
-      vapply(FUN = max, FUN.VALUE = 0) |> 
-      tcrossprod(y = rep(1, length = nstrata))
-  } else max(x$time)
-  
-  q. <- quantile(x, ...) 
+
+  q. <- x |>
+    quantile(...) |>
   # ?survival:::quantile.survfit # 2026-01-09
   # it seems the confidence level (95%) is hard coded
-  
-  qq <- q.[['quantile']] 
-  qq[!is.na(qq)] <- qq[!is.na(qq)] |>
-    sprintf(fmt = fmt) # unestimable quantile is '>max_time'
-  qq[is.na(qq)] <- max_tm[is.na(qq)] |>
-    sprintf(fmt = paste0('>', fmt)) # unestimable quantile is '>max_time'
-  
-  l <- q.[['lower']]
-  l[is.na(l)] <- 0 # unestimable LCL is 0
-  
-  u <- q.[['upper']]
-  u[!is.na(u)] <- u[!is.na(u)] |>
-    sprintf(fmt = fmt)
-  u[is.na(u)] <- '\u221e' # unestimable UCL is Inf
+    sprintf_quantile_survfit(fmt = fmt)
   
   z <- q.[['quantile']]
-  storage.mode(z) <- 'character'
-  if (is.matrix(z)) {
-    colnames(z) <- colnames(z) |>
-      sprintf(fmt = '%s%% Observed') # ?survival:::quantile.survfit does not take care of this ..
-  } else {
-    names(z) <- names(z) |>
-      sprintf(fmt = '%s%% Observed') # ?survival:::quantile.survfit does not take care of this ..
-  }
-  
-  z[] <- sprintf(
-    fmt = paste0('%s (', fmt, ', ', '%s)'),
-    qq,
-    l, u
-  )
+  z[] <- sprintf(fmt = '%s (%s, %s)', q.[['quantile']], q.[['lower']], q.[['upper']])
   
   if (!is.matrix(z)) {
     z <- z |>
@@ -102,8 +69,47 @@ as_flextable_quantile_survfit <- function(
     paste0(.x = _, '95% Confidence Interval) at Percentage Event-Observed')
   
   z |> 
-    as_flextable.matrix(row.title = 'Strata') |> 
+    as_flextable.matrix(row.title = deparse1(x$call$formula[[2L]])) |> 
     color(i = seq_len(nstrata), color = if (nstrata) pal_hue()(n = nstrata), part = 'body') |>
     set_caption(caption = table_caption)
   
 }
+
+
+
+
+sprintf_quantile_survfit <- \(fmt, x, ...) {
+  
+  # `x` is the return of ?survival:::quantile.survfit
+  
+  z <- x
+  
+  q. <- x[['quantile']] 
+  q.[!is.na(q.)] <- q.[!is.na(q.)] |>
+    sprintf(fmt = fmt)
+  q.[is.na(q.)] <- '> max.fu'
+  if (is.matrix(q.)) {
+    colnames(q.) <- colnames(q.) |>
+      sprintf(fmt = '%s%% Observed') # ?survival:::quantile.survfit does not take care of this ..
+  } else {
+    names(q.) <- names(q.) |>
+      sprintf(fmt = '%s%% Observed') # ?survival:::quantile.survfit does not take care of this ..
+  }
+  z[['quantile']] <- q.
+  
+  l <- x[['lower']]
+  l[is.na(l)] <- 0 # unestimable LCL is 0
+  l[] <- l |> 
+    sprintf(fmt = fmt)
+  z[['lower']] <- l
+  
+  u <- x[['upper']]
+  u[!is.na(u)] <- u[!is.na(u)] |>
+    sprintf(fmt = fmt)
+  u[is.na(u)] <- '\u221e' # unestimable UCL is Inf
+  z[['upper']] <- u
+  
+  return(z)
+  
+}
+

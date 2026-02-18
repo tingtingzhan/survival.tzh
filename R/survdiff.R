@@ -61,7 +61,7 @@ nobsText.survdiff <- function(x) {
 #' ) |> fastmd::render2html(file = 'logrank')
 #' @keywords internal
 #' @importClassesFrom fastmd md_lines
-#' @importFrom fastmd md_ label_pvalue_sym
+#' @importFrom fastmd md_ md_.default label_pvalue_sym
 #' @export md_.survdiff
 #' @export
 md_.survdiff <- function(x, xnm, ...) {
@@ -85,14 +85,9 @@ md_.survdiff <- function(x, xnm, ...) {
       .gehan65()
     ))
   
-  z2 <- c(
-    '```{r}',
-    '#| echo: false', 
-    '#| comment: ',
-    xnm,
-    '```'
-  ) |> 
-    new(Class = 'md_lines')
+  z2 <- if (!missing(xnm)) {
+    md_.default(x, xnm = xnm, ...)
+  } # else NULL
   
   c(z1, z2) # ?fastmd::c.md_lines
   

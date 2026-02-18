@@ -270,8 +270,6 @@ md_.survfit <- function(x, xnm, ...) {
   
   z2 <- c(
     '```{r}',
-    '#| echo: false', 
-    '#| comment: ',
     xnm |> 
       sprintf(fmt = 'as_flextable_quantile_survfit(%s)'),
     '```'
@@ -280,10 +278,7 @@ md_.survfit <- function(x, xnm, ...) {
   
   z3 <- c(
     '```{r}',
-    '#| echo: false', 
-    '#| warning: false', 
-    '#| message: false', 
-    '#| dev: \'ragg_png\'', # unicode support for \pkg{rpart.tzh}
+    # '#| dev: \'ragg_png\'', # unicode support for \pkg{rpart.tzh}
     x |>
       attr(which = 'fig-height', exact = TRUE) |> 
       sprintf(fmt = '#| fig-height: %.1f'),
@@ -326,7 +321,6 @@ md_.summary.survfit <- function(x, xnm, ...) {
   
   c(
     '```{r}',
-    '#| echo: false', 
     xnm |> 
       sprintf(fmt = '%s |> as_flextable.summary.survfit(which = \'surv\')'), 
     '```'

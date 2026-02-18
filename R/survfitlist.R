@@ -153,16 +153,20 @@ autoplot.survfitlist <- function(object, ...) {
 #' @export
 md_.survfitlist <- function(x, xnm, ...) {
   
-  z1 <- x[[1L]]$call$formula[[2L]] |> 
-    deparse1() |> 
-    sprintf(fmt = '@KaplanMeier58 estimates and curves of time-to-event endpoint **`%s`** are obtained using <u>**`R`**</u> package <u>**`survival`**</u>.') |>
+  z1 <- x |> 
+    vapply(FUN = \(i) {
+      i$call$formula[[2L]] |>
+        deparse1()
+    }, FUN.VALUE = '') |>
+    unique.default() |>
+    sprintf(fmt = '**`%s`**') |>
+    paste(collapse = ', ') |>
+    sprintf(fmt = '@KaplanMeier58 estimates and curves of time-to-event endpoint(s) %s are obtained using <u>**`R`**</u> package <u>**`survival`**</u>.') |>
     new(Class = 'md_lines', package = 'survival', bibentry = .kaplan_meier58())
   
   z2 <- c(
     '<details><summary>Survival Stats</summary>',
     '```{r}',
-    '#| echo: false', 
-    '#| comment: ',
     xnm |> 
       sprintf(fmt = 'tmp <- lapply(%s, FUN = \\(i) { i$call <- NULL; return(i) })'), # see ?survival:::print.survfit
     'tmp',
@@ -176,7 +180,6 @@ md_.survfitlist <- function(x, xnm, ...) {
     
   z3 <- c(
     '```{r}',
-    '#| echo: false', 
     fig.height |> 
       sprintf(fmt = '#| fig-height: %.1f'),
     fig.width |> 
