@@ -293,14 +293,10 @@ md_.survfit <- function(x, xnm, ...) {
 #' 
 #' @keywords internal
 #' @importClassesFrom fastmd md_lines  
-#' @importFrom fastmd md_
+#' @importFrom fastmd md_ md_flextable_
 #' @export md_.summary.survfit
 #' @export
-md_.summary.survfit <- function(x, xnm, ...) {
-  xnm |> 
-    sprintf(fmt = '%s |> as_flextable.summary.survfit(which = \'surv\')') |> 
-    new(Class = 'md_lines', chunk.r = TRUE)
-}
+md_.summary.survfit <- md_flextable_ 
 
 
 
@@ -325,7 +321,7 @@ md_.summary.survfit <- function(x, xnm, ...) {
 #' @export
 as_flextable.summary.survfit <- function(
     x, 
-    which = c('n.risk', 'surv'), 
+    which = c('surv', 'n.risk'), 
     ...
 ) {
   

@@ -4,7 +4,7 @@
 \alias{as_flextable.summary.survfit}
 \title{Convert \link[survival]{summary.survfit} Object to \link[flextable]{flextable}}
 \usage{
-\method{as_flextable}{summary.survfit}(x, which = c("n.risk", "surv"), ...)
+\method{as_flextable}{summary.survfit}(x, which = c("surv", "n.risk"), ...)
 }
 \arguments{
 \item{x}{a \link[survival]{summary.survfit} object}
