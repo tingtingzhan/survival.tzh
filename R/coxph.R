@@ -55,7 +55,7 @@ estnm.coxph <- function(x) 'Hazards\ Ratio'
 #'  coxph(formula = Surv(futime, fustat) ~ age + ecog.ps)
 #' 
 #' library(ecip); 
-#' list('`coxph`' = m) |> fastmd::render2html(file = 'coxph')
+#' list('`coxph`' = m) |> fastmd::render2html()
 #' 
 #' @keywords internal
 #' @importFrom fastmd md_

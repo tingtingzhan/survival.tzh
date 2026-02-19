@@ -26,7 +26,7 @@ d1 = survival::udca |>
   os_mon = os_yr; more_units(os_mon) = 'months'
  })
 head(d1)
-list(os_yr = survfit(os_yr ~ stage, data = d1)) |> fastmd::render2html(file = 'udca')
+list(os_yr = survfit(os_yr ~ stage, data = d1)) |> fastmd::render2html()
 
 noout = within(survival::udca, expr = {
   edp_bug = Surv_3Date(entry.dt, death.dt, as.Date('1991-01-01'), units = 'months') 
