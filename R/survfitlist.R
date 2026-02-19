@@ -148,7 +148,7 @@ autoplot.survfitlist <- function(object, ...) {
 #' 
 #' @keywords internal
 #' @importClassesFrom fastmd md_lines  
-#' @importFrom fastmd md_
+#' @importFrom fastmd md_ md_autoplot_
 #' @export md_.survfitlist
 #' @export
 md_.survfitlist <- function(x, xnm, ...) {
@@ -165,37 +165,28 @@ md_.survfitlist <- function(x, xnm, ...) {
     new(Class = 'md_lines', package = 'survival', bibentry = .kaplan_meier58())
   
   z2 <- c(
-    '<details><summary>Survival Stats</summary>',
     '```{r}',
     xnm |> 
-      sprintf(fmt = 'tmp <- lapply(%s, FUN = \\(i) { i$call <- NULL; return(i) })'), # see ?survival:::print.survfit
-    'tmp',
-    '```',
-    '</details>'
-  ) |> 
-    new(Class = 'md_lines')
-  
-  fig.height <- attr(x, which = 'fig-height', exact = TRUE) %||% (ceiling(length(x)/2) * 3.5)
-  fig.width <- attr(x, which = 'fig-width', exact = TRUE) %||% 10
-    
-  z3 <- c(
-    '```{r}',
-    fig.height |> 
-      sprintf(fmt = '#| fig-height: %.1f'),
-    fig.width |> 
-      sprintf(fmt = '#| fig-width: %.1f'),
-    
-    xnm |> sprintf(fmt = 'autoplot.survfitlist(%s) + patchwork::plot_layout(ncol = 2L)'),
+      sprintf(fmt = 'as_flextable_quantile_survfitlist(%s)'),
     '```'
   ) |> 
     new(Class = 'md_lines')
+  
+  z3 <- md_autoplot_(x = x, xnm = xnm, ..., fig.height = ceiling(length(x)/2) * 3.5, fig.width = 10)
   
   c(z1, z2, z3) # ?fastmd::c.md_lines
   
 }
 
 
-
+#' @importFrom flextable wrap_flextable
+as_flextable_quantile_survfitlist <- \(x, ...) {
+  x |> 
+    lapply(FUN = as_flextable_quantile_survfit) |>
+    lapply(FUN = wrap_flextable) |>
+    Reduce(f = `+`) + 
+    plot_layout(ncol = 1L) # ?patchwork::plot_layout
+}
 
 
 

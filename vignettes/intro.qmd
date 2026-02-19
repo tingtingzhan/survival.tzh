@@ -45,7 +45,7 @@ theme_minimal() |>
 # Data Example
 
 ```{r}
-rotterdam2 = survival::rotterdam |> 
+rotterdam = survival::rotterdam |> 
   within.data.frame(expr = {
     menopausal = ifelse(meno, yes = 'post', no = 'pre')
     rtime = as.difftime(rtime, units = 'days')
@@ -71,7 +71,7 @@ The `S3` methods for `'summary.survfit'` object
 ## No Strata
 
 ```{r}
-(s0 = survfit(os ~ 1, data = rotterdam2))
+(s0 = survfit(os ~ 1, data = rotterdam))
 ```
 
 ```{r}
@@ -100,7 +100,7 @@ ss0 |>
 ## One Strata
 
 ```{r}
-(s1 = survfit(os ~ size, data = rotterdam2))
+(s1 = survfit(os ~ size, data = rotterdam))
 ```
 
 
@@ -132,7 +132,7 @@ ss1 |>
 ## Multiple Stratum
 
 ```{r}
-(s2 = survfit(os ~ size + meno, data = rotterdam2))
+(s2 = survfit(os ~ size + meno, data = rotterdam))
 ```
 
 ```{r}
@@ -157,14 +157,14 @@ Function `subset_survfit()` applies function `survival::survfit()` to multiple s
 ```{r}
 s = subset_survfit(os ~ size, subset = list(
   All = TRUE, pre = (menopausal == 'pre'), post = (menopausal == 'post')
-), data = rotterdam2)
+), data = rotterdam)
 ```
 
 ```{r}
 id = quote(list(
   All = TRUE, pre = (menopausal == 'pre'), post = (menopausal == 'post')
 ))
-s1 = subset_survfit(os ~ size, subset = id, data = rotterdam2)
+s1 = subset_survfit(os ~ size, subset = id, data = rotterdam)
 stopifnot(identical(s, s1))
 ```
 
@@ -192,7 +192,7 @@ list(survfitlist = s) |>
 Function `msurvfit()` applies function `survival::survfit()` to multiple endpoints.
 
 ```{r}
-m = msurvfit(c(rfs, os) ~ menopausal, data = rotterdam2)
+m = msurvfit(c(rfs, os) ~ menopausal, data = rotterdam)
 ```
 
 The `S3` method `autoplot.survfitlist()` ..

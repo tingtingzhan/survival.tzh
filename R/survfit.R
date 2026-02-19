@@ -258,7 +258,7 @@ nobsText.summary.survfit <- nobsText.survfit
 #' ) |> fastmd::render2html(file = 'survfit')
 #' @keywords internal
 #' @importClassesFrom fastmd md_lines  
-#' @importFrom fastmd md_
+#' @importFrom fastmd md_ md_autoplot_
 #' @export md_.survfit
 #' @export
 md_.survfit <- function(x, xnm, ...) {
@@ -276,23 +276,7 @@ md_.survfit <- function(x, xnm, ...) {
   ) |> 
     new(Class = 'md_lines')
   
-  z3 <- c(
-    '```{r}',
-    x |>
-      attr(which = 'fig-height', exact = TRUE) |> 
-      sprintf(fmt = '#| fig-height: %.1f'),
-    x |>
-      attr(which = 'fig-width', exact = TRUE) |> 
-      sprintf(fmt = '#| fig-width: %.1f'),
-    
-    #xnm |> sprintf(fmt = 'autoplot.survfit(%s)'),
-    xnm |> sprintf(fmt = 'autoplot(%s)'),
-    # use generic ?ggplot2::autoplot; May dispatch to
-    # ?survival.tzh::autoplot.survfit
-    # ?rpart.tzh::autoplot.rpart
-    '```'
-  ) |> 
-    new(Class = 'md_lines')
+  z3 <- md_autoplot_(x = x, xnm = xnm, ...)
   
   c(z1, z2, z3) # ?fastmd::c.md_lines
   
