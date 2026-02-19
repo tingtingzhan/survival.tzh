@@ -281,20 +281,7 @@ md_.survfit <- function(x, xnm, ...) {
 
 
 
-#' @title Fast Markdown Lines for \link[survival]{summary.survfit} Object
-#' 
-#' @description ..
-#' 
-#' @param x a \link[survival]{summary.survfit} object
-#' 
-#' @param xnm ..
-#'  
-#' @param ... ..
-#' 
-#' @keywords internal
-#' @importClassesFrom fastmd md_lines  
 #' @importFrom fastmd md_ md_flextable_
-#' @export md_.summary.survfit
 #' @export
 md_.summary.survfit <- md_flextable_ 
 
