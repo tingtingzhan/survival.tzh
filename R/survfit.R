@@ -268,13 +268,9 @@ md_.survfit <- function(x, xnm, ...) {
     sprintf(fmt = '@KaplanMeier58 estimates and curves of the time-to-event endpoint **`%s`** are obtained using <u>**`R`**</u> package <u>**`survival`**</u>.') |>
     new(Class = 'md_lines', package = 'survival', bibentry = .kaplan_meier58())
   
-  z2 <- c(
-    '```{r}',
-    xnm |> 
-      sprintf(fmt = 'as_flextable_quantile_survfit(%s)'),
-    '```'
-  ) |> 
-    new(Class = 'md_lines')
+  z2 <- xnm |> 
+    sprintf(fmt = 'as_flextable_quantile_survfit(%s)') |> 
+    new(Class = 'md_lines', chunk.r = TRUE)
   
   z3 <- md_autoplot_(x = x, xnm = xnm, ...)
   
@@ -301,15 +297,9 @@ md_.survfit <- function(x, xnm, ...) {
 #' @export md_.summary.survfit
 #' @export
 md_.summary.survfit <- function(x, xnm, ...) {
-  
-  c(
-    '```{r}',
-    xnm |> 
-      sprintf(fmt = '%s |> as_flextable.summary.survfit(which = \'surv\')'), 
-    '```'
-  ) |> 
-    new(Class = 'md_lines')
-  
+  xnm |> 
+    sprintf(fmt = '%s |> as_flextable.summary.survfit(which = \'surv\')') |> 
+    new(Class = 'md_lines', chunk.r = TRUE)
 }
 
 
