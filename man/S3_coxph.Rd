@@ -22,4 +22,16 @@
 \description{
 S3 methods of \link[survival]{coxph}
 }
+\examples{
+# ?survival::cox.zph
+m = ovarian |>
+ within.data.frame(expr = {
+  ecog.ps = factor(ecog.ps)
+ }) |>
+ coxph(formula = Surv(futime, fustat) ~ age + ecog.ps)
+
+library(ecip); 
+list('`coxph`' = m) |> fastmd::render2html()
+
+}
 \keyword{internal}

@@ -3,6 +3,17 @@
 #' 
 #' @param x an \link[survival]{coxph} object  
 #' 
+#' @examples
+#' # ?survival::cox.zph
+#' m = ovarian |>
+#'  within.data.frame(expr = {
+#'   ecog.ps = factor(ecog.ps)
+#'  }) |>
+#'  coxph(formula = Surv(futime, fustat) ~ age + ecog.ps)
+#' 
+#' library(ecip); 
+#' list('`coxph`' = m) |> fastmd::render2html()
+#' 
 #' @name S3_coxph
 #' @keywords internal
 #' @importFrom ecip nobsText
@@ -42,25 +53,8 @@ estnm.coxph <- function(x) 'Hazards\ Ratio'
 } 
 
 
-#' @title R Markdown Lines for \link[survival]{coxph}
-#' 
-#' @param x,xnm,... ..
-#' 
-#' @examples
-#' ?survival::cox.zph
-#' m = ovarian |>
-#'  within.data.frame(expr = {
-#'   ecog.ps = factor(ecog.ps)
-#'  }) |>
-#'  coxph(formula = Surv(futime, fustat) ~ age + ecog.ps)
-#' 
-#' library(ecip); 
-#' list('`coxph`' = m) |> fastmd::render2html()
-#' 
-#' @keywords internal
 #' @importFrom fastmd md_
 #' @importFrom ecip md_ecip
-#' @export md_.coxph
 #' @export
 md_.coxph <- md_ecip
 
