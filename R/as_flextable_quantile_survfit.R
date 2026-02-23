@@ -33,7 +33,6 @@
 #' 
 #' @keywords internal
 #' @importFrom fastmd as_flextable.matrix
-#' @importFrom flextable color
 #' @importFrom scales pal_hue
 #' @export
 as_flextable_quantile_survfit <- function(

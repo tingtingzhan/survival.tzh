@@ -79,7 +79,7 @@ subset_survfit <- function(formula, subset, data, ...) {
   nr <- d_call |>
     vapply(FUN = \(d.) {
       eval(d.) |> 
-        .row_names_info(type = 2L)
+        nrow()
     }, FUN.VALUE = NA_integer_)
   
   s <- d_call |>
@@ -175,7 +175,6 @@ md_.survfitlist <- function(x, xnm, ...) {
 }
 
 
-#' @importFrom flextable wrap_flextable
 as_flextable_quantile_survfitlist <- \(x, ...) {
   x |> 
     lapply(FUN = as_flextable_quantile_survfit) |>

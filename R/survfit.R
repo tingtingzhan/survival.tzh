@@ -300,7 +300,6 @@ md_.summary.survfit <- md_flextable_
 #' @param ... ..
 #' 
 #' @keywords internal
-#' @importFrom flextable as_flextable color set_caption
 #' @importFrom fastmd as_flextable.matrix
 #' @importFrom reshape2 acast dcast
 #' @importFrom scales pal_hue

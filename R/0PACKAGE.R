@@ -1,7 +1,9 @@
 
 
 #' @import cli
+#' @import flextable
 #' @import patchwork
+#' 
 #' @import survival
 #' 
 #' @import stats
