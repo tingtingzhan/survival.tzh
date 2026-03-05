@@ -1,24 +1,25 @@
 
 
-#' @title Additional S3 methods for \link[survival]{clogit} Objects
-#' 
-#' @param x \link[survival]{clogit} object
+#' @title \link[survival]{clogit} Objects
 #' 
 #' @examples
 #' # see ?survival::clogit
-#' data(logan, package = 'survival')
-#' resp = levels(logan$occupation)
+#' resp = levels(survival::logan$occupation)
 #' n = nrow(logan)
 #' indx = rep(1:n, length(resp))
 #' logan2 = data.frame(logan[indx,], id = indx, tocc = factor(rep(resp, each=n)))
 #' logan2$case = (logan2$occupation == logan2$tocc)
-#' (m = clogit(case ~ tocc + tocc:education + strata(id), data = logan2))
-#' endpoint.clogit(m)
+#' m = clogit(case ~ tocc + tocc:education + strata(id), data = logan2)
+#' library(ecip); list(
+#'  '`clogit`' = m
+#' ) |> fastmd::render2html()
 #' 
-#' @name clogit_S3
-#' @keywords internal
+#' @name clogit
+NULL
+
+
+
 #' @importFrom ecip endpoint endpoint.formula
-#' @export endpoint.clogit  
 #' @export
 endpoint.clogit <- function(x) {
   # do not use ?tzh::endpoint.default
@@ -31,16 +32,12 @@ endpoint.clogit <- function(x) {
 }
 
 
-#' @rdname clogit_S3
 #' @importFrom ecip estnm
-#' @export estnm.clogit
 #' @export
 estnm.clogit <- function(x) 'Odds\ Ratio'
 
 
 
-#' @rdname clogit_S3
 #' @importFrom ecip desc_
-#' @export desc_.clogit
 #' @export
 desc_.clogit <- function(x) 'conditional logistic regression (via Cox model)'

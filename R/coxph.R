@@ -1,7 +1,5 @@
 
-#' @title S3 methods of \link[survival]{coxph}
-#' 
-#' @param x an \link[survival]{coxph} object  
+#' @title \link[survival]{coxph} Objects
 #' 
 #' @examples
 #' # ?survival::cox.zph
@@ -11,40 +9,41 @@
 #'  }) |>
 #'  coxph(formula = Surv(futime, fustat) ~ age + ecog.ps)
 #' 
-#' library(ecip); 
-#' list('`coxph`' = m) |> fastmd::render2html()
+#' library(ecip); list(
+#'  '`coxph`' = m
+#' ) |> fastmd::render2html()
 #' 
-#' @name S3_coxph
-#' @keywords internal
+#' @name coxph
+NULL
+
+
+
 #' @importFrom ecip nobsText
-#' @export nobsText.coxph
 #' @export
 nobsText.coxph <- function(x) {
-  sprintf(fmt = '%d subj (%d events)', x[['n']], x[['nevent']])
+  sprintf(
+    fmt = '%d subj (%d events)', 
+    x[['n']], 
+    x[['nevent']])
 }
 
 
-#' @rdname S3_coxph
 #' @importClassesFrom fastmd md_lines
 #' @importFrom ecip desc_
-#' @export desc_.coxph
 #' @export
 desc_.coxph <- function(x) {
   '@Cox72 proportional hazards' |>
     new(Class = 'md_lines', bibentry = .cox72(), package = 'survival')
 }
 
-#' @rdname S3_coxph
 #' @importFrom ecip estnm
-#' @export estnm.coxph
 #' @export
 estnm.coxph <- function(x) 'Hazards\ Ratio'
 
 
-#' @rdname S3_coxph
+
 #' @importFrom ecip .pval
 #' @method .pval summary.coxph
-#' @export .pval.summary.coxph
 #' @export
 .pval.summary.coxph <- function(x) {
   ret <- x$coefficients[, 'Pr(>|z|)']

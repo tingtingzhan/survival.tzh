@@ -14,46 +14,10 @@ desc_survdiff_rho <- function(rho, ...) {
 
 
 
-#' @title S3 Methods \link[survival]{survdiff} Object
-#' 
-#' @param x a \link[survival]{survdiff} object
+#' @title \link[survival]{survdiff} Object
 #' 
 #' @note
 #' The `S3` method `broom:::nobs.survdiff()` (2026-01-26) is **WRONG**.
-#' 
-#' @examples
-#' m = survdiff(Surv(futime, fustat) ~ rx, data = ovarian) 
-#' m |> nobsText.survdiff()
-#' m |> .pval.survdiff()
-#'  
-#' @name S3_survdiff
-#' @keywords internal
-#' @importFrom ecip nobsText
-#' @export nobsText.survdiff
-#' @export
-nobsText.survdiff <- function(x) {
-  sprintf(fmt = '%d subj (%d events)', sum(x[['n']]), sum(x[['obs']]))
-}
-
-
-#' @rdname S3_survdiff
-#' @importFrom ecip .pval
-#' @export .pval.survdiff
-#' @export
-.pval.survdiff <- function(x) x[['pvalue']]
-
-
-
-
-#' @title Fast Markdown Lines for \link[survival]{survdiff} Object
-#' 
-#' @description ..
-#' 
-#' @param x a \link[survival]{survdiff} object
-#' 
-#' @param xnm ..
-#'  
-#' @param ... ..
 #' 
 #' @examples
 #' list(
@@ -61,10 +25,27 @@ nobsText.survdiff <- function(x) {
 #'  '$\\rho=1$' = survdiff(Surv(time, status) ~ x, data = aml, rho = 1),
 #'  '$0<\\rho<1$' = survdiff(Surv(time, status) ~ x, data = aml, rho = .5)
 #' ) |> fastmd::render2html()
-#' @keywords internal
+#' @name survdiff
+NULL
+
+
+#' @importFrom ecip nobsText
+#' @export
+nobsText.survdiff <- function(x) {
+  sprintf(fmt = '%d subj (%d events)', sum(x[['n']]), sum(x[['obs']]))
+}
+
+
+#' @importFrom ecip .pval
+#' @export
+.pval.survdiff <- function(x) x[['pvalue']]
+
+
+
+
+
 #' @importClassesFrom fastmd md_lines
 #' @importFrom fastmd md_ md_.default label_pvalue_sym
-#' @export md_.survdiff
 #' @export
 md_.survdiff <- function(x, xnm, ...) {
   
