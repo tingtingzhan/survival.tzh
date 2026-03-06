@@ -1,17 +1,17 @@
 
-#' @title S3 methods for \link[survival]{survreg}
-#' 
-#' @param x a \link[survival]{survreg} or \link[survival]{summary.survreg}
+#' @title \link[survival]{survreg} Object
 #' 
 #' @examples
 #' # ?survival::survreg
 #' m = survreg(Surv(futime, fustat) ~ ecog.ps + rx, data = ovarian, dist = 'weibull', scale = 1) 
 #' 
-#' @name S3_survreg
-#' @keywords internal
+#' @name survreg
+NULL
+
+
+
 #' @importFrom ecip .pval
 #' @method .pval summary.survreg
-#' @export .pval.summary.survreg
 #' @export
 .pval.summary.survreg <- function(x) {
   # ?survival:::summary.survreg

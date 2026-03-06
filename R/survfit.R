@@ -1,17 +1,20 @@
 
 
-#' @title Time Unit of a \link[survival]{survfit.object} or \link[survival]{summary.survfit} Object
+#' @title \link[survival]{survfit.object}
 #' 
-#' @description ..
+#' @examples
+#' s0 = survfit(Surv(time, status) ~ 1, data = aml)
+#' s1 = survfit(Surv(time, status) ~ x, data = aml)
+#' list(
+#'  'no strata' = list(s0, summary(s0, times = c(10, 25))),
+#'  'one strata' = list(s1, summary(s1, times = c(10, 25)))
+#' ) |> fastmd::render2html()
 #' 
-#' @param x a \link[survival]{survfit.object} or \link[survival]{summary.survfit} object
 #' 
-#' @seealso 
-#' \link[base]{units}
-#' 
-#' @keywords internal
-#' @name units_survfit
-#' @export units.survfit
+#' @name survfit
+NULL
+
+
 #' @export
 units.survfit <- function(x) {
   #attr(x, which = 'units', exact = TRUE) %||% # brutal-but-simple for downstream packages!!
@@ -19,9 +22,8 @@ units.survfit <- function(x) {
     tryCatch(units.Surv(eval(x$call$data)[[x$call$formula[[2L]]]]), error = \(e) return(invisible()))
 }
   
-#' @rdname units_survfit
+
 #' @method units summary.survfit
-#' @export units.summary.survfit
 #' @export
 units.summary.survfit <- units.survfit
 
@@ -203,29 +205,13 @@ autoplot.survfit <- function(object, ...) {
 
 
 
-#' @title Sample Size of \link[survival]{survfit.object}
-#' 
-#' @param x a \link[survival]{survfit.object} or \link[survival]{summary.survfit} object
-#' 
-#' @examples
-#' library(ecip)
-#' survfit(Surv(time, status) ~ x, data = aml) |> 
-#'  nobsText()
-#' survfit(Surv(time, status) ~ x, data = aml) |> 
-#'  summary() |>
-#'  nobsText()
-#' @keywords internal
 #' @importFrom ecip nobsText
-#' @name nobsText_survfit
-#' @export nobsText.survfit
 #' @export
 nobsText.survfit <- function(x) {
-  sprintf(fmt = '%d subj (%d events)', sum(x[['n']]), sum(x[['n.event']]))
+  sprintf(fmt = '%d `subjects` (%d `observed events`)', sum(x[['n']]), sum(x[['n.event']]))
 }
 
-#' @rdname nobsText_survfit
 #' @method nobsText summary.survfit
-#' @export nobsText.summary.survfit
 #' @export
 nobsText.summary.survfit <- nobsText.survfit
 
@@ -239,33 +225,19 @@ nobsText.summary.survfit <- nobsText.survfit
 
 
 
-#' @title Fast Markdown Lines for \link[survival]{survfit.object}
-#' 
-#' @description ..
-#' 
-#' @param x \link[survival]{survfit.object}
-#' 
-#' @param xnm ..
-#'  
-#' @param ... ..
-#' 
-#' @examples
-#' s0 = survfit(Surv(time, status) ~ 1, data = aml)
-#' s1 = survfit(Surv(time, status) ~ x, data = aml)
-#' list(
-#'  'no strata' = list(s0, summary(s0, times = c(10, 25))),
-#'  'one strata' = list(s1, summary(s1, times = c(10, 25)))
-#' ) |> fastmd::render2html()
-#' @keywords internal
+
 #' @importClassesFrom fastmd md_lines  
 #' @importFrom fastmd md_ md_autoplot_
-#' @export md_.survfit
 #' @export
 md_.survfit <- function(x, xnm, ...) {
   
   z1 <- x$call$formula[[2L]] |> 
     deparse1() |> 
-    sprintf(fmt = '@KaplanMeier58 estimates and curves of the time-to-event endpoint **`%s`** are obtained using <u>**`R`**</u> package <u>**`survival`**</u>.') |>
+    sprintf(
+      fmt = '@KaplanMeier58 estimates and curves of the time-to-event endpoint **`%s`** based on %s are obtained using <u>**`R`**</u> package <u>**`survival`**</u>.',
+      . = _,
+      x |> nobsText.survfit()
+    ) |>
     new(Class = 'md_lines', package = 'survival', bibentry = .kaplan_meier58())
   
   z2 <- xnm |> 
@@ -291,19 +263,9 @@ md_.summary.survfit <- md_flextable_
 
 
 
-#' @title Convert \link[survival]{summary.survfit} Object to \link[flextable]{flextable}
-#' 
-#' @param x a \link[survival]{summary.survfit} object
-#' 
-#' @param which ..
-#' 
-#' @param ... ..
-#' 
-#' @keywords internal
 #' @importFrom fastmd as_flextable.matrix
 #' @importFrom reshape2 acast dcast
 #' @importFrom scales pal_hue
-#' @export as_flextable.summary.survfit
 #' @export
 as_flextable.summary.survfit <- function(
     x, 

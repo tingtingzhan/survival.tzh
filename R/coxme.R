@@ -1,18 +1,20 @@
 
 
-#' @title S3 methods for \link[coxme]{coxme}
-#' 
-#' @param x \link[coxme]{coxme} object 
+#' @title \link[coxme]{coxme} Object
 #' 
 #' @examples 
 #' library(coxme)
 #' m = coxme(Surv(time, status) ~ ph.ecog + age + (1|inst), data = lung) 
-#' m |> nobsText.coxme()
-#' @name S3_coxme
-#' @keywords internal
+#' library(ecip); list(
+#'  '`coxme`' = m
+#' ) |> fastmd::render2html()
+#' @name coxme
+NULL
+
+
+
 #' @importFrom ecip .pval
 #' @method .pval summary.coxme
-#' @export .pval.summary.coxme
 #' @export
 .pval.summary.coxme <- function(x) {
   cf <- x$coefficients
@@ -23,9 +25,7 @@
 
 
 
-#' @rdname S3_coxme
 #' @importFrom ecip nobsText
-#' @export nobsText.coxme
 #' @export
 nobsText.coxme <- function(x) {
   ng <- lengths(x$frail, use.names = TRUE)
@@ -74,10 +74,8 @@ terms.coxme <- function(x, ...) {
 #}
 
 
-#' @rdname S3_coxme
 #' @importClassesFrom fastmd md_lines
 #' @importFrom ecip desc_
-#' @export desc_.coxme
 #' @export
 desc_.coxme <- function(x) {
   'mixed effects Cox [@Ripatti04; @Therneau03]' |> # ?coxme::coxme
@@ -86,15 +84,15 @@ desc_.coxme <- function(x) {
 
 
 
-#' @rdname S3_coxme
 #' @importFrom ecip estnm
-#' @export estnm.coxme
 #' @export
 estnm.coxme <- function(x) 'Hazards\ Ratio'
 
 
-
-
+#' @importFrom fastmd md_
+#' @importFrom ecip md_ecip
+#' @export
+md_.coxme <- md_ecip
 
 
 
