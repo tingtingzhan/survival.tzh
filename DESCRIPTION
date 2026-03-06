@@ -24,7 +24,9 @@ Suggests:
     coxme (== 2.2.22),
     coxphw (== 4.0.3),
     lubridate (== 1.9.5),
+    survminer (== 0.5.2),
     readxl (== 1.4.5), writexl (== 1.5.4)
+
 
 
 
