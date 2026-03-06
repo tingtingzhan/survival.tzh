@@ -19,16 +19,16 @@ NULL
 
 
 
-#' @importFrom ecip endpoint endpoint.formula
+#' @importFrom ecip endpoint
 #' @export
 endpoint.clogit <- function(x) {
-  # do not use ?tzh::endpoint.default
+  # do not use ?ecip:::endpoint.default
   # stats::formula dispatches to ?stats:::formula.default
   # I do not want to write [formula.clogit], may mess up with \pkg{survival}
   fom <- x$userCall[[2L]]
   if (!is.call(fom) || (fom[[1L]] != '~')) stop('user formula not formula?')
   fom |> 
-    endpoint.formula()
+    endpoint() # ecip:::endpoint.formula()
 }
 
 
