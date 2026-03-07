@@ -263,7 +263,6 @@ md_.summary.survfit <- md_flextable_
 
 
 
-#' @importFrom fastmd as_flextable.matrix
 #' @importFrom reshape2 acast dcast
 #' @importFrom scales pal_hue
 #' @export
@@ -306,7 +305,7 @@ as_flextable.summary.survfit <- function(
   })
   
   z |> 
-    as_flextable.matrix() |>
+    as_flextable() |> # fastmd::as_flextable.matrix
     color(i = seq_len(nstrata), color = if (nstrata) pal_hue()(n = nstrata), part = 'body') |>
     set_caption(caption = table_title)
   

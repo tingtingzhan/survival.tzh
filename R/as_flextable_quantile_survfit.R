@@ -32,7 +32,6 @@
 #'  as_flextable_quantile_survfit(units = 'days') 
 #' 
 #' @keywords internal
-#' @importFrom fastmd as_flextable.matrix
 #' @importFrom scales pal_hue
 #' @export
 as_flextable_quantile_survfit <- function(
@@ -68,7 +67,7 @@ as_flextable_quantile_survfit <- function(
     paste0(.x = _, '95% Confidence Interval) at Percentage Event-Observed')
   
   z |> 
-    as_flextable.matrix(row.title = deparse1(x$call$formula[[2L]])) |> 
+    as_flextable(row.title = deparse1(x$call$formula[[2L]])) |> # fastmd::as_flextable.matrix
     color(i = seq_len(nstrata), color = if (nstrata) pal_hue()(n = nstrata), part = 'body') |>
     set_caption(caption = table_caption)
   

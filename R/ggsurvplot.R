@@ -13,12 +13,9 @@
 NULL
 
 
-#' @importFrom fastmd md_
+#' @importFrom fastmd md_ md_.default
 #' @export
-md_.ggsurvplot <- function(x, xnm, ...) {
-  NextMethod(generic = 'md_')
-  # otherwise dispatch to ?fastmd::md_.list
-} 
+md_.ggsurvplot <- md_.default # otherwise dispatch to ?fastmd::md_.list
 
 
 
