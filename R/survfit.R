@@ -253,10 +253,6 @@ md_.survfit <- function(x, xnm, ...) {
 
 
 
-#' @importFrom fastmd md_ md_flextable_
-#' @export
-md_.summary.survfit <- md_flextable_ 
-
 
 
 
