@@ -7,7 +7,7 @@
 #'  survminer::ggsurvplot(data = lung)
 #' list(
 #'  '`ggsurvplot`' = p
-#' ) |> fastmd::render2html(file = 'ggsurvplot')
+#' ) |> fastmd::render2html()
 #' 
 #' @name ggsurvplot
 NULL

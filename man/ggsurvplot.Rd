@@ -11,6 +11,6 @@ p = survfit(Surv(time, status) ~ sex, data = lung) |>
  survminer::ggsurvplot(data = lung)
 list(
  '`ggsurvplot`' = p
-) |> fastmd::render2html(file = 'ggsurvplot')
+) |> fastmd::render2html()
 
 }
