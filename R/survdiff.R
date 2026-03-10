@@ -1,17 +1,4 @@
 
-desc_survdiff_rho <- function(rho, ...) {
-  # see ?survival::survdiff
-  if (missing(rho) || is.null(rho) || (rho == 0)) {
-    # see ?survival::survdiff and ?coin::logrank_test
-    # 'Log-rank [unweighted]' # 'Logrank [Mantel-Cox]' # 'hypergeometric variance'
-    '[Log-rank test](https://en.wikipedia.org/wiki/Logrank_test)'
-  } else if (rho == 1) {
-    '@Petos72\'s modification of @Gehan65 test'
-  } else {
-    '@HarringtonFleming82 $G^{\\rho,\\gamma}$ family of tests'
-  }
-}
-
 
 
 #' @title \link[survival]{survdiff} Object
@@ -45,7 +32,7 @@ nobsText.survdiff <- function(x) {
 
 
 #' @importClassesFrom fastmd md_lines
-#' @importFrom fastmd md_ md_.default label_pvalue_sym
+#' @importFrom fastmd md_ md_print_ label_pvalue_sym
 #' @export
 md_.survdiff <- function(x, xnm, ...) {
   
@@ -53,7 +40,16 @@ md_.survdiff <- function(x, xnm, ...) {
   
   z1 <- sprintf(
     fmt = '%s on the time-to-event endpoint **`%s`** by %s (%s) is performed using <u>**`R`**</u> package <u>**`survival`**</u>.',
-    desc_survdiff_rho(x$call$rho),
+    if (rho == 0) {
+      # see ?survival::survdiff and ?coin::logrank_test
+      # 'Log-rank [unweighted]' # 'Logrank [Mantel-Cox]' # 'hypergeometric variance'
+      # https://pubmed.ncbi.nlm.nih.gov/5910392/ # Mantel 1966
+      '[Log-rank test](https://en.wikipedia.org/wiki/Logrank_test)'
+    } else if (rho == 1) {
+      '@Petos72\'s modification of @Gehan65 test'
+    } else {
+      '@HarringtonFleming82 $G^{\\rho,\\gamma}$ family of tests'
+    },
     x$call$formula[[2L]] |> 
       deparse1(),
     x$call$formula[[3L]] |>
@@ -71,7 +67,7 @@ md_.survdiff <- function(x, xnm, ...) {
     } else bibentry())
   
   z2 <- if (!missing(xnm)) {
-    md_.default(x, xnm = xnm, ...)
+    md_print_(x, xnm = xnm, ...)
   } # else NULL
   
   c(z1, z2) # ?fastmd::c.md_lines
