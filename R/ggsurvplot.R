@@ -13,9 +13,10 @@
 NULL
 
 
-#' @importFrom fastmd md_ md_print_
 #' @export
-md_.ggsurvplot <- md_print_ # otherwise dispatch to ?fastmd::md_.list
+md_.ggsurvplot <- function(x, ...) {
+  md_int(x, engine = 'print', ...) # survminer:::print.ggsurvplot
+} # otherwise dispatch to ?fastmd::md_.list
 
 
 

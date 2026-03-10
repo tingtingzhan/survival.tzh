@@ -40,4 +40,8 @@ estnm.clogit <- function(x) 'Odds\ Ratio'
 
 #' @importFrom ecip desc_
 #' @export
-desc_.clogit <- function(x) 'conditional logistic regression (via Cox model)'
+desc_.clogit <- function(x) {
+  'conditional logistic regression (via Cox model)' |>
+    sprintf(fmt = '*%s*') |>
+    new(Class = 'md_lines', package = 'survival')
+}

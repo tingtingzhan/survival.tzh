@@ -133,8 +133,6 @@ autoplot.survfitlist <- function(object, ...) {
 
 
 
-#' @importClassesFrom fastmd md_lines  
-#' @importFrom fastmd md_ md_autoplot_
 #' @export
 md_.survfitlist <- function(x, xnm, ...) {
   
@@ -153,7 +151,7 @@ md_.survfitlist <- function(x, xnm, ...) {
     sprintf(fmt = 'as_flextable_quantile_survfitlist(%s)') |> 
     new(Class = 'md_lines', chunk.r = TRUE)
   
-  z3 <- md_autoplot_(x = x, xnm = xnm, ...)
+  z3 <- md_int(x = x, xnm = xnm, engine = 'autoplot', ...)
   
   c(z1, z2, z3) # ?fastmd::c.md_lines
   

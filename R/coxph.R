@@ -28,11 +28,11 @@ nobsText.coxph <- function(x) {
 }
 
 
-#' @importClassesFrom fastmd md_lines
 #' @importFrom ecip desc_
 #' @export
 desc_.coxph <- function(x) {
   '@Cox72 proportional hazards' |>
+    sprintf(fmt = '*%s*') |>
     new(Class = 'md_lines', bibentry = .cox72(), package = 'survival')
 }
 
@@ -52,7 +52,6 @@ estnm.coxph <- function(x) 'Hazards\ Ratio'
 } 
 
 
-#' @importFrom fastmd md_
 #' @importFrom ecip md_ecip
 #' @export
 md_.coxph <- md_ecip

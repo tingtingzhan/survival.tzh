@@ -74,11 +74,11 @@ terms.coxme <- function(x, ...) {
 #}
 
 
-#' @importClassesFrom fastmd md_lines
 #' @importFrom ecip desc_
 #' @export
 desc_.coxme <- function(x) {
   'mixed effects Cox [@Ripatti04; @Therneau03]' |> # ?coxme::coxme
+    sprintf(fmt = '*%s*') |>
     new(Class = 'md_lines', bibentry = c(.ripatti04(), .therneau03()), package = 'coxme')
 }
 
@@ -89,7 +89,6 @@ desc_.coxme <- function(x) {
 estnm.coxme <- function(x) 'Hazards\ Ratio'
 
 
-#' @importFrom fastmd md_
 #' @importFrom ecip md_ecip
 #' @export
 md_.coxme <- md_ecip

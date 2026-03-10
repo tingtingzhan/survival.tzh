@@ -31,8 +31,6 @@ nobsText.survdiff <- function(x) {
 
 
 
-#' @importClassesFrom fastmd md_lines
-#' @importFrom fastmd md_ md_print_ label_pvalue_sym
 #' @export
 md_.survdiff <- function(x, xnm, ...) {
   
@@ -67,7 +65,7 @@ md_.survdiff <- function(x, xnm, ...) {
     } else bibentry())
   
   z2 <- if (!missing(xnm)) {
-    md_print_(x, xnm = xnm, ...)
+    md_int(x, xnm = xnm, engine = 'print', ...)
   } # else NULL
   
   c(z1, z2) # ?fastmd::c.md_lines

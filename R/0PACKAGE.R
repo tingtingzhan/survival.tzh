@@ -9,6 +9,9 @@
 #' @import stats
 #' @import methods
 #' 
+#' @importFrom fastmd md_ md_int label_pvalue_sym
+#' @importClassesFrom fastmd md_lines
+#' 
 # @importFrom patchwork ggplot_add.ggplot
 '_PACKAGE'
 # ?patchwork:::ggplot_add.ggplot # not exported
