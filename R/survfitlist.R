@@ -30,6 +30,8 @@ msurvfit <- function(formula, ...) {
       ))
     })
   
+  attr(s, which = 'fig.height') <- ceiling(length(s)/2) * 3.5 
+  attr(s, which = 'fig.width') <- 10
   class(s) <- c('survfitlist', 'listof')
   return(s)
 
@@ -87,6 +89,9 @@ subset_survfit <- function(formula, subset, data, ...) {
       do.call(what = survfit.formula, args = list(formula = formula, data = d., ...))
     })
   attr(s, which = 'title') <- sprintf(fmt = '%s, n=%d', nm, nr) # title (with sample size)
+  
+  attr(s, which = 'fig.height') <- ceiling(length(s)/2) * 3.5 
+  attr(s, which = 'fig.width') <- 10
   class(s) <- c('survfitlist', 'listof')
   return(s)
   
@@ -94,16 +99,8 @@ subset_survfit <- function(formula, subset, data, ...) {
 
 
 
-#' @title autoplot.survfitlist
-#' 
-#' @param object ..
-#' 
-#' @param ... ..
-#' 
-#' @keywords internal
 #' @importFrom ggplot2 autoplot layer_scales 
 #' @importFrom scales label_percent
-#' @export autoplot.survfitlist
 #' @export
 autoplot.survfitlist <- function(object, ...) {
   
@@ -136,20 +133,8 @@ autoplot.survfitlist <- function(object, ...) {
 
 
 
-#' @title [md_.survfitlist()]
-#' 
-#' @description ..
-#' 
-#' @param x a `'survfitlist'` object
-#' 
-#' @param xnm ..
-#'  
-#' @param ... ..
-#' 
-#' @keywords internal
 #' @importClassesFrom fastmd md_lines  
 #' @importFrom fastmd md_ md_autoplot_
-#' @export md_.survfitlist
 #' @export
 md_.survfitlist <- function(x, xnm, ...) {
   
@@ -168,7 +153,7 @@ md_.survfitlist <- function(x, xnm, ...) {
     sprintf(fmt = 'as_flextable_quantile_survfitlist(%s)') |> 
     new(Class = 'md_lines', chunk.r = TRUE)
   
-  z3 <- md_autoplot_(x = x, xnm = xnm, ..., fig.height = ceiling(length(x)/2) * 3.5, fig.width = 10)
+  z3 <- md_autoplot_(x = x, xnm = xnm, ...)
   
   c(z1, z2, z3) # ?fastmd::c.md_lines
   
