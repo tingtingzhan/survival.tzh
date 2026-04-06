@@ -299,8 +299,15 @@ as_flextable.summary.survfit <- function(
   })
   
   z |> 
-    as_flextable() |> # fastmd::as_flextable.matrix
-    color(i = seq_len(nstrata), color = if (nstrata) pal_hue()(n = nstrata), part = 'body') |>
+    as_flextable() |> # fastmd:::as_flextable.matrix
+    color(
+      i = seq_len(nstrata), 
+      j = (ncol(z) + 1L) |> # 'Strata' column always present!
+        seq_len() |>
+        rep(times = nstrata),
+      # parameter `j` must be there
+      # otherwise bug (fault of \pkg{flextable}?) if (nstrata == 2L)
+      color = if (nstrata) pal_hue()(n = nstrata), part = 'body') |>
     set_caption(caption = table_title)
   
 }
